@@ -1,0 +1,41 @@
+body > .header .logo {
+  font-family: inherit;
+}
+body > .header .navbar .nav > li > a > .badge {
+  position: absolute;
+  top: 4px;
+  right: 0;
+  font-size: 75%;
+}
+body .navbar-nav > .notifications-menu > .dropdown-menu > li .menu > li > a > .glyphicon,
+body .navbar-nav > .notifications-menu > .dropdown-menu > li .menu > li > a > .fa,
+body .navbar-nav > .notifications-menu > .dropdown-menu > li .menu > li > a > .ion {
+  background: none;
+  color: inherit;
+}
+body .user-panel > .info {
+  padding-left: 10px;
+}
+body .table {
+  word-break: break-all;
+}
+/*# sourceMappingURL=style.map */
+.btn-export{
+	font-size: 10px;
+}
+
+.page-a4{
+    width: 22cm;
+    min-height: 29.7cm;
+    padding: 2cm;
+    margin: 1cm auto;  
+    border-radius: 5px;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+  .report_date_input{
+    margin: 20px 0 0 0;
+  }
+.page-a4 .header-report {
+  margin: -50px 0 0 0;
+}

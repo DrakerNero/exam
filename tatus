@@ -1,0 +1,159 @@
+* [33m0d5a36b[m[33m ([1;36mHEAD[m[33m, [1;31morigin/master[m[33m, [1;32mmaster[m[33m)[m update color insert answer
+* [33m256d48c[m update part image to PNG
+* [33mb3a86a2[m update
+* [33m1620025[m update explanation and disable question
+* [33m84b0481[m update debug not login
+* [33mc564115[m update question name
+* [33m35fd1b9[m update debug
+* [33m328b1ad[m update debug
+* [33m6814cc4[m update debug
+* [33m24f98d7[m update debug
+* [33m3d0dba6[m update debug
+* [33m0f0ca03[m update debug
+* [33m9f00594[m update debug
+* [33mba8041b[m update debug
+* [33m6e907aa[m debug
+* [33m56719a9[m update view monitor email"
+* [33m4a75794[m update quesiton type 2
+* [33mc041fa5[m wording for questionType2
+* [33me754a55[m update response mail wording
+* [33mdb86849[m update question type 2
+* [33m69dfa2b[m update question image file
+* [33me1df1ae[m update question mp3
+* [33mcddd63a[m create subject
+* [33m47e9719[m insert button select status in report/question-save
+* [33m1bea7a0[m move position guide subject on phone
+* [33me45d447[m edit layout site/index
+* [33mc011ba2[m edit bug show subject
+* [33mebf9ee5[m edit layout site index
+* [33me66899f[m editable Question Sets
+* [33m8cdb42c[m edit table and print report on backend
+* [33m50fb006[m edit wording footer
+* [33me52c9a7[m - change wording in modal - submit button
+*   [33m9fb6a26[m Merge branch 'master' of bitbucket.org:pongnarin/e-pretest2
+[32m|[m[33m\[m  
+[32m|[m *   [33m84d41bb[m Merge branch 'master' of bitbucket.org:pongnarin/e-pretest2
+[32m|[m [34m|[m[35m\[m  
+[32m|[m [34m|[m * [33m239568c[m delete title name
+[32m|[m * [35m|[m [33mf6b1dcd[m Add modal to show flash
+[32m|[m * [35m|[m [33m9b3a3e7[m Change .btn font-size
+[32m|[m * [35m|[m [33maf94679[m Change migration script
+[32m|[m [35m|[m[35m/[m  
+* [35m|[m [33mda2e0f2[m Save score to database
+[35m|[m[35m/[m  
+* [33mf4753de[m - Save state and stop countDown - Cannot resubmit the answer
+* [33mba0bbff[m update test F5 save time
+* [33m963d647[m update exam js and css to title exam and reflector code query question by find where array
+* [33m277f30a[m fix layout
+* [33ma8769d5[m Add link to login page from signup page
+*   [33m6529e39[m Resolve conflict
+[36m|[m[1;31m\[m  
+[36m|[m * [33m8f62273[m update exam onclick finish and return to new question
+[36m|[m * [33m75356e3[m update debug headbar submit
+[36m|[m *   [33mbb6c41a[m update git pull to submit headbar
+[36m|[m [1;32m|[m[1;33m\[m  
+[36m|[m * [1;33m|[m [33ma33124a[m update headbar submit
+* [1;33m|[m [1;33m|[m [33meeba973[m Add placeholder to signup form
+[1;33m|[m [1;33m|[m[1;33m/[m  
+[1;33m|[m[1;33m/[m[1;33m|[m   
+* [1;33m|[m [33m6d20770[m Change answer column size
+* [1;33m|[m [33mc835ca0[m Change question column size
+* [1;33m|[m [33maec5526[m image profile
+* [1;33m|[m [33mc271c05[m show demo image profile
+* [1;33m|[m [33mcd8c5a8[m fix bug in migration script
+* [1;33m|[m [33mb88d2f9[m - Change token expire period to 30 days
+* [1;33m|[m [33m0ea1813[m Fix startup script
+* [1;33m|[m [33m7ed2db0[m popup question-save
+* [1;33m|[m [33m950f76a[m add values  question-save/history
+* [1;33m|[m [33meda459c[m add find score question save
+* [1;33m|[m [33m15e272c[m create QuestionHistory
+[1;33m|[m[1;33m/[m  
+* [33m7c05200[m update insert answer debug to show answer
+* [33me7fdfaf[m update debug not insert question save
+* [33mf0acf6f[m update submit question and layout left menu
+*   [33m93510c8[m update jquery to exam insert answer error
+[1;34m|[m[1;35m\[m  
+[1;34m|[m * [33m707e3f4[m create relations table user, QuestionSet, QuestionSave
+[1;34m|[m * [33m48fbf97[m debug questionSave
+[1;34m|[m * [33m3634ee3[m Save time during do_exam
+[1;34m|[m * [33mb6fd38b[m countdown again
+[1;34m|[m *   [33me98887b[m Merge branch 'master' of bitbucket.org:pongnarin/e-pretest2
+[1;34m|[m [1;36m|[m[31m\[m  
+[1;34m|[m [1;36m|[m * [33me4ae93b[m edit scroll bar site/index
+[1;34m|[m * [31m|[m [33m82ec2de[m CountDown
+[1;34m|[m [31m|[m[31m/[m  
+* [31m|[m [33md329ea5[m edit load answer question
+[31m|[m[31m/[m  
+* [33m5f2c217[m update left sidebar
+* [33m6ed13fa[m update debug load question save and button submit
+* [33m1858a00[m Cut space name logo
+* [33mf8a3e8c[m edit text footer
+* [33m0291e77[m overflow menu
+* [33m9be27d5[m add logo question-set/do-exam
+* [33m0d4c02f[m page show
+* [33m0a6065d[m edit font-family question-set/do-exam
+* [33m4134c85[m add class footer
+* [33m40f84d5[m Edit Footer
+*   [33m9fef6d5[m Merge branch 'master' of bitbucket.org:pongnarin/e-pretest2
+[32m|[m[33m\[m  
+[32m|[m * [33m2db9bd5[m instal font
+[32m|[m * [33m320cecf[m edit menuLeft status =1
+[32m|[m * [33m10c529c[m edit subject status
+[32m|[m * [33m6778fe1[m update question-set/exam edit text h3
+[32m|[m *   [33me242fae[m update jquery
+[32m|[m [34m|[m[35m\[m  
+[32m|[m * [35m|[m [33m8f0ec9f[m update exam
+[32m|[m * [35m|[m   [33m321293c[m update Merge
+[32m|[m [36m|[m[1;31m\[m [35m\[m  
+[32m|[m * [1;31m|[m [35m|[m [33m1fac4b2[m update jquery
+* [1;31m|[m [1;31m|[m [35m|[m [33madadbe6[m move js file to assetbundle
+* [1;31m|[m [1;31m|[m [35m|[m [33md97f8d2[m - fix homepage
+[35m|[m [1;31m|[m[35m_[m[1;31m|[m[35m/[m  
+[35m|[m[35m/[m[1;31m|[m [1;31m|[m   
+* [1;31m|[m [1;31m|[m [33m81c3cb0[m - Fix left menu bug
+* [1;31m|[m [1;31m|[m [33m1b5bdc3[m - Fix bug in BottomMenuCenter
+[1;31m|[m [1;31m|[m[1;31m/[m  
+[1;31m|[m[1;31m/[m[1;31m|[m   
+* [1;31m|[m [33ma1a87cb[m rename images.jpg
+* [1;31m|[m   [33mb508457[m Merge branch 'master' of bitbucket.org:pongnarin/e-pretest2
+[1;32m|[m[1;33m\[m [1;31m\[m  
+[1;32m|[m * [1;31m|[m [33m131e2dc[m apple-touch-icon
+[1;32m|[m * [1;31m|[m [33m67eeb1d[m edit number subject
+[1;32m|[m * [1;31m|[m [33m56525a2[m edit status subject
+[1;32m|[m * [1;31m|[m [33m31dc710[m count QuestionSet
+[1;32m|[m * [1;31m|[m [33m407d787[m edit text header คลังข้อสอบออนไลน์
+[1;32m|[m * [1;31m|[m [33mad7b03b[m image o-net
+* [1;33m|[m [1;31m|[m [33m543ae02[m rename to e-pretest.com
+[1;33m|[m[1;33m/[m [1;31m/[m  
+* [1;31m|[m [33me9433e1[m edit wording in email
+* [1;31m|[m [33m906d89c[m icon new
+* [1;31m|[m [33m6593603[m delete echo random
+* [1;31m|[m [33m135b062[m edit bug menu left
+* [1;31m|[m [33mabcb30d[m on click menu left not refresh
+* [1;31m|[m [33m760d2ea[m position menu left
+* [1;31m|[m [33m23cc037[m page next not refresh
+* [1;31m|[m [33m776ed73[m Next page site/index
+* [1;31m|[m [33m0b1293f[m edit menu left
+* [1;31m|[m [33m83174fc[m edit style.css
+* [1;31m|[m [33m374bddb[m input logo
+* [1;31m|[m [33m6c043fa[m edit layouts index
+* [1;31m|[m [33mb77e967[m edit layout text title, text-header , logo
+* [1;31m|[m   [33m136eb56[m Merge branch 'master' of https://bitbucket.org/pongnarin/e-pretest2
+[1;34m|[m[1;31m\[m [1;31m\[m  
+[1;34m|[m [1;31m|[m[1;31m/[m  
+[1;34m|[m *   [33m028b8c3[m Merge branch 'master' of bitbucket.org:pongnarin/e-pretest2
+[1;34m|[m [1;36m|[m[31m\[m  
+[1;34m|[m [1;36m|[m *   [33m9fda611[m Merge branch 'master' of https://bitbucket.org/pongnarin/e-pretest2
+[1;34m|[m [1;36m|[m [32m|[m[33m\[m  
+[1;34m|[m [1;36m|[m * [33m\[m   [33ma964349[m update to server
+[1;34m|[m [1;36m|[m [34m|[m[35m\[m [33m\[m  
+[1;34m|[m [1;36m|[m * [35m|[m [33m|[m [33m7662c34[m update question set to server
+[1;34m|[m * [35m|[m [35m|[m [33m|[m [33m53dba4b[m Fix frontend asset
+[1;34m|[m [33m|[m [35m|[m[33m_[m[35m|[m[33m/[m  
+[1;34m|[m [33m|[m[33m/[m[35m|[m [35m|[m   
+[1;34m|[m * [35m|[m [35m|[m [33m507821a[m Fix frontend assets
+[1;34m|[m [35m|[m [35m|[m[35m/[m  
+[1;34m|[m [35m|[m[35m/[m[35m|[m   
+* [35m|[m [35m|[m [33m73976ef[m edit bug
+[35m|[m[35m/[m [35m/[m  
+* [35m|[m   [33m32f6b43

@@ -1,0 +1,6 @@
+.env
+codeception/backend/_support/_generated/
+codeception/common/_support/_generated/
+codeception/console/_support/_generated/
+codeception/frontend/_support/_generated/
+/codeception
