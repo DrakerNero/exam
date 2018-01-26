@@ -36,6 +36,7 @@ class QuestionSetController extends Controller {
                         'view',
                         'monitor-user-do-exam',
                         'teacher',
+                        'print-file-exam',
                     ],
                     'allow' => true,
                     'roles' => ['@']
@@ -279,6 +280,16 @@ class QuestionSetController extends Controller {
 
   public function actionTeacher($id) {
     return $this->render('teacher', ['id' => $id]);
+  }
+
+  public function actionPrintFileExam($id) {
+    $this->layout = 'blank';
+    $questionSet = QuestionSet::find()->where($id)->one();
+    $questions = Question::find()
+            ->where(['>=', 'id', $questionSet->from])
+            ->andWhere(['<=', 'id', $questionSet->to])
+            ->all();
+    return $this->render('print_file_exam', ['questions' => $questions, 'questionSet' => $questionSet]);
   }
 
 }

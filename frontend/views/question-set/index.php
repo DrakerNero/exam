@@ -1,7 +1,8 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use yii\helpers\Url;
+use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\models\QuestionSetSearch */
@@ -27,20 +28,26 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             'id',
-//            'explanation:ntext',
             'name',
             'from',
             'to',
             'total_time',
             'total_score',
-            // 'question_id:ntext',
-            // 'img',
-            // 'status',
-            // 'created',
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]);
-    ?>
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{copy}',
+                'contentOptions' => [ 'width' => '1px'],
+                'header' => '',
+                'buttons' => [
+                    'copy' => function($url, $model, $key) {
+                      return '<a target="_blank" href="' . Url::to(['question-set/print-file-exam', 'id' => $model->id]) . '"><i class="fa fa-print"></i></a>';
+                    },
+                        ],
+                    ],
+                    ['class' => 'yii\grid\ActionColumn'],
+                ],
+            ]);
+            ?>
 
   </div>
 </div>
