@@ -284,7 +284,7 @@ class QuestionSetController extends Controller {
 
   public function actionPrintFileExam($id) {
     $this->layout = 'blank';
-    $questionSet = QuestionSet::find()->where($id)->one();
+    $questionSet = QuestionSet::find()->where(['id' => $id])->one();
     $questions = Question::find()
             ->where(['>=', 'id', $questionSet->from])
             ->andWhere(['<=', 'id', $questionSet->to])

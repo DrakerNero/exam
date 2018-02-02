@@ -113,6 +113,8 @@ class QuestionController extends Controller {
       if ($model->uploadFile('file_upload') != false) {
         $uploadFile = $model->uploadFile('file_upload');
         $uploadFile->saveAs('uploads/png/' . $model->id . '.png');
+
+        $model->png = 1;
       }
       $model = $this->encodeModelWithArray($model, $this->choiceNames(), 'choices');
       $model = $this->encodeModelWithArray($model, $this->answerNames(), 'answers');
@@ -146,6 +148,8 @@ class QuestionController extends Controller {
       if ($model->uploadFile('file_upload') != false) {
         $uploadFile = $model->uploadFile('file_upload');
         $uploadFile->saveAs('uploads/png/' . $model->id . '.png');
+
+        $model->png = 1;
       }
       $model->updated_at = date('Y-m-d H:i:s');
 
