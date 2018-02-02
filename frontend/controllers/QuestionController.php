@@ -110,6 +110,10 @@ class QuestionController extends Controller {
     $model->id = rand(100000000, 999999999);
 
     if ($model->load(Yii::$app->request->post())) {
+      if ($model->uploadFile('file_upload') != false) {
+        $uploadFile = $model->uploadFile('file_upload');
+        $uploadFile->saveAs('uploads/png/' . $model->id . '.png');
+      }
       $model = $this->encodeModelWithArray($model, $this->choiceNames(), 'choices');
       $model = $this->encodeModelWithArray($model, $this->answerNames(), 'answers');
 
@@ -139,6 +143,10 @@ class QuestionController extends Controller {
     if ($model->load(Yii::$app->request->post())) {
       $model = $this->encodeModelWithArray($model, $this->choiceNames(), 'choices');
       $model = $this->encodeModelWithArray($model, $this->answerNames(), 'answers');
+      if ($model->uploadFile('file_upload') != false) {
+        $uploadFile = $model->uploadFile('file_upload');
+        $uploadFile->saveAs('uploads/png/' . $model->id . '.png');
+      }
       $model->updated_at = date('Y-m-d H:i:s');
 
       $model->save();
@@ -208,7 +216,9 @@ class QuestionController extends Controller {
   }
 
   private function isEmptyData($object, $key) {
-    return (isset($object->{$key}) && !empty($object->{$key})) ? $object->{$key} : '';
+//    return $object->{$key};
+    return (isset($object->{$key})) ? $object->{$key} : '';
+//    return (isset($object->{$key}) && !empty($object->{$key}) ) ? $object->{$key} : '';
   }
 
 }

@@ -19,10 +19,11 @@ $('.select-type-question').change(function (e) {
   var dataSelect = e.target.value;
   hideExamDoctor(dataSelect);
 });
-
+var formQuestionType = $('.form-data-question-type').attr('data-question-type-value');
+//alert(formQuestionType);
 $(document).ready(function () {
-  console.log('hello ', $('.select-type-question input[type="radio"]').val());
-  hideExamDoctor($('.select-type-question input[type="radio"]').val());
+//  console.log('hello  ', $('.select-type-question input[name="Question[type_question]"]').val());
+  hideExamDoctor(formQuestionType);
 
 });
 

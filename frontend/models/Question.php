@@ -3,6 +3,7 @@
 namespace frontend\models;
 
 use Yii;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "question".
@@ -55,6 +56,9 @@ class Question extends \yii\db\ActiveRecord {
   public $answer_13;
   public $answer_14;
   public $answer_15;
+  //
+
+  public $file_upload;
 
   public static function tableName() {
     return 'question';
@@ -86,7 +90,8 @@ class Question extends \yii\db\ActiveRecord {
         'choice_15', 'answer_15',
             ], 'string'],
         [['updated_at'], 'safe'],
-        [['answer'], 'string', 'max' => 10]
+        [['answer'], 'string', 'max' => 10],
+        [['file_upload'], 'file', 'extensions' => 'png', 'maxSize' => 1024 * 1024 * 2],
     ];
   }
 
@@ -107,6 +112,26 @@ class Question extends \yii\db\ActiveRecord {
         'part' => 'Part',
         'updated_at' => 'Updated',
     ];
+  }
+
+  public function uploadFile($attribute) {
+    // get the uploaded file instance. for multiple file uploads
+    // the following data will return an array (you may need to use
+    // getInstances method)
+    $image = UploadedFile::getInstance($this, $attribute);
+
+    // if no image was uploaded abort the upload
+    if (empty($image)) {
+      return false;
+    }
+
+    // store the source file name
+    $this->$attribute = $image->name;
+    //$ext = end((explode(".", $image->name)));
+    // generate a unique file name
+    //$this->avatar = Yii::$app->security->generateRandomString() . ".{$ext}";
+    // the uploaded image instance
+    return $image;
   }
 
 }
