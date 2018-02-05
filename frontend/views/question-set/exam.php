@@ -11,9 +11,13 @@ use yii\web\View;
 $this->title = $model->subject->exam_class . ' > ' . $model->subject->exam_subclass . ' > ' . $model->name;
 $disableChoice = (isset($disableChoice) && !empty($disableChoice)) ? $disableChoice : false;
 
+
 if (isset($onAdmin) && !empty($onAdmin) && $onAdmin == true) {
 //  $stringScript = "$('.wrapper-disable-click-choice').hide();";
-  $stringScript = "adminTrue();";
+  echo $questionSave->module_part;
+  $questionSaveParts = $questionSave->module_part;
+//  $test = json_encode($test);
+  $stringScript = "adminTrue(); handleHidingQuestion(" . $questionSaveParts . ");";
 } else {
   $stringScript = "hidingSectionPart('" . $doPart . "');"
           . "adminFalse();"

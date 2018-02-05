@@ -5,8 +5,7 @@ namespace frontend\widgets;
 use Yii;
 use kartik\grid\GridView;
 use frontend\helpers\MainHelper;
-
-//use yii\helpers\Url;
+use yii\helpers\Url;
 
 class MonitorUserProfileGridExam extends \yii\bootstrap\Widget {
 
@@ -43,7 +42,7 @@ class MonitorUserProfileGridExam extends \yii\bootstrap\Widget {
                 'label' => 'Last Update',
                 'attribute' => 'updated_at',
 //                'width' => '150px',
-                'value'=> function($model) {
+                'value' => function($model) {
                   return date('Y-m-d H:i:s', $model->updated_at);
                 }
             ],
@@ -51,11 +50,13 @@ class MonitorUserProfileGridExam extends \yii\bootstrap\Widget {
                 'width' => '1px',
                 'format' => 'html',
                 'value' => function($model) {
-                  return '<a target="_blank" href="' . Yii::$app->getUrlManager()->getBaseUrl() . '/question-set/monitor-user-do-exam?questionSaveId=' . $model->id . '"><i class="fa fa-external-link"></i></a>';
+                  return '<a target="_blank" href="' . Url::to(['question-set/monitor-user-do-exam', 'questionSaveId' => $model->id]) . '"><i class="fa fa-external-link"></i></a>';
+//                  return '<a target="_blank" href="' . Yii::$app->getUrlManager()->getBaseUrl() . '/question-set/monitor-user-do-exam?questionSaveId=' . $model->id . '"><i class="fa fa-external-link"></i></a>';
                 }
-            ],
-        ],
-    ]);
-  }
+                    ],
+                ],
+            ]);
+          }
 
-}
+        }
+        

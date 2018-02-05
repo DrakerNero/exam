@@ -88,11 +88,13 @@ class QuestionSaveMonitorGridView extends \yii\bootstrap\Widget {
                 'width' => '1px',
                 'format' => 'html',
                 'value' => function($model) {
-                  return '<a target="_blank" href="' . Yii::$app->getUrlManager()->getBaseUrl() . '/site/monitor-profile-user?userId=' . $model->id . '"><i class="fa fa-user"></i></a>';
-                }
-            ],
-        ],
-    ]);
-  }
 
-}
+                  return '<a target="_blank" href="' . Url::to(['site/monitor-profile-user', 'userId' => $model->id]) . '"><i class="fa fa-user"></i></a>';
+                }
+                    ],
+                ],
+            ]);
+          }
+
+        }
+        

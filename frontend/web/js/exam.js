@@ -579,6 +579,17 @@ function autoSelectChoice(choiceId, multiSelectChoice) {
   handleClickChoice(choiceId);
 }
 
+function handleHidingQuestion(parts) {
+//  parts.forEach(function (val) {
+  for (var i = 1; i <= 50; i++) {
+    if (parts[0] == i || parts[1] == i) {
+    } else {
+      $('[id^="frame-question-section-' + i + '"]').hide();
+    }
+  }
+//  });
+}
+
 function adminTrue() {
   $('#rescore-exam').remove();
   $('#btn-restart-temporary').remove();

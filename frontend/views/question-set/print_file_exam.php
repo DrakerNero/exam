@@ -12,7 +12,7 @@
   foreach ($questions as $question) {
     $arrChoices = json_decode($question->choices, true);
     $answers = json_decode($question->answers, true);
-    echo $i . '.  ' . $question->question;
+    echo $i . '.  ' . nl2br($question->question);
     echo '<br /><br />';
     if ($question->png == 1) {
       echo '<img src="' . Yii::$app->getUrlManager()->getBaseUrl() . '/uploads/png/' . $question->id . '.png" />';
@@ -37,7 +37,7 @@
 
     <div style="">
       <b>Explain</b><br />
-      <?= $question->answer_detail ?>
+      <?= nl2br($question->answer_detail) ?>
     </div>
 
     <?php
