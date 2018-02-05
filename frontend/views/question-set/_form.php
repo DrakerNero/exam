@@ -7,7 +7,6 @@ use yii\widgets\ActiveForm;
 /* @var $model frontend\models\QuestionSet */
 /* @var $form yii\widgets\ActiveForm */
 $model->select_question_type = 1;
-echo $model->id;
 ?>
 
 <div class="question-set-form">

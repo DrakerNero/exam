@@ -3,6 +3,7 @@
 //use Yii;
 use yii\helpers\Html;
 use kartik\grid\GridView;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\QuestionSet */
@@ -73,14 +74,17 @@ $this->params['breadcrumbs'][] = 'Update';
                   'width' => '10px',
                   'format' => 'html',
                   'value' => function($model) {
-                    return '<a target="_blank" href="' . Yii::$app->getUrlManager()->getBaseUrl() . '/question/update?id=' . $model->id . '">'
+                    return '<a target="_blank" href="' . Url::to(['question/update', 'id' => $model->id]) . '">'
                             . '<i class="fa fa-edit"></i>'
                             . '</a>';
+//                    return '<a target="_blank" href="' . Yii::$app->getUrlManager()->getBaseUrl() . '/question/update?id=' . $model->id . '">'
+//                            . '<i class="fa fa-edit"></i>'
+//                            . '</a>';
                   }
-              ],
-          ]
-      ])
-      ?>
+                      ],
+                  ]
+              ])
+              ?>
     </div>
   </div>
 
