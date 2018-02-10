@@ -82,7 +82,7 @@ function ClickSave(questionId, choices, part) {
     success: function (data) {
     },
     error: function (data) {
-      alert("ไม่มีการส่งข้อมูล" + questionSaveId);
+      console.log("ไม่มีการส่งข้อมูล" + questionSaveId);
     }
   });
 }
@@ -430,11 +430,11 @@ function Rescore(getUrl) {
       if (data === '1') {
         location.reload();
       } else if (data === '0') {
-        alert('เกิดข้อผิดพลาด');
+        console.log('เกิดข้อผิดพลาด');
       }
     },
     error: function (data) {
-      alert("ไม่มีการส่งข้อมูล");
+      console.log("ไม่มีการส่งข้อมูล");
     }
   });
 }
@@ -531,11 +531,11 @@ function handleOnNextSection() {
       if (data === '1') {
         location.reload();
       } else if (data === '0') {
-        alert('เกิดข้อผิดพลาด');
+        console.log('เกิดข้อผิดพลาด');
       }
     },
     error: function (data) {
-      alert("ไม่มีการส่งข้อมูล");
+      console.log("ไม่มีการส่งข้อมูล");
     }
   });
 }
