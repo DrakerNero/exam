@@ -148,8 +148,8 @@ class SiteController extends Controller {
   }
 
   public function actionTestAuth() {
-    $username = 'medic';
-    $password = 'Gund@m00';
+    $username = 'mdcutest08';
+    $password = 'MDcu0853!';
     $host = '161.200.98.35';
     $key = 'MDCUacs1#';
 //    $username = $argv[1];
