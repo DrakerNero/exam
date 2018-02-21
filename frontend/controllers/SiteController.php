@@ -147,4 +147,29 @@ class SiteController extends Controller {
     return $this->render('edit_profile_user', ['model' => $model, 'id' => $id]);
   }
 
+  public function actionTestAuth() {
+    $username = 'medic';
+    $password = 'Gund@m00';
+    $host = '161.200.98.35';
+    $key = 'MDCUacs1#';
+//    $username = $argv[1];
+//    $password = $argv[2];
+//    $host = $argv[3];
+//    $key = $argv[4];
+    $timeout = 10;
+    $retry = 3;
+    $radius = radius_auth_open();
+    radius_add_server($radius, $host, 0, $key, $timeout, $retry);
+    radius_create_request($radius, RADIUS_ACCESS_REQUEST);
+    radius_put_attr($radius, RADIUS_USER_NAME, $username);
+    radius_put_attr($radius, RADIUS_USER_PASSWORD, $password);
+    $status = radius_send_request($radius);
+    radius_close($radius);
+    if ($status == RADIUS_ACCESS_ACCEPT) {
+      echo 'true';
+      return;
+    }
+    echo 'false';
+  }
+
 }
