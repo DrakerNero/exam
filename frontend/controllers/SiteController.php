@@ -178,5 +178,20 @@ class SiteController extends Controller {
     }
     echo 'false';
   }
+  
+  public function actionTestLdap() {
+    $ldap_dn = 'cn=read-only-admin,dc=example,dc=com';
+    $ldap_password = 'password';
+    
+    $ldap_con = ldap_connect('ldap.forumsys.com');
+    
+//    ldap_set_option($ldap_con, LDAP_OTP_PROTOCOL_VERSION, 30);
+    
+    if(ldap_bind($ldap_con, $ldap_dn, $ldap_password)) {
+      echo 'TRUE';
+    } else {
+      echo 'FALSE';
+    }
+  }
 
 }
