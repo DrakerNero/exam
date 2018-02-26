@@ -166,6 +166,7 @@ class SiteController extends Controller {
     $status = radius_send_request($radius);
     radius_close($radius);
     if ($status == RADIUS_ACCESS_ACCEPT) {
+      echo radius_strerror($radius);
       echo ' radius: ' . $radius;
       echo ' status: ' . $status;
       echo ' : true';
