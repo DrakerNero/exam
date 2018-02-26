@@ -164,9 +164,10 @@ class SiteController extends Controller {
     radius_put_attr($radius, RADIUS_USER_NAME, $username);
     radius_put_attr($radius, RADIUS_USER_PASSWORD, $password);
     $status = radius_send_request($radius);
+    $getAttr = radius_get_attr($radius);
     radius_close($radius);
     if ($status == RADIUS_ACCESS_ACCEPT) {
-//      echo radius_strerror($radius);
+      echo $getAttr;
       echo ' radius: ' . $radius;
       echo ' status: ' . $status;
       echo ' : true';
