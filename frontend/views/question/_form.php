@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use frontend\widgets\QuestionPNG;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Question */
@@ -21,6 +22,12 @@ $maxSelectChoice = (!empty($model->max_select_choice) && isset($model->max_selec
     <?= $form->field($model, 'part')->textInput(['placeholder' => 'Part'])->label('Part') ?>
 
     <?= $form->field($model, 'question')->textarea(['rows' => 8])->label('Topic') ?>
+    
+    <?php
+    
+    echo ($model->png == 1) ? QuestionPNG::widget(['model' => $model]) : '';
+    
+    ?>
 
     <?= $form->field($model, 'file_upload')->fileInput()->label(false); ?>
 

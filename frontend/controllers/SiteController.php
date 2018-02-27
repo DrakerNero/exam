@@ -193,10 +193,10 @@ class SiteController extends Controller {
 //      echo 'FALSE';
 //    }
 //  }
-    $con = ldap_connect('ldaps://the.ldap.server', 636);
+    $con = @ldap_connect('ldaps://the.ldap.server', 636);
     ldap_set_option($con, LDAP_OPT_PROTOCOL_VERSION, 3);
     ldap_set_option($con, LDAP_OPT_REFERRALS, 0);
-    var_dump(ldap_bind($con, 'user@sub.domain.com', 'password'));
+    var_dump(@ldap_bind($con, 'user@sub.domain.com', 'password'));
   }
 
 }

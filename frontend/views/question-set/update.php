@@ -69,6 +69,13 @@ $this->params['breadcrumbs'][] = 'Update';
                   'hAlign' => 'center',
               ],
               [
+                  'label' => 'Image',
+                  'attribute' => 'png',
+                  'width' => '10px',
+                  'vAlign' => 'middle',
+                  'hAlign' => 'center',
+              ],
+              [
                   'vAlign' => 'middle',
                   'hAlign' => 'center',
                   'width' => '10px',
