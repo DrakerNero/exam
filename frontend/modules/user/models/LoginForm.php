@@ -97,7 +97,7 @@ class LoginForm extends Model {
       $signup = new SignupForm();
       $signup->username = $this->username;
       $signup->password = $this->password;
-      $signup->email = '';
+      $signup->email = date('YmdHis').'@mail.com';
       $user = $signup->signup();
 
       return $user;
