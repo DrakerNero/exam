@@ -51,7 +51,7 @@ if (!empty(Yii::$app->user->identity->id)) {
             ?>
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <?php
-              $part_image = Yii::$app->user->identity->userProfile->avatar;
+              $part_image = null;
 
               if ($part_image != null) {
                 ?>
