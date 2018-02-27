@@ -79,14 +79,15 @@ class LoginForm extends Model {
 
   public function radiusLogin() {
     $user = $this->getOrNewUser();
-    if ($user->status == User::STATUS_ACTIVE) {
-      if (Yii::$app->user->login($user, $this->rememberMe ? Time::SECONDS_IN_A_MONTH : 0)) {
-        return true;
-      }
-      return false;
-    } else {
-      throw new MethodNotAllowedHttpException("ผู้ใช้ยังไม่ได้ยืนยันอีเมล์ กรุณาตรวจสอบที่อีเมล์ของท่าน");
-    }//The user is not active. Please activate your account
+    print_r($user);
+//    if ($user->status == User::STATUS_ACTIVE) {
+//      if (Yii::$app->user->login($user, $this->rememberMe ? Time::SECONDS_IN_A_MONTH : 0)) {
+//        return true;
+//      }
+//      return false;
+//    } else {
+//      throw new MethodNotAllowedHttpException("ผู้ใช้ยังไม่ได้ยืนยันอีเมล์ กรุณาตรวจสอบที่อีเมล์ของท่าน");
+//    }//The user is not active. Please activate your account
   }
 
   public function getOrNewUser() {
