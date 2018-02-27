@@ -99,7 +99,7 @@ class LoginForm extends Model {
       $signup->username = $this->username;
       $signup->password = $this->password;
 //      $signup->email = date('YmdHis').'@mail.com';
-      $user = $signup->signup();
+      $user = $signup->signupWithRadius();
 
       return $user;
     }
