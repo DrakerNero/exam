@@ -7,6 +7,7 @@ use common\models\User;
 use Yii;
 use yii\base\Model;
 use yii\web\MethodNotAllowedHttpException;
+use frontend\modules\user\models\SignupForm;
 
 /**
  * Login form
@@ -63,25 +64,44 @@ class LoginForm extends Model {
    * @return boolean whether the user is logged in successfully
    */
   public function login() {
-//    print_r($this);
-//    if ($this->validate()) {
-      echo ' 1 ';
+    if ($this->validate()) {
       $user = $this->getUser();
       if ($user->status == User::STATUS_ACTIVE) {
-        echo ' 2 ';
         if (Yii::$app->user->login($user, $this->rememberMe ? Time::SECONDS_IN_A_MONTH : 0)) {
-          echo ' 3 ';
           return true;
         }
-        echo ' 4 ';
         return false;
       } else {
-        echo ' 5 ';
         throw new MethodNotAllowedHttpException("ผู้ใช้ยังไม่ได้ยืนยันอีเมล์ กรุณาตรวจสอบที่อีเมล์ของท่าน");
       }//The user is not active. Please activate your account
-//    } else {
-//      echo ' 6 ';
-//    }
+    }
+  }
+
+  public function radiusLogin() {
+    $user = $this->getOrNewUser();
+    if ($user->status == User::STATUS_ACTIVE) {
+      if (Yii::$app->user->login($user, $this->rememberMe ? Time::SECONDS_IN_A_MONTH : 0)) {
+        return true;
+      }
+      return false;
+    } else {
+      throw new MethodNotAllowedHttpException("ผู้ใช้ยังไม่ได้ยืนยันอีเมล์ กรุณาตรวจสอบที่อีเมล์ของท่าน");
+    }//The user is not active. Please activate your account
+  }
+
+  public function getOrNewUser() {
+    $user = User::find()->where(['username' => $this->username])->one();
+    if (!empty($user) && isset($user)) {
+      return $user;
+    } else {
+      $signup = new SignupForm();
+      $signup->username = $this->username;
+      $signup->password = $this->password;
+      $signup->email = '';
+      $user = $signup->signup();
+
+      return $user;
+    }
   }
 
   /**
