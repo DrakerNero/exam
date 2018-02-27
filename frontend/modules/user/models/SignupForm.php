@@ -79,15 +79,15 @@ class SignupForm extends Model {
     $user->generatePasswordResetToken();
     $user->user_status = 0;
     if ($user->save()) {
-      Yii::$app->commandBus->handle(new SendEmailCommand([
-          'from' => [Yii::$app->params['adminEmail'] => Yii::$app->name],
-          'to' => $this->username,
-          'subject' => Yii::t('frontend', '[{name}] Pleae activate your account', ['name' => Yii::$app->name]),
-          'view' => 'accountActivateToken',
-          'params' => ['user' => $user]
-      ]));
+//      Yii::$app->commandBus->handle(new SendEmailCommand([
+//          'from' => [Yii::$app->params['adminEmail'] => Yii::$app->name],
+//          'to' => $this->username,
+//          'subject' => Yii::t('frontend', '[{name}] Pleae activate your account', ['name' => Yii::$app->name]),
+//          'view' => 'accountActivateToken',
+//          'params' => ['user' => $user]
+//      ]));
     }
-    $user->afterSignup();
+    $user->afterSignupWithRadius();
     return $user;
   }
 
