@@ -99,6 +99,7 @@ class AuthController extends \yii\web\Controller {
         $model->radiusLogin();
 //        echo 'true';
       } else {
+        $model->login();
 //        echo 'false';
       }
 

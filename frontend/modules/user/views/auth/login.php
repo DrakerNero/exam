@@ -33,8 +33,8 @@ $this->params['body-class'] = 'login-page';
         </div>
         <?php ActiveForm::end(); ?>
     </div>
-    <div class="login-page-link text-center">
+<!--    <div class="login-page-link text-center">
       <a href="<?= Url::to(['auth/signup']) ?>">Sign Up</a> |
       <a href="<?= Url::to(['auth/request-password-reset']) ?>">Forgot password</a>
-    </div>
+    </div>-->
 </div>
