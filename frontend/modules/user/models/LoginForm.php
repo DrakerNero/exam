@@ -63,8 +63,8 @@ class LoginForm extends Model {
    * @return boolean whether the user is logged in successfully
    */
   public function login() {
-    print_r($this);
-    if ($this->validate()) {
+//    print_r($this);
+//    if ($this->validate()) {
       echo ' 1 ';
       $user = $this->getUser();
       if ($user->status == User::STATUS_ACTIVE) {
@@ -79,9 +79,9 @@ class LoginForm extends Model {
         echo ' 5 ';
         throw new MethodNotAllowedHttpException("ผู้ใช้ยังไม่ได้ยืนยันอีเมล์ กรุณาตรวจสอบที่อีเมล์ของท่าน");
       }//The user is not active. Please activate your account
-    } else {
-      echo ' 6 ';
-    }
+//    } else {
+//      echo ' 6 ';
+//    }
   }
 
   /**
