@@ -297,7 +297,7 @@ class User extends ActiveRecord implements IdentityInterface {
     $profile->avatar_path = '';
     $profile->avatar_base_url = '';
     $profile->gender = '';
-    $profile->load($profileData, '');
+//    $profile->load($profileData, '');
 
     $this->link('userProfile', $profile);
     $this->trigger(self::EVENT_AFTER_SIGNUP);
