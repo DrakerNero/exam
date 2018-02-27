@@ -70,7 +70,8 @@ function ClickSave(questionId, choices, part) {
   var csrfToken = $('meta[name="csrf-token"]').attr("content");
   $.ajax({
     type: "POST",
-    url: "../../question-save/click-save",
+//    url: "../../question-save/click-save",
+    url: "index.php?r=question-save/click-save",
     data: ({
       questionSaveId: questionSaveId,
       questionId: questionId,
@@ -150,7 +151,7 @@ $(window).load(function () {
     Rescore('');
   });
   $('#btn-restart-temporary').click(function () {
-    Rescore('../../question-save/rescore-all-status');
+    Rescore('index.php?r=question-save/rescore-all-status');
   });
   $('.div-rescore-exam-mobile').click(function () {
     Rescore('');
@@ -279,7 +280,7 @@ function SaveStateDone(score) {
   var csrfToken = $('meta[name="csrf-token"]').attr("content");
   $.ajax({
     type: "POST",
-    url: "../../question-save/save-state-done",
+    url: "index.php?r=question-save/save-state-done",
     data: ({
       questionSaveId: questionSaveId,
       score: score,
@@ -416,7 +417,7 @@ function handlePercentPass() {
 }
 
 function Rescore(getUrl) {
-  var urlPost = (getUrl == null || getUrl == undefined || getUrl == '') ? '../../question-save/rescore' : getUrl;
+  var urlPost = (getUrl == null || getUrl == undefined || getUrl == '') ? 'index.php?r=question-save/rescore' : getUrl;
   var csrfToken = $('meta[name="csrf-token"]').attr("content");
   var questionSetId = $('.question-set-id').attr('data-id');
   $.ajax({
@@ -470,7 +471,8 @@ $('.btn-next-present').click(function () {
   $('.doing-question-section').attr('data-present-question', presentQuestion);
   $.ajax({
     type: "POST",
-    url: "../../question-save/update-present-question",
+//    url: "../../question-save/update-present-question",
+    url: "index.php?r=question-save/update-present-question",
     data: ({
       presentQuestion: presentQuestion,
       id: questionSaveId,
