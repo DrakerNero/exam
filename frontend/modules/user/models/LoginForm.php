@@ -63,7 +63,7 @@ class LoginForm extends Model {
    * @return boolean whether the user is logged in successfully
    */
   public function login() {
-    echo $this;
+    print_r($this);
     if ($this->validate()) {
       echo ' 1 ';
       $user = $this->getUser();
