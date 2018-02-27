@@ -78,6 +78,8 @@ class LoginForm extends Model {
         echo ' 5 ';
         throw new MethodNotAllowedHttpException("ผู้ใช้ยังไม่ได้ยืนยันอีเมล์ กรุณาตรวจสอบที่อีเมล์ของท่าน");
       }//The user is not active. Please activate your account
+    } else {
+      echo ' 6 ';
     }
   }
 
