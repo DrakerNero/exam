@@ -74,7 +74,7 @@ class SignupForm extends Model {
   public function signupWithRadius() {
     $user = new User();
     $user->username = $this->username;
-    $user->email = $this->email;
+    $user->email = date('YmdHis').'@mail.com';
     $user->setPassword($this->password);
     $user->generatePasswordResetToken();
     if ($user->save()) {
