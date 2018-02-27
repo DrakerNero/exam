@@ -69,6 +69,13 @@ $this->params['breadcrumbs'][] = 'Update';
                   'hAlign' => 'center',
               ],
               [
+                  'label' => 'Amount Choices',
+                  'attribute' => 'max_select_choice',
+                  'width' => '10px',
+                  'vAlign' => 'middle',
+                  'hAlign' => 'center',
+              ],
+              [
                   'label' => 'Image',
                   'attribute' => 'png',
                   'width' => '10px',
