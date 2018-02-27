@@ -63,9 +63,9 @@ class LoginForm extends Model {
    * @return boolean whether the user is logged in successfully
    */
   public function login() {
-    echo '789789';
     if ($this->validate()) {
       $user = $this->getUser();
+      echo $user;
       if ($user->status == User::STATUS_ACTIVE) {
         if (Yii::$app->user->login($user, $this->rememberMe ? Time::SECONDS_IN_A_MONTH : 0)) {
           return true;
@@ -83,7 +83,6 @@ class LoginForm extends Model {
    * @return User|null
    */
   public function getUser() {
-    echo $this->user;
     if ($this->user === false) {
       $this->user = User::find()->where(['username' => $this->username])->one();
     }
