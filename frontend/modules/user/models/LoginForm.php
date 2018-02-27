@@ -64,14 +64,18 @@ class LoginForm extends Model {
    */
   public function login() {
     if ($this->validate()) {
+      echo ' 1 ';
       $user = $this->getUser();
-      echo $user;
       if ($user->status == User::STATUS_ACTIVE) {
+        echo ' 2 ';
         if (Yii::$app->user->login($user, $this->rememberMe ? Time::SECONDS_IN_A_MONTH : 0)) {
+          echo ' 3 ';
           return true;
         }
+        echo ' 4 ';
         return false;
       } else {
+        echo ' 5 ';
         throw new MethodNotAllowedHttpException("ผู้ใช้ยังไม่ได้ยืนยันอีเมล์ กรุณาตรวจสอบที่อีเมล์ของท่าน");
       }//The user is not active. Please activate your account
     }
