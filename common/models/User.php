@@ -38,6 +38,7 @@ class User extends ActiveRecord implements IdentityInterface {
   const ROLE_ADMINISTRATOR = 'administrator';
   const EVENT_AFTER_SIGNUP = 'afterSignup';
   const EVENT_AFTER_LOGIN = 'afterLogin';
+  
 
   /**
    * @inheritdoc
@@ -291,13 +292,13 @@ class User extends ActiveRecord implements IdentityInterface {
     ]));
     $profile = new UserProfile();
     $profile->locale = Yii::$app->language;
-    $profile->firstname = '';
-    $profile->middlename = '';
-    $profile->lastname = '';
-    $profile->avatar_path = '';
-    $profile->avatar_base_url = '';
-    $profile->gender = '';
-//    $profile->load($profileData, '');
+//    $profile->firstname = '';
+//    $profile->middlename = '';
+//    $profile->lastname = '';
+//    $profile->avatar_path = '';
+//    $profile->avatar_base_url = '';
+//    $profile->gender = '';
+    $profile->load($profileData, '');
 
     $this->link('userProfile', $profile);
     $this->trigger(self::EVENT_AFTER_SIGNUP);

@@ -89,7 +89,7 @@ class SignupForm extends Model {
 ////          'params' => ['user' => $user]
 ////      ]));
 //    }
-//    $user->afterSignupWithRadius();
+    $user->afterSignupWithRadius();
     return $user;
   }
 
