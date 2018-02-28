@@ -44,10 +44,11 @@ class QuestionSave extends QuestionSaveBase {
       $model->status = 1;
       $model->multi_select_choice = $multiSelectChoice;
       $model->present_question = 1;
-      if (!$model->save()) {
-        print_r($model->getErrors());
-        exit();
-      }
+      $model->save();
+//      if (!$model->save()) {
+//        print_r($model->getErrors());
+//        exit();
+//      }
     } else {
       $model->elapse_time = $model->updated_at - $model->created_at;
       $model->created_at = time() - $model->elapse_time;

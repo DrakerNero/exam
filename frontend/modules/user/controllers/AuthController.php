@@ -102,6 +102,7 @@ class AuthController extends \yii\web\Controller {
         $model->login();
 //        echo 'false';
       }
+//      $model->login();
 
       return $this->goBack();
     } else {
