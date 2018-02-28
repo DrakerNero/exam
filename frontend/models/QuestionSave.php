@@ -37,7 +37,7 @@ class QuestionSave extends QuestionSaveBase {
   public function LoadQuestionSave($questionSetID, $multiSelectChoice) {
     $userId = Yii::$app->user->identity->id;
     $model = QuestionSave::find()->where(['user_id' => $userId, 'question_set_id' => $questionSetID, 'status' => [1, 2, 3]])->one();
-    if (empty($model) && isset($model)) {
+    if (empty($model->id) && isset($model->id)) {
       $model2 = new QuestionSave();
       $model2->user_id = '' . $userId;
       $model2->question_set_id = $questionSetID;
