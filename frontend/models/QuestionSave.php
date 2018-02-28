@@ -44,7 +44,8 @@ class QuestionSave extends QuestionSaveBase {
       $model->status = 1;
       $model->multi_select_choice = $multiSelectChoice;
       $model->present_question = 1;
-      $model->save();
+      print_r($model);
+//      $model->save();
 //      if (!$model->save()) {
 //        print_r($model->getErrors());
 //        exit();
