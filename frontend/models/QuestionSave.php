@@ -50,8 +50,8 @@ class QuestionSave extends QuestionSaveBase {
       $model2->multi_select_choice = $multiSelectChoice;
       $model2->present_question = 1;
 //      $model2->save();
-      echo "<pre>";
-      print_r($model);
+//      echo "<pre>";
+//      print_r($model);
       return $model2;
 //      if (!$model->save()) {
 //        print_r($model->getErrors());
