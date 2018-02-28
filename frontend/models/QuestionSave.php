@@ -49,7 +49,7 @@ class QuestionSave extends QuestionSaveBase {
       $model2->status = 1;
       $model2->multi_select_choice = $multiSelectChoice;
       $model2->present_question = 1;
-      $model2->save();
+//      $model2->save();
       echo "<pre>";
       print_r($model);
       return $model2;
