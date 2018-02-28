@@ -37,7 +37,12 @@ class QuestionSave extends QuestionSaveBase {
   public function LoadQuestionSave($questionSetID, $multiSelectChoice) {
     $userId = Yii::$app->user->identity->id;
     $model = QuestionSave::find()->where(['user_id' => $userId, 'question_set_id' => $questionSetID, 'status' => [1, 2, 3]])->one();
-    if (empty($model->id) && isset($model->id)) {
+    if (!empty($model->id) && isset($model->id)) {
+      $model->elapse_time = $model->updated_at - $model->created_at;
+      $model->created_at = time() - $model->elapse_time;
+      $model->save();
+      return $model;
+    } else {
       $model2 = new QuestionSave();
       $model2->user_id = '' . $userId;
       $model2->question_set_id = $questionSetID;
@@ -47,16 +52,12 @@ class QuestionSave extends QuestionSaveBase {
       $model2->save();
       echo "<pre>";
       print_r($model);
+      return $model2;
 //      if (!$model->save()) {
 //        print_r($model->getErrors());
 //        exit();
 //      }
-    } else {
-      $model->elapse_time = $model->updated_at - $model->created_at;
-      $model->created_at = time() - $model->elapse_time;
-      $model->save();
     }
-    return $model;
   }
 
   /**
