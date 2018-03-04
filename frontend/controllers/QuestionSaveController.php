@@ -26,7 +26,8 @@ class QuestionSaveController extends Controller {
 
                     'actions' => ['history', 'monitor', 'click-save', 'finish-question', 'save-state-done', 'rescore', 'save-present-section', 'update-present-question',
                         'click-save-multi-choice',
-                        'rescore-all-status'
+                        'rescore-all-status',
+                        'question-save-export-excel'
                     ],
                     'allow' => true,
                     'roles' => ['@']
@@ -331,6 +332,21 @@ class QuestionSaveController extends Controller {
     }
 
     return $doPart;
+  }
+
+  public function actionQuestionSaveExportExcel($questionSetId) {
+    $this->layout = 'blank';
+    $models = QuestionSave::find()->where(['question_set_id' => $questionSetId])->all();
+    $answers = json_decode($models[0]->answer);
+
+    if (count($models) >= 1) {
+      return $this->render('question_set_export_excel', ['models' => $models, 'answers' => $answers]);
+    } else {
+      
+    }
+//    echo '<pre>';
+//    print_r($answers);
+//    echo $answers->{18010033}->value;
   }
 
 }

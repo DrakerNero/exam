@@ -44,6 +44,17 @@ $this->params['breadcrumbs'][] = $this->title;
                     },
                         ],
                     ],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{copy}',
+                'contentOptions' => [ 'width' => '1px'],
+                'header' => '',
+                'buttons' => [
+                    'copy' => function($url, $model, $key) {
+                      return '<a target="_blank" href="' . Url::to(['question-save/question-save-export-excel', 'questionSetId' => $model->id]) . '"><i class="fa fa-file"></i></a>';
+                    },
+                        ],
+                    ],
                     ['class' => 'yii\grid\ActionColumn'],
                 ],
             ]);

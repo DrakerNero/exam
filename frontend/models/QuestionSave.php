@@ -66,6 +66,9 @@ class QuestionSave extends QuestionSaveBase {
   public function getQuestionSet() {
     return $this->hasOne(QuestionSet::className(), ['id' => 'question_set_id']);
   }
+  public function getQuestionset2() {
+    return $this->hasOne(QuestionSet::className(), ['id' => 'question_set_id']);
+  }
 
   /**
    * @return \yii\db\ActiveQuery

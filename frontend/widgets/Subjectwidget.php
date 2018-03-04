@@ -39,42 +39,40 @@ class Subjectwidget extends \yii\bootstrap\Widget {
       }
     </script>
     <?php
+    $iconName = 'ic-1.png';
+    $colorClass = 'wsq-gray';
+    $heager_subject = "bg-green";
     if ($this->models != null) {
       $month = 2;
       $dateEndNew = $month * (2592000); // 2592000 => 1 เดือน
       foreach ($this->models as $model) {
         $dataSubject = Subjectwidget::getStatusSubject($user_id, $model->questionSaves);
-        if ((!empty($dataSubject['status']) && isset($dataSubject['status'])) ||(!empty($dataSubject['score']) && isset($dataSubject['score']))) {
+        if ((!empty($dataSubject['status']) && isset($dataSubject['status'])) || (!empty($dataSubject['score']) && isset($dataSubject['score']))) {
           if ($dataSubject['score'] >= 80) {
-            $heager_subject = "bg-green";
+            $iconName = 'ic-3.png';
+            $colorClass = 'wsq-green';
           } else if ($dataSubject['status'] == 1 || $dataSubject['status'] = 3) {
-            $heager_subject = "bg-orange";
+            $iconName = 'ic-2.png';
+            $colorClass = 'wsq-orange';
           } else {
-            $heager_subject = "bg-aqua";
+            $iconName = 'ic-1.png';
+            $colorClass = 'wsq-gray';
           }
         } else {
-          $heager_subject = "bg-aqua";
+          $iconName = 'ic-1.png';
+          $colorClass = 'wsq-gray';
         }
         ?>       
         <a href="<?= Url::to(['question-set/teacher', 'id' => $model->id]) ?>" onmouseover="ShowOtherData(<?= $model->id ?>)" onmouseout="NotShowOtherData(<?= $model->id ?>)">
           <div class="col-md-4">
-            <div class="info-box subject">
-              <span class="header-box <?= $heager_subject ?>" >
-                <div class="subject-new">
-                  <?php
-                  if (date("Y/m/d") <= date("Y/m/d", $model->created_at + $dateEndNew)) {
-                    ?>
-                    <img src="<?= Url::to('@frontendUrl/uploads/images/new.png') ?>" />
-                  <?php } ?>
-
-                </div> 
-                <div class="logo-subject">
-                  <img class="img-exam-cover" style="height: 50px; margin-top: 5px;" src="<?= Yii::$app->getUrlManager()->getBaseUrl() ?>/uploads/static/exam.png" />
-                </div> 
-              </span>
-              <div class="info-box show-data">
-                <span class="info-box-text"><?= $model->subject->exam_subclass ?>(<?= $model->subject->exam_class ?> : <?= $model->name ?>) </span>
-                <span class="other" id="<?= $model->id ?>"><?= $model->total_score ?>  ข้อ <?= $model->total_time ?> นาที </span>
+            <div class="wrapper-select-question <?= $colorClass ?>">
+              <div class="flex-select-question">
+                <div class="left">
+                  <img src="<?= Yii::$app->urlManager->baseUrl ?>/uploads/static/<?= $iconName ?>" alt="" />
+                </div>
+                <div class="right">
+                  <?= $model->name ?>
+                </div>
               </div>
             </div>
           </div>
@@ -89,6 +87,20 @@ class Subjectwidget extends \yii\bootstrap\Widget {
 
       <?php
     }
+    ?>
+    <!--    <div class="col-md-4">
+          <div class="wrapper-select-question wsq-green">
+            <div class="flex-select-question">
+              <div class="left">
+                <img src="<?= Yii::$app->urlManager->baseUrl ?>/uploads/static/ic-3.png" alt="" />
+              </div>
+              <div class="right">
+                MODULE 5 (DOUCTOR EXAM : INTERACTIVE 5)
+              </div>
+            </div>
+          </div>
+        </div>-->
+    <?php
   }
 
   private function getStatusSubject($user_id, $models) {

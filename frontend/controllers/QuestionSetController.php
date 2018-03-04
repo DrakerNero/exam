@@ -292,4 +292,9 @@ class QuestionSetController extends Controller {
     return $this->render('print_file_exam', ['questions' => $questions, 'questionSet' => $questionSet]);
   }
 
+//  public function actionQuestionSetExportExcel($id) {
+////    $models = QuestionSet::find()->where(['id' => $id])->all();
+//    
+//  }
+
 }
