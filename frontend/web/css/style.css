@@ -205,7 +205,7 @@ input[type="radio"]:checked + #inputRadio {
 
 }
 input[type="checkbox"]:checked + #inputRadio {
-  background-color:#0F970F;
+  background-color:#6b2942;
   color: #fff;
 
 }
@@ -687,13 +687,13 @@ input[type="checkbox"]:checked + #inputRadio {
   padding: 5px 5px 5px 30px;
   border-radius: 3px;
   margin: 5px 0;
+  cursor: pointer;
 }
 .wrapper-select-question .flex-select-question {
   background: #fff;
   padding: 20px 10px;
   display: flex;
   flex-direction: row;
-  cursor: default;
 }
 .flex-select-question>.left {
   flex-grow: 1;

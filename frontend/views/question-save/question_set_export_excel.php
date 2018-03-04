@@ -41,25 +41,30 @@ header('Content-Disposition: attachment; filename="export_question_choices.xls"'
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Year</td>
-          <td>รุ่น</td>
-          <td>SID</td>
-          <td>Datetime</td>
-          <?php
-          $countModel = 0;
-          foreach ($models as $model) {
-            for ($i = $models[$countModel]->questionset2->from; $i <= $models[$countModel]->questionset2->to; $i++) {
+        <?php
+//        $countModel = 0;
+        foreach ($models as $model) {
+          $answers = json_decode($model->answer);
+          ?>
+          <tr>
+            <td>Year</td>
+            <td>รุ่น</td>
+            <td>SID</td>
+            <td>Datetime</td>
+            <?php
+            for ($i = $model->questionset2->from; $i <= $model->questionset2->to; $i++) {
               if (!empty($answers->{$i}) && isset($answers->{$i})) {
                 echo '<td>' . $answers->{$i}->value . '</td>';
               } else {
                 echo '<td></td>';
               }
             }
-            $countModel++;
-          }
-          ?>
-        </tr>
+            ?>
+          </tr>
+          <?php
+//          $countModel++;
+        }
+        ?>
       </tbody>
     </table>
     <?php ?>

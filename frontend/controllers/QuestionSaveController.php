@@ -337,10 +337,10 @@ class QuestionSaveController extends Controller {
   public function actionQuestionSaveExportExcel($questionSetId) {
     $this->layout = 'blank';
     $models = QuestionSave::find()->where(['question_set_id' => $questionSetId])->all();
-    $answers = json_decode($models[0]->answer);
+    
 
     if (count($models) >= 1) {
-      return $this->render('question_set_export_excel', ['models' => $models, 'answers' => $answers]);
+      return $this->render('question_set_export_excel', ['models' => $models]);
     } else {
       
     }
