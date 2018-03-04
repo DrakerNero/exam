@@ -47,12 +47,16 @@ header('Content-Disposition: attachment; filename="export_question_choices.xls"'
           <td>SID</td>
           <td>Datetime</td>
           <?php
-          for ($i = $models[0]->questionset2->from; $i <= $models[0]->questionset2->to; $i++) {
-            if (!empty($answers->{$i}) && isset($answers->{$i})) {
-              echo '<td>' . $answers->{$i}->value . '</td>';
-            } else {
-              echo '<td></td>';
+          $countModel = 0;
+          foreach ($models as $model) {
+            for ($i = $models[$countModel]->questionset2->from; $i <= $models[$countModel]->questionset2->to; $i++) {
+              if (!empty($answers->{$i}) && isset($answers->{$i})) {
+                echo '<td>' . $answers->{$i}->value . '</td>';
+              } else {
+                echo '<td></td>';
+              }
             }
+            $countModel++;
           }
           ?>
         </tr>
