@@ -544,30 +544,31 @@ input[type="checkbox"]:checked + #inputRadio {
   position: fixed;
   left: 0;
   top: 0;
-  background: #ecf0f5;
-  z-index: 1500;
+  /*background: #ecf0f5;*/
+  z-index: 1600;
 }
 .teacher-img {
   height: auto;
-  width: 100%;
-  box-shadow: 5px 5px 20px 1px #959595;
+  width: 80%;
+  /*box-shadow: 5px 5px 20px 1px #959595;*/
 }
 .teacher-header {
   width: 50%;
   margin: 0 auto;
   margin-top: 5%;
+  text-align: center;
 }
 .teacher-body-content {
-  padding-top: 30px;
+  padding-top: 10px;
 }
 
 /* Main Styles */
 .button-teacher {
   display: block;
-  background-color: #2BB12B;
+  background-color: #7daa57;
   width: 300px;
-  height: 100px;
-  line-height: 100px;
+  height: 60px;
+  line-height: 60px;
   margin: auto;
   color: #fff;
   position: relative;
@@ -577,9 +578,9 @@ input[type="checkbox"]:checked + #inputRadio {
   right: 0;
   cursor: pointer;
   overflow: hidden;
-  border-radius: 5px;
-  -webkit-box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.3);
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+  /*  -webkit-box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.3);*/
   -webkit-transition: all 0.25s cubic-bezier(0.31, -0.105, 0.43, 1.4);
   transition: all 0.25s cubic-bezier(0.31, -0.105, 0.43, 1.4);
 }
@@ -722,6 +723,26 @@ input[type="checkbox"]:checked + #inputRadio {
 .wsq-gray {
   background: #a1a1a1 !important;
 }
+span.wrapper-logo {
+  display: flex;
+  flex-direction: row;
+}
+span.wrapper-logo>.right {
+  font-size: 12px;
+  text-align: left;
+  line-height: 18px;
+  padding-top: 6px;
+  padding-left: 10px;
+}
+span.wrapper-logo>.left {
+
+}
+span.wrapper-logo>.left>img {
+  width: auto;
+  height: 45px;
+}
+
+
 @media (max-width:991px){
   .exam-title{
     background: none;

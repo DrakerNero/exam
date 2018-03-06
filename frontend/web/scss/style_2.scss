@@ -259,6 +259,30 @@ $blue_1: #6b2942;
 .site_title {
   font-size: 20px;
 }
+.bg-teacher {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 1400;
+  background: #bc697b;
+}
+.circle-teacher {
+  z-index: 1500;
+  position: relative;
+  width: 140%;
+  height: 150%;
+  background: #fff;
+  border-radius: 100%;
+  top: -55%;
+  left: -20%;
+}
+.teacher-detail {
+  padding: 5px;
+  width: 70%;
+  margin: 0 auto;
+}
 
 @keyframes heartRateIn {
   0% {

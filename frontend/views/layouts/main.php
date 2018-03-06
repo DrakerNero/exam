@@ -25,8 +25,16 @@ if (!empty(Yii::$app->user->identity->id)) {
 <div class="wrapper">
   <header class="main-header" id="divHeaderBar">
     <a href="<?php echo Yii::getAlias('@frontendUrl') ?>" class="logo">
-        <!--<img src="<?= Url::to('@frontendUrl/uploads/images/logo.png') ?>" class="img-circle" />-->
         <!--<span>e-pretest</span>-->
+      <span class="wrapper-logo">
+        <span class="left">
+          <img  src="<?= Url::to('@frontendUrl/uploads/static/logo-2.png') ?>" class="img-circle" />
+        </span>
+        <span class="right">
+          คณะแพทย์ศาสตร์<br />
+          มหาวิทยาลัยจุฬาลงกรณ์
+        </span>
+      </span>
     </a>
     <nav class="navbar navbar-static-top" role="navigation">
       <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
@@ -69,7 +77,7 @@ if (!empty(Yii::$app->user->identity->id)) {
               if (!empty(Yii::$app->user->identity->id)) {
                 if ($user->user_status == 1) {
                   ?>
-                  <!--<li><a href="<?= Url::to(['question-save/monitor', 'email' => '0']) ?>"><font color="#000">Search EXAM by User</font></a></li>-->
+                      <!--<li><a href="<?= Url::to(['question-save/monitor', 'email' => '0']) ?>"><font color="#000">Search EXAM by User</font></a></li>-->
                   <li><a href="<?= Url::to(['site/monitor']) ?>"><font color="#000">Administor</font></a></li>
                   <?php
                 } else {
