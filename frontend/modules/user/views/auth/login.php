@@ -42,9 +42,9 @@ $this->params['body-class'] = 'login-page';
     </div>
   </div>
 
-  <!--    <div class="login-page-link text-center">
-        <a href="<?= Url::to(['auth/signup']) ?>">Sign Up</a> |
-        <a href="<?= Url::to(['auth/request-password-reset']) ?>">Forgot password</a>
-      </div>-->
+  <div class="login-page-link text-center">
+    <!--<a href="<?= Url::to(['auth/signup']) ?>">Sign Up</a> |-->
+    <a href="https://userportal.it.chula.ac.th/Login.aspx">>> Forgot password <<</a>
+  </div>
 </div>
 
