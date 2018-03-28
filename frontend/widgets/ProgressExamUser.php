@@ -12,22 +12,24 @@ class ProgressExamUser extends \yii\bootstrap\Widget {
 
   public function run() {
     $questionSet = $this->questionSet;
-    $questionSaves = QuestionSave::find()->where(['question_set_id' => $questionSet->id, 'user_id' => $this->userId])->orderBy(['id' => SORT_DESC])->all();
+    $questionSave = QuestionSave::find()->where(['question_set_id' => $questionSet->id, 'user_id' => $this->userId, 'status' => [3, 4]])->orderBy(['id' => SORT_DESC])->one();
 //$
-    $score = 0;
-    foreach ($questionSaves as $questionSave) {
-      if (!empty($questionSave->score) && isset($questionSave->score) && $questionSave->score > $score) {
-        $score = $questionSave->score;
-      } else {
-        
-      }
-    }
+//    echo $questionSave->score;
+    $score = (!empty($questionSave->score) && isset($questionSave->score)) ? $questionSave->score : 0;
+    $colorProgress = ($score >= 80) ? 'bg-green' : 'bg-yellow';
+//    foreach ($questionSaves as $questionSave) {
+//      if (!empty($questionSave->score) && isset($questionSave->score) && $questionSave->score > $score) {
+//        $score = $questionSave->score;
+//      } else {
+//        
+//      }
+//    }
 //    $score = (!empty($questionSave->score) && isset($questionSave->score) && $questionSave->score > 0) ? $questionSave->score : 0;
     ?>
 
     <p><?= $questionSet->name ?></p>
     <div class="progress progress_sm" title="<?= $questionSet->name . ' ' . $score . '%' ?>">
-      <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="<?= $score ?>" aria-valuenow="<?= $score - 1 ?>" ></div>
+      <div class="progress-bar <?= $colorProgress ?>" role="progressbar" data-transitiongoal="<?= $score ?>" aria-valuenow="<?= $score - 1 ?>" ></div>
     </div>
     <?php
   }

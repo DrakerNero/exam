@@ -27,17 +27,20 @@ $(document).ready(function () {
 
 });
 
-//$('#id-support_password').change(function () {
-//  if ($(this).val() != $('#id-again_password').val()) {
-//    $('#btn-submit-profile-user').attr("disabled", true);
-//  } else {
-//    $('#btn-submit-profile-user').attr("disabled", false);
-//  }
-//});
-//$('#id-again_password').change(function () {
-//  if ($(this).val() != $('#id-support_password').val()) {
-//    $('#btn-submit-profile-user').attr("disabled", true);
-//  } else {
-//    $('#btn-submit-profile-user').attr("disabled", false);
-//  }
-//});
+function searchUserWithData(url) {
+  var academic = $('#input-academic-data').val();
+  var rotation = $('#input-rotation-data').val();
+  var newUrl = url;
+  if (academic == null && rotation != null) {
+    newUrl = url + '&rotation=' + rotation;
+  } else if (rotation == null && academic != null) {
+    newUrl = url + '&academic=' + academic;
+  } else if (academic == null && rotation == null) {
+    newUrl = url;
+  } else {
+    newUrl = url + '&academic=' + academic + '&rotation=' + rotation;
+  }
+
+    window.location.href = newUrl;
+
+}

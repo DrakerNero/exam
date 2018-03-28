@@ -38,10 +38,10 @@ class User extends \yii\db\ActiveRecord {
   public function rules() {
     return [
         [['auth_key', 'password_hash', 'email', 'first_name', 'last_name', 'student_id'], 'required'],
-        [['status', 'created_at', 'updated_at', 'logged_at', 'user_status'], 'integer'],
+        [['status', 'created_at', 'updated_at', 'logged_at', 'user_status', 'rotation'], 'integer'],
         [['username', 'auth_key'], 'string', 'max' => 32],
         [['password_hash', 'password_reset_token', 'oauth_client', 'oauth_client_user_id', 'email'], 'string', 'max' => 255],
-        [['first_name', 'last_name', 'student_id', 'faculty', 'branch', 'start_study'], 'string'],
+        [['first_name', 'last_name', 'student_id', 'start_study'], 'string'],
         [['support_password'], 'string', 'max' => 20],
     ];
   }
@@ -66,9 +66,8 @@ class User extends \yii\db\ActiveRecord {
         'first_name' => 'First Name',
         'last_name' => 'Last Name',
         'student_id' => 'Student ID',
-        'faculty' => 'Faculty',
-        'branch' => 'Branch',
         'start_study' => 'Start Study',
+        'rotation' => 'Rotation',
         'support_password' => 'Support Password',
     ];
   }

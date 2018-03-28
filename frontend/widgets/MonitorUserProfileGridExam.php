@@ -25,9 +25,12 @@ class MonitorUserProfileGridExam extends \yii\bootstrap\Widget {
                 'value' => 'questionSet.name',
             ],
             [
-                'label' => 'Score',
+                'label' => 'Score(%)',
                 'attribute' => 'score',
                 'width' => '100px',
+                'value' => function($model) {
+                  return (!empty($model->score) && isset($model->score) && $model->score > 0) ? $model->score . '%' : 'Null';
+                }
             ],
             [
                 'label' => 'Status',

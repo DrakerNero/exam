@@ -18,7 +18,6 @@ class QuestionSaveMonitorGridView extends \yii\bootstrap\Widget {
         'dataProvider' => $this->dataProvider,
         'filterModel' => $this->searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
             [
                 'attribute' => 'student_id',
                 'value' => 'student_id',
@@ -36,54 +35,22 @@ class QuestionSaveMonitorGridView extends \yii\bootstrap\Widget {
 //                'width' => '100px',
             ],
             [
-                'attribute' => 'faculty',
-                'value' => 'faculty',
-                'width' => '50px',
-            ],
-            [
-                'attribute' => 'branch',
-                'value' => 'branch',
-                'width' => '50px',
-            ],
-            [
                 'attribute' => 'start_study',
                 'value' => 'start_study',
                 'width' => '50px',
+                'label' => 'Academic Year',
+                'filter' => false,
+//                'align'=>'center',
+                'contentOptions' => ['style' => 'text-align: center;']
             ],
-//            [
-//                'label' => 'Topic',
-//                'attribute' => 'questionSet',
-//                'value' => 'questionSet.name',
-//            ],
-//            [
-//                'label' => 'Score',
-//                'attribute' => 'score',
-////                'width' => '100px',
-//            ],
-//            [
-//                'label' => 'Status',
-//                'attribute' => 'status',
-//                'filter' => MainHelper::arrayQuestionSaveStatus(),
-//                'value' => function($model) {
-//                  return MainHelper::arrayQuestionSaveStatus()[$model->status];
-//                },
-//                'width' => '50px',
-//            ],
-//            [
-//                'label' => 'Updated',
-//                'attribute' => 'updated_at',
-//                'value' => function($model) {
-//                  return date('Y-m-d H:i:s', $model->updated_at);
-//                }
-//            ],
-//            [
-//                'width' => '1px',
-//                'format' => 'html',
-//                'value' => function($model) {
-//                  return '';
-////                  return '<a target="_blank" href="' . Yii::$app->getUrlManager()->getBaseUrl() . '/question-set/monitor-user-do-exam?questionSaveId=' . $model->id . '"><i class="fa fa-edit"></i></a>';
-//                }
-//            ],
+            [
+                'attribute' => 'rotation',
+                'value' => 'rotation',
+                'width' => '50px',
+                'label' => 'Rotation',
+                'filter' => false,
+                'contentOptions' => ['style' => 'text-align: center;']
+            ],
             [
                 'width' => '1px',
                 'format' => 'html',

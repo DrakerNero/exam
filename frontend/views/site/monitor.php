@@ -44,6 +44,7 @@ $this->title = 'Chula Interactive Medical Case';
 
   <!--table-->
 
+
   <div class="row">
 
     <div class="col-md-12 col-sm-12 col-xs-12">
@@ -66,7 +67,32 @@ $this->title = 'Chula Interactive Medical Case';
             </li>
           </ul>
           <div class="clearfix"></div>
+
         </div>
+        <div class="row">
+          <div class="col-lg-5 col-xs-5">
+            <select id="input-academic-data" style="font-size: 14px;" class="form-control">
+              <option disabled selected>Choose Academic Year...</option>
+              <?php
+              foreach ($resultAcademics as $academic) {
+                echo '<option value="' . $academic . '">' . $academic . '</option>';
+              }
+              ?>
+            </select>
+          </div>
+          <div class="col-lg-5 col-xs-5">
+            <select id="input-rotation-data" style="font-size: 14px;" class="form-control">
+              <option disabled selected>Choose Rotation...</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </div>
+          <div class="col-lg-2 col-xs-2">
+            <span onclick="searchUserWithData('<?= Url::to(['site/monitor']) ?>')" style="font-size: 14px" class="btn btn-primary"><i class="fa fa-search"></i> Search</span>
+          </div>
+        </div>
+
         <div class="x_content">
           <div class="row">
             <div class="col-sm-12">
@@ -84,3 +110,6 @@ $this->title = 'Chula Interactive Medical Case';
   </div>
 
 </div>
+
+
+

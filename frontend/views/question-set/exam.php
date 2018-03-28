@@ -14,10 +14,10 @@ $disableChoice = (isset($disableChoice) && !empty($disableChoice)) ? $disableCho
 
 if (isset($onAdmin) && !empty($onAdmin) && $onAdmin == true) {
 //  $stringScript = "$('.wrapper-disable-click-choice').hide();";
-  echo $questionSave->module_part;
+//  echo $questionSave->module_part;
   $questionSaveParts = $questionSave->module_part;
 //  $test = json_encode($test);
-  $stringScript = "adminTrue(); handleHidingQuestion(" . $questionSaveParts . ");";
+  $stringScript = "adminTrue(); ";
 } else {
   $stringScript = "hidingSectionPart('" . $doPart . "');"
           . "adminFalse();"

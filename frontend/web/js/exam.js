@@ -224,6 +224,7 @@ function handleOnSumScore() {
     var selectChoice = [];
     $("[class^='choice-question-" + from + "']").each(function () {
       if ($(this).is(':checked')) {
+        console.log("[class^='choice-question-" + from + "']", $(this).val());
         selectChoice.push(parseInt($(this).val()));
       } else {
 
@@ -232,7 +233,12 @@ function handleOnSumScore() {
     for (var i = 1; i <= 15; i++) {
       var point = $('#answer-point-' + from + '-' + i).attr('data-point');
       if (point !== undefined && selectChoice != []) {
-        totalPoint = totalPoint + parseInt(point);
+        if (parseInt(point) >= 1) {
+          totalPoint = totalPoint + parseInt(point);
+        } else {
+
+        }
+        console.log(totalPoint, ' : ', parseInt(point), ' : ', '#answer-point-' + from + '-' + i);
         if (selectChoice.includes(i)) {
           sumPoint = sumPoint + parseInt(point);
         }
@@ -455,7 +461,7 @@ var questionSaveId = $('.question-save-id').attr('data-id');
 var maxQuestion = $('.max-question-data').attr('data-max');
 //var questionSectionActive = $('.question-save').attr('data-question-section-active');
 
-function hidingSectionPart(doPart) {
+function hidingSectionPart(doPart) { // ทำให้ display: none
   for (var i = doPart - 1; i >= 0; i--) {
     $('[id*="frame-question-section-' + i + '"]').hide();
   }
@@ -464,7 +470,7 @@ function hidingSectionPart(doPart) {
 $('.btn-next-present').click(function () {
   presentQuestion = parseInt(presentQuestion) + 1;
   if (presentQuestion > endFirstQuestion) {
-    hidingSectionPart(keyEndPart);
+//    hidingSectionPart(keyEndPart); // ทำให้ display: none
   } else {
 
   }
@@ -491,6 +497,7 @@ function renderPreSentQuestion() {
   var disable = 0;
   for (var i = 1; i <= presentQuestion; i++) {
     disable = i - 1;
+//    console.log('#render-question-no-' + i, ' : ', disable);
     $('#render-question-no-' + i).css("display", "block");
     $('#wrapper-question-section-' + disable).css("display", "block");
   }
@@ -586,7 +593,7 @@ function handleHidingQuestion(parts) {
   for (var i = 1; i <= 50; i++) {
     if (parts[0] == i || parts[1] == i) {
     } else {
-      $('[id^="frame-question-section-' + i + '"]').hide();
+//      $('[id^="frame-question-section-' + i + '"]').hide();
     }
   }
 //  });

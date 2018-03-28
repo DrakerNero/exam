@@ -93,18 +93,27 @@ class SiteController extends Controller {
     ]);
   }
 
-  public function actionMonitor() {
+  public function actionMonitor($academic = null, $rotation = null) {
     $this->layout = 'main_backend';
-    $userCount = User::find()->where(['user_status' => 0])->count();
+    $arrWhere = ['status' => 1];
+    ($academic != null) ? $arrWhere['start_study'] = $academic : null;
+    ($rotation != null) ? $arrWhere['rotation'] = $rotation : null;
+
+    $modelUsers = User::find()->where($arrWhere)->all();
+    $usersActives = User::find()->where(['status' => 1])->all();
+    $userCount = count($modelUsers);
     $examCount = QuestionSet::find()->where(['status' => 1])->count();
     $questionCount = Question::find()->count();
     $questionSaveCount = QuestionSave::find()->count();
+    $arrAcademics = [];
+    foreach ($usersActives as $usersActives) {
+      array_push($arrAcademics, $usersActives->start_study);
+    }
 
+    $resultAcademics = array_unique($arrAcademics);
 
-//    $searchQuestionSaveModel = new QuestionSaveSearch();
-//    $dataProvider = $searchQuestionSaveModel->search2(Yii::$app->request->queryParams);
     $searchUser = new UserSearch();
-    $dataProvider = $searchUser->search(Yii::$app->request->queryParams);
+    $dataProvider = $searchUser->searchMonitor(Yii::$app->request->queryParams, $academic, $rotation);
 
 
 
@@ -116,6 +125,8 @@ class SiteController extends Controller {
                 'examCount' => $examCount,
                 'questionCount' => $questionCount,
                 'questionSaveCount' => $questionSaveCount,
+                'resultAcademics' => $resultAcademics,
+                'usersActives' => $usersActives,
     ]);
   }
 
@@ -194,5 +205,4 @@ class SiteController extends Controller {
 //    ldap_set_option($con, LDAP_OPT_REFERRALS, 0);
 //    var_dump(@ldap_bind($con, 'user@sub.domain.com', 'password'));
 //  }
-
 }

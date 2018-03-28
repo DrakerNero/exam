@@ -741,6 +741,9 @@ span.wrapper-logo>.left>img {
   width: auto;
   height: 45px;
 }
+.carousel-indicators>li {
+  border-color: #000 !important;
+}
 
 
 @media (max-width:991px){
