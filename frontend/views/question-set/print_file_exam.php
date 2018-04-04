@@ -20,6 +20,7 @@
     }
 
     $numChoice = 1;
+    echo 'MAX[' . $question->max_select_choice . ']<br />';
     foreach ($arrChoices as $key => $choice) {
 //    if ($this->question->type_question == 2 && $answers[$key] == '') {
       if ($answers[$key] == '') {

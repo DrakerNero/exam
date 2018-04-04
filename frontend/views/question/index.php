@@ -9,6 +9,7 @@ use kartik\grid\GridView;
 
 $this->title = 'Questions';
 $this->params['breadcrumbs'][] = $this->title;
+$pngs = [1 => 'Yes', 0 => 'No'];
 ?>
 <div class="question-index">
 
@@ -31,23 +32,17 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'label' => 'ID',
                 'attribute' => 'id',
-                'width' => '20%',
+                'width' => '50px',
                 'vAlign' => 'middle',
                 'hAlign' => 'center',
             ],
             [
                 'label' => 'Topic',
                 'attribute' => 'question',
-                'width' => '65%',
+                'width' => '1300px',
                 'vAlign' => 'middle',
                 'hAlign' => 'center',
-            ],
-            [
-                'label' => 'Answer',
-                'attribute' => 'answer',
-                'width' => '10px',
-                'vAlign' => 'middle',
-                'hAlign' => 'center',
+                'contentOptions' => ['style' => 'text-align: left;'],
             ],
             [
                 'label' => 'Updated',
@@ -57,35 +52,29 @@ $this->params['breadcrumbs'][] = $this->title;
                 'hAlign' => 'center',
             ],
             [
+                'label' => 'Max Choice',
+                'attribute' => 'max_select_choice',
+                'width' => '10px',
+                'vAlign' => 'middle',
+                'hAlign' => 'center',
+            ],
+            [
+                'label' => 'PNG',
+                'attribute' => 'png',
+                'width' => '10px',
+                'vAlign' => 'middle',
+                'hAlign' => 'center',
+                'filter' => $pngs,
+                'value' => function($model) {
+                  return ($model->png == 1) ? '<i class="fa fa-check _bg-green"></i>' : '<i  class="fa fa-times _bg-red"></i>';
+                },
+                'format' => 'html'
+            ],
+            [
                 'class' => 'yii\grid\ActionColumn',
             ],
         ]
     ])
-    ?>
-    <?php
-//    GridView::widget([
-//        'dataProvider' => $dataProvider,
-//        'filterModel' => $searchModel,
-//        'columns' => [
-//            ['class' => 'yii\grid\SerialColumn'],
-//            'id',
-////            'question_number',
-////            'question_name:ntext',
-//            'type_question',
-////            'choices_1:ntext',
-//            // 'choices_2:ntext',
-//            // 'choices_3:ntext',
-//            // 'choices_4:ntext',
-//            // 'choices_5:ntext',
-//            // 'answer:ntext',
-//            // 'answer_detail:ntext',
-//            // 'mp3:ntext',
-//            // 'image:ntext',
-//            // 'txt:ntext',
-//            // 'created',
-//            ['class' => 'yii\grid\ActionColumn'],
-//        ],
-//    ]);
     ?>
 
   </div>

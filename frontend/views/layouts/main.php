@@ -32,7 +32,7 @@ if (!empty(Yii::$app->user->identity->id)) {
         </span>
         <span class="right">
           คณะแพทย์ศาสตร์<br />
-          มหาวิทยาลัยจุฬาลงกรณ์
+          จุฬาลงกรณ์มหาวิทยาลัย
         </span>
       </span>
     </a>
