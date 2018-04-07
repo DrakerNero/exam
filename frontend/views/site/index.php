@@ -43,8 +43,8 @@ if ($countPage >= 2) {
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false"     >
   <div class="modal-dialog" role="document" style="color: #d53c31; font-weight: bold; text-align: center; font-size: 20px; width: 750px;">
-    <div class="modal-content">
-      <div class="modal-body">
+    <div class="modal-content" style="border-radius: 3px;">
+      <div class="modal-body" style="padding: 30px;">
         CU Interactive Medical Cases are designed for 6th year medical student <br />
         practicing crucial management in Medicine. <br />
         You were a doctor at a primary care hospital. Two random cases form <br />
