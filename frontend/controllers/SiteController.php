@@ -38,6 +38,19 @@ class SiteController extends Controller {
   }
 
   public function actionIndex() {
+    $session = Yii::$app->session;
+    $popup = false;
+    if (!empty(Yii::$app->user->identity->id) && isset(Yii::$app->user->identity->id) && Yii::$app->user->identity->id != null) {
+      if ($session->get('dateFirstLogin') == date('Ymd')) {
+        
+      } else {
+        $popup = true;
+        $session->set('dateFirstLogin', date('Ymd'));
+      }
+    } else {
+      
+    }
+
     $subject_id = 'all';
     $pageEnd = 12;
     if (isset($_GET['subject_id'])) {
@@ -68,6 +81,7 @@ class SiteController extends Controller {
                 'models' => $models,
                 'countPage' => $countPage,
                 'subject_id' => $subject_id,
+                'popup' => $popup
     ]);
   }
 
