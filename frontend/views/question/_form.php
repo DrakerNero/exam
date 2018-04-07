@@ -22,11 +22,9 @@ $maxSelectChoice = (!empty($model->max_select_choice) && isset($model->max_selec
     <?= $form->field($model, 'part')->textInput(['placeholder' => 'Part'])->label('Part') ?>
 
     <?= $form->field($model, 'question')->textarea(['rows' => 8])->label('Topic') ?>
-    
+
     <?php
-    
     echo ($model->png == 1) ? QuestionPNG::widget(['model' => $model]) : '';
-    
     ?>
 
     <?= $form->field($model, 'file_upload')->fileInput()->label(false); ?>
@@ -35,6 +33,10 @@ $maxSelectChoice = (!empty($model->max_select_choice) && isset($model->max_selec
     $form->field($model, 'type_question')->radioList([1 => 'พื้นฐาน', 2 => 'แต่ละตัวเลือกมีคะแนน'], [
         'class' => 'select-type-question',
     ])->label('เลือกการประเภทคำถาม')
+    ?>
+    <?=
+    $form->field($model, 'is_mission_tree')->radioList([0 => 'No', 1 => 'Yes'], [
+    ])->label('Mission Tree')
     ?>
 
 
@@ -47,27 +49,10 @@ $maxSelectChoice = (!empty($model->max_select_choice) && isset($model->max_selec
       </div>
     </div>
 
-    <!--    <div class="wrapper-content-type-question-choice">
-          <div class="type-input" id="type-1">
-            <div class="wrapper-input" id="choice-input-1">
-              <div class="row">
-                <div class="col-md-1">
-                  <div class="question-choice-label">Test</div>
-                </div>
-                <div class="col-md-11">
-                  <div class="question-choice-input">
-    <?php // $form->field($model, 'choice_1')->textInput()->label(false)     ?>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>-->
-
     <div class="wrapper-choice-input">
       <b>Choice</b>
       <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-8">
           <div class="input-choice">
             <?= $form->field($model, 'choice_1')->textInput(['placeholder' => 'Choice 1'])->label(false) ?>
 
@@ -104,7 +89,7 @@ $maxSelectChoice = (!empty($model->max_select_choice) && isset($model->max_selec
             </div>
           </div>
         </div>
-        <div class="col-md-2 exam-doctor">
+        <div class="col-md-1 exam-doctor">
           <div class="input-choice" style="padding-left: 0;">
             <?= $form->field($model, 'answer_1')->textInput(['placeholder' => 'Answer Score 1'])->label(false) ?>
             <?= $form->field($model, 'answer_2')->textInput(['placeholder' => 'Answer Score 2'])->label(false) ?>
@@ -123,6 +108,28 @@ $maxSelectChoice = (!empty($model->max_select_choice) && isset($model->max_selec
             <?= $form->field($model, 'answer_15')->textInput(['placeholder' => 'Answer Score 15'])->label(false) ?>
           </div>
         </div>
+        <div class="col-md-3 exam-mission-tree">
+          <div class="input-choice" style="padding-left: 0;">
+            <div class="input-tree">
+              <?= $form->field($model, 'tree_1')->textInput(['placeholder' => 'Mission Tree Input 1'])->label(false) ?>
+              <?= $form->field($model, 'tree_2')->textInput(['placeholder' => 'Mission Tree Input 2'])->label(false) ?>
+              <?= $form->field($model, 'tree_3')->textInput(['placeholder' => 'Mission Tree Input 3'])->label(false) ?>
+              <?= $form->field($model, 'tree_4')->textInput(['placeholder' => 'Mission Tree Input 4'])->label(false) ?>
+              <?= $form->field($model, 'tree_5')->textInput(['placeholder' => 'Mission Tree Input 5'])->label(false) ?>
+              <?= $form->field($model, 'tree_6')->textInput(['placeholder' => 'Mission Tree Input 6'])->label(false) ?>
+              <?= $form->field($model, 'tree_7')->textInput(['placeholder' => 'Mission Tree Input 7'])->label(false) ?>
+              <?= $form->field($model, 'tree_8')->textInput(['placeholder' => 'Mission Tree Input 8'])->label(false) ?>
+              <?= $form->field($model, 'tree_9')->textInput(['placeholder' => 'Mission Tree Input 9'])->label(false) ?>
+              <?= $form->field($model, 'tree_10')->textInput(['placeholder' => 'Mission Tree Input 10'])->label(false) ?>
+              <?= $form->field($model, 'tree_11')->textInput(['placeholder' => 'Mission Tree Input 11'])->label(false) ?>
+              <?= $form->field($model, 'tree_12')->textInput(['placeholder' => 'Mission Tree Input 12'])->label(false) ?>
+              <?= $form->field($model, 'tree_13')->textInput(['placeholder' => 'Mission Tree Input 13'])->label(false) ?>
+              <?= $form->field($model, 'tree_14')->textInput(['placeholder' => 'Mission Tree Input 14'])->label(false) ?>
+              <?= $form->field($model, 'tree_15')->textInput(['placeholder' => 'Mission Tree Input 15'])->label(false) ?>
+
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -132,7 +139,7 @@ $maxSelectChoice = (!empty($model->max_select_choice) && isset($model->max_selec
       </div>
     </div>
 
-    <?php // $form->field($model, 'answers')->textarea(['rows' => 6])     ?>
+    <?php // $form->field($model, 'answers')->textarea(['rows' => 6])      ?>
 
     <?php // $form->field($model, 'answer_score')->textarea(['rows' => 6])    ?>
 

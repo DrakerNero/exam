@@ -282,6 +282,7 @@ $blue_1: #6b2942;
   padding: 5px;
   width: 70%;
   margin: 0 auto;
+  padding-top: 20px;
 }
 .logo-backend {
   height: 40px;
@@ -296,6 +297,9 @@ $blue_1: #6b2942;
 }
 ._bg-red {
   color: #E91E63;
+}
+.teacher-header {
+  max-width: 480px;
 }
 
 @keyframes heartRateIn {

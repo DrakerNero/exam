@@ -17,8 +17,8 @@ class QuestionSearch extends Question {
    */
   public function rules() {
     return [
-        [['id', 'type_question'], 'integer'],
-        [['question', 'answer', 'answer_detail', 'mp3', 'png', 'txt', 'updated_at'], 'safe'],
+        [['id', 'type_question', 'is_mission_tree'], 'integer'],
+        [['question', 'answer', 'answer_detail', 'mp3', 'png', 'txt', 'updated_at', 'mission_tree_questions'], 'safe'],
     ];
   }
 

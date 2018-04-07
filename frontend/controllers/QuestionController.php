@@ -97,11 +97,32 @@ class QuestionController extends Controller {
     ];
   }
 
+  public function treeNames() {
+    return [
+        'tree_1',
+        'tree_2',
+        'tree_3',
+        'tree_4',
+        'tree_5',
+        'tree_6',
+        'tree_7',
+        'tree_8',
+        'tree_9',
+        'tree_10',
+        'tree_11',
+        'tree_12',
+        'tree_13',
+        'tree_14',
+        'tree_15',
+    ];
+  }
+
   public function actionCreate() {
     $this->layout = 'main_backend';
     $model = new Question();
     $model = $this->decodeModelWithArray($model, $this->choiceNames(), 'choices');
     $model = $this->decodeModelWithArray($model, $this->answerNames(), 'answers');
+    $model = $this->decodeModelWithArray($model, $this->treeNames(), 'mission_tree_questions');
 
     $model->mp3 = 0;
     $model->png = 0;
@@ -118,6 +139,7 @@ class QuestionController extends Controller {
       }
       $model = $this->encodeModelWithArray($model, $this->choiceNames(), 'choices');
       $model = $this->encodeModelWithArray($model, $this->answerNames(), 'answers');
+      $model = $this->encodeModelWithArray($model, $this->treeNames(), 'mission_tree_questions');
 
       $model->updated_at = date('Y-m-d H:i:s');
 
@@ -141,10 +163,12 @@ class QuestionController extends Controller {
     $model = $this->findModel($id);
     $model = $this->decodeModelWithArray($model, $this->choiceNames(), 'choices');
     $model = $this->decodeModelWithArray($model, $this->answerNames(), 'answers');
+    $model = $this->decodeModelWithArray($model, $this->treeNames(), 'mission_tree_questions');
 
     if ($model->load(Yii::$app->request->post())) {
       $model = $this->encodeModelWithArray($model, $this->choiceNames(), 'choices');
       $model = $this->encodeModelWithArray($model, $this->answerNames(), 'answers');
+      $model = $this->encodeModelWithArray($model, $this->treeNames(), 'mission_tree_questions');
       if ($model->uploadFile('file_upload') != false) {
         $uploadFile = $model->uploadFile('file_upload');
         $uploadFile->saveAs('uploads/png/' . $model->id . '.png');
@@ -212,9 +236,6 @@ class QuestionController extends Controller {
     }
 
     $model->{$string} = json_encode($obj);
-//    echo '<pre>';
-//    print_r($obj);
-//    echo $model->answers;
 
     return $model;
   }
@@ -223,6 +244,27 @@ class QuestionController extends Controller {
 //    return $object->{$key};
     return (isset($object->{$key})) ? $object->{$key} : '';
 //    return (isset($object->{$key}) && !empty($object->{$key}) ) ? $object->{$key} : '';
+  }
+
+  public function actionGetMissionTreeQuestion() {
+    $stringQuestion = $_POST['questionTreeId'];
+    $questions = explode(',', $stringQuestion);
+    $models = Question::find()->where(['id' => $questions])->all();
+    $arr = [];
+    $count = 0;
+    foreach($models as $model) {
+      $arr[$count]['id'] = $model->id;
+      $arr[$count]['question_topic'] = $model->id;
+      $arr[$count]['question'] = $model->id;
+      $arr[$count]['part'] = $model->id;
+      $arr[$count]['is_mission_tree'] = $model->id;
+      $arr[$count]['mission_tree_questions'] = $model->id;
+      $count++;
+    }
+    
+    $newArr = json_encode($arr);
+//    
+    return json_encode($newArr);
   }
 
 }

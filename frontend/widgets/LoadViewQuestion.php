@@ -115,7 +115,6 @@ class LoadViewQuestion extends \yii\bootstrap\Widget {
         for ($i2 = 1; $i2 <= $i; $i2++) {
           if ($answers[$i2] != '') {
             ?>
-
             <a id="answer-point-<?= $this->question->id . '-' . $i2 ?>" data-point="<?= $answers[$i2] ?>"></a>
             <?php
           } else {
@@ -124,6 +123,25 @@ class LoadViewQuestion extends \yii\bootstrap\Widget {
         }
         ?>
         <a class="max-select-choice-question-<?= $this->question->id ?>" data-max-choice="<?= $this->question->max_select_choice ?>"></a>
+        <?php
+        if (!empty($this->question->is_mission_tree) && isset($this->question->is_mission_tree) && $this->question->is_mission_tree == 1) {
+          ?>
+          <a href="#" style="display: none;" class="is-mission-tree" data-status="true" data-id="<?= $this->question->id ?>"></a>
+          <?php
+          $arrMissionTree = json_decode($this->question->mission_tree_questions);
+          $countKey = 1;
+          foreach ($arrMissionTree as $missionTree) {
+            if (!empty($missionTree) && isset($missionTree) && $missionTree != '') {
+              ?>
+              <a id="mission-tree-question-<?= $this->question->id ?>-<?= $countKey ?>" style="display: none;"><?= $missionTree ?></a>
+              <?php
+            }
+            $countKey++;
+          }
+        } else {
+          
+        }
+        ?>
 
         <?php
       }

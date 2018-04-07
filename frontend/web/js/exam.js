@@ -488,8 +488,8 @@ $('.btn-next-present').click(function () {
 //      hidingSectionPart(data);
     }
   });
-  renderProgressBar();
-  renderPreSentQuestion();
+  renderProgressBar(); // คำนวน progress bar ใหม่
+  renderPreSentQuestion(); // เปิดข้อสอบข้อต่อไป
   $(this).hide();
 });
 
@@ -608,6 +608,38 @@ function adminTrue() {
 function adminFalse() {
   $('[id^="showAnswer"]').remove();
   $('[class^="edit-question-on-exam"]').remove();
+}
+
+function handleMissionTree() {
+  var isMissionTree = $('.active-question .is-mission-tree').attr('data-status');
+//  console.log(isMissionTree);
+  if (isMissionTree != null && isMissionTree != undefined && isMissionTree == 'true') {
+    var questionId = $('.active-question .is-mission-tree').attr('data-id');
+    var checkInput = $('input[name="name_' + questionId + '"]:checked').val();
+    var questionTreeId = $('#mission-tree-question-' + questionId + '-' + checkInput).html();
+    questionTreeId = questionTreeId.replace(/\s+/g, '');
+
+    $.ajax({
+      type: "POST",
+      url: "index.php?r=question/get-mission-tree-question",
+      data: ({
+        questionTreeId: questionTreeId,
+        _csrf: csrfToken
+      }),
+      success: function (data) {
+        console.log(data);
+        
+      },
+      error: function (data) {
+        console.log("ไม่มีการส่งข้อมูล");
+      }
+    });
+
+    console.log('Yes' + isMissionTree + ' : ' + questionId + ' : ' + checkInput + ' : ' + questionTreeId);
+
+  } else {
+    console.log('No' + isMissionTree);
+  }
 }
 
 $(document).ready(function () {

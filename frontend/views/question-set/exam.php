@@ -19,7 +19,7 @@ if (isset($onAdmin) && !empty($onAdmin) && $onAdmin == true) {
 //  $test = json_encode($test);
   $stringScript = "adminTrue(); ";
 } else {
-  $stringScript = "hidingSectionPart('" . $doPart . "');"
+  $stringScript = ""
           . "adminFalse();"
   ;
 }
@@ -133,7 +133,7 @@ if ($questionSave->status == 1) {
 <a class="question-set-id" data-id="<?= $model->id ?>"></a>
 <a class="question-type" data-id="<?= $model->question_type ?>"></a>
 <a class="question-save" data-id="<?= $questionSave->id ?>" ></a>
-<a class="doing-question-section" data-present-question="<?= $questionSave->present_question ?>" data-question-last="<?= $newQuestionPart[0] ?>" data-key-part="<?= $getKeyArrQuestionPart[1] ?>" data-render-=""></a>
+<a class="doing-question-section" data-present-question="<?= $questionSave->present_question ?>" data-question-last="<?= $newQuestionPart[0] ?>" data-key-part="<?= $getKeyArrQuestionPart[1] ?>" data-render=""></a>
 <a class="max-question-data" data-max="<?= sizeof($questions) ?>"></a>
 <a class="is-multi-select-choice" data-multi="<?= (!empty($model->multi_select_choice) && isset($model->multi_select_choice)) ? $model->multi_select_choice : '0' ?>"></a>
 <?php
