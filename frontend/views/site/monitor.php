@@ -74,8 +74,11 @@ $this->title = 'Chula Interactive Medical Case';
             <select id="input-academic-data" style="font-size: 14px;" class="form-control">
               <option disabled selected>Choose Academic Year...</option>
               <?php
-              foreach ($resultAcademics as $academic) {
-                echo '<option value="' . $academic . '">' . $academic . '</option>';
+//              $count = 1;
+              foreach ($resultAcademics as $resultAcademic) {
+                $selected = ($resultAcademic == $academic) ? 'selected' : '';
+                echo '<option value="' . $resultAcademic . '" ' . $selected . '>' . $resultAcademic . '</option>';
+//                $count++;
               }
               ?>
             </select>
@@ -83,13 +86,17 @@ $this->title = 'Chula Interactive Medical Case';
           <div class="col-lg-5 col-xs-5">
             <select id="input-rotation-data" style="font-size: 14px;" class="form-control">
               <option disabled selected>Choose Rotation...</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
+              <?php
+              for ($i = 1; $i <= 3; $i++) {
+                $selected2 = ($i == $rotation) ? 'selected' : '';
+                echo '<option value="' . $i . '" ' . $selected2 . '>' . $i . '</option>';
+              }
+              ?>
             </select>
           </div>
           <div class="col-lg-2 col-xs-2">
-            <span onclick="searchUserWithData('<?= Url::to(['site/monitor']) ?>')" style="font-size: 14px" class="btn btn-primary"><i class="fa fa-search"></i> Search</span>
+            <span onclick="searchUserWithData('<?= Url::to(['site/monitor']) ?>', 'false')" style="font-size: 14px" class="btn btn-primary"><i class="fa fa-search"></i> Search</span>
+            <span onclick="searchUserWithData('<?= Url::to(['question-save/question-save-export-excel-with-user']) ?>', 'true')" style="font-size: 14px" class="btn btn-default"><i class="fa fa-file-excel-o"></i> Export</span>
           </div>
         </div>
 
@@ -108,7 +115,6 @@ $this->title = 'Chula Interactive Medical Case';
       </div>
     </div>
   </div>
-
 </div>
 
 

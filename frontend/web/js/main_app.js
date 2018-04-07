@@ -27,7 +27,7 @@ $(document).ready(function () {
 
 });
 
-function searchUserWithData(url) {
+function searchUserWithData(url, newWindow) {
   var academic = $('#input-academic-data').val();
   var rotation = $('#input-rotation-data').val();
   var newUrl = url;
@@ -40,7 +40,11 @@ function searchUserWithData(url) {
   } else {
     newUrl = url + '&academic=' + academic + '&rotation=' + rotation;
   }
-
+  if (newWindow == 'true') {
+    window.open(newUrl, '_blank');
+  } else {
     window.location.href = newUrl;
 
+  }
+  console.log(newUrl);
 }

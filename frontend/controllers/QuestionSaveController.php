@@ -27,7 +27,8 @@ class QuestionSaveController extends Controller {
                     'actions' => ['history', 'monitor', 'click-save', 'finish-question', 'save-state-done', 'rescore', 'save-present-section', 'update-present-question',
                         'click-save-multi-choice',
                         'rescore-all-status',
-                        'question-save-export-excel'
+                        'question-save-export-excel',
+                        'question-save-export-excel-with-user',
                     ],
                     'allow' => true,
                     'roles' => ['@']
@@ -337,16 +338,37 @@ class QuestionSaveController extends Controller {
   public function actionQuestionSaveExportExcel($questionSetId) {
     $this->layout = 'blank';
     $models = QuestionSave::find()->where(['question_set_id' => $questionSetId])->all();
-    
+
 
     if (count($models) >= 1) {
       return $this->render('question_set_export_excel', ['models' => $models]);
     } else {
       
     }
-//    echo '<pre>';
-//    print_r($answers);
-//    echo $answers->{18010033}->value;
+  }
+
+  public function actionQuestionSaveExportExcelWithUser($academic = null, $rotation = null) {
+    $this->layout = 'blank';
+
+    $arrWhere = [];
+    $arrUserId = [];
+    ($academic != null) ? $arrWhere['start_study'] = $academic : null;
+    ($rotation != null) ? $arrWhere['rotation'] = $rotation : null;
+    $modelUsers = User::find()->where($arrWhere)->all();
+    foreach ($modelUsers as $user) {
+      array_push($arrUserId, $user->id);
+    }
+    if ($academic == null && $rotation == null) {
+      $models = QuestionSave::find()->all();
+    } else {
+      $models = QuestionSave::find()->where(['id' => $arrUserId])->all();
+    }
+
+    if (count($models) >= 1) {
+      return $this->render('question_set_export_excel', ['models' => $models]);
+    } else {
+      echo 'ไม่พบข้อมูลนักเรียน';
+    }
   }
 
 }

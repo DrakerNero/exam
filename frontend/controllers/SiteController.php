@@ -127,6 +127,8 @@ class SiteController extends Controller {
                 'questionSaveCount' => $questionSaveCount,
                 'resultAcademics' => $resultAcademics,
                 'usersActives' => $usersActives,
+                'academic' => $academic,
+                'rotation' => $rotation,
     ]);
   }
 
