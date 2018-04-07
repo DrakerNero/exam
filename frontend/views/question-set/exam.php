@@ -46,13 +46,37 @@ $i = 0;
 $countKey = 0;
 $arrQuestionPart = [];
 $getKeyArrQuestionPart = [];
+$modulePart = '';
+$checkModulePart = '';
+$conutQuestionWithModule = 1;
 foreach ($questions as $question) {
   $i++;
   $arrQuestionPart[$question->part] = $i;
-  if (!empty($question)) {
-
-    echo LoadViewQuestion::widget(['question' => $question, 'countDiv' => $question->id, 'questionSetID' => $model->id, 'countQuestion' => $i, 'modelQuestion' => $model]);
+//  $modulePart = (!empty($modulePart) && isset($modulePart) && $modulePart)
+  if (isset($modulePart) && $modulePart == '') {
+    $modulePart = 1;
+    $checkModulePart = $question->part;
+  } else if ($checkModulePart != $question->part) {
+    $modulePart = $modulePart + 1;
+    $checkModulePart = $question->part;
+    $conutQuestionWithModule = 1;
+  } else {
+    
   }
+  if (!empty($question)) {
+    echo LoadViewQuestion::widget([
+        'question' => $question,
+        'countDiv' => $question->id,
+        'questionSetID' => $model->id,
+        'countQuestion' => $i,
+        'questionNumber' => $modulePart . '.' . $conutQuestionWithModule,
+        'modelQuestion' => $model,
+    ]);
+  } else {
+    
+  }
+  echo 'Hello: ' . $modulePart . '.' . $conutQuestionWithModule;
+  $conutQuestionWithModule++;
 }
 
 foreach ($arrQuestionPart as $key => $value) {

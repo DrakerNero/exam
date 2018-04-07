@@ -16,6 +16,7 @@ class LoadViewQuestion extends \yii\bootstrap\Widget {
   public $questionSetID;
   public $countQuestion;
   public $modelQuestion;
+  public $questionNumber;
 
   public function run() {
     $name = $this->countDiv;
@@ -43,8 +44,8 @@ class LoadViewQuestion extends \yii\bootstrap\Widget {
                   ?>
 
                   <h3 class="box-title">
-
-                    <?= $this->countQuestion . '. ' ?><?= nl2br($this->question['question']) ?>
+                    <?= (!empty($this->question->question_topic) && isset($this->question->question_topic) && $this->question->question_topic != '') ? nl2br($this->question->question_topic).'<br />' : '' ?>
+                    <?= $this->questionNumber . '. ' ?><?= nl2br($this->question->question) ?>
                   </h3>
                 </div>
               </div><!-- /.box-header -->
