@@ -36,9 +36,9 @@ $maxSelectChoice = (!empty($model->max_select_choice) && isset($model->max_selec
         'class' => 'select-type-question',
     ])->label('เลือกการประเภทคำถาม')
     ?>
-    <?=
-    $form->field($model, 'is_mission_tree')->radioList([0 => 'No', 1 => 'Yes'], [
-    ])->label('Mission Tree')
+    <?php
+//    $form->field($model, 'is_mission_tree')->radioList([0 => 'No', 1 => 'Yes'], [
+//    ])->label('Mission Tree')
     ?>
 
 
