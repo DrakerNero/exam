@@ -4,6 +4,7 @@
 use yii\helpers\Html;
 use kartik\grid\GridView;
 use yii\helpers\Url;
+use frontend\widgets\GridTableQuestion;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\QuestionSet */
@@ -32,73 +33,7 @@ $this->params['breadcrumbs'][] = 'Update';
       </div>
     </div>
     <div class="wrapper-question-seach">
-      <?=
-      GridView::widget([
-          'dataProvider' => $dataProvider,
-          'filterModel' => $questionSearch,
-          'hover' => true,
-          'pjax' => true,
-//          'showPageSummary' => true,
-          'columns' => [
-              [
-                  'label' => 'ID',
-                  'attribute' => 'id',
-                  'width' => '20%',
-                  'vAlign' => 'middle',
-                  'hAlign' => 'center',
-              ],
-              [
-                  'label' => 'Part',
-                  'attribute' => 'part',
-                  'width' => '20px',
-                  'vAlign' => 'middle',
-                  'hAlign' => 'center',
-              ],
-              [
-                  'label' => 'Topic',
-                  'attribute' => 'question',
-                  'width' => '65%',
-                  'vAlign' => 'middle',
-                  'hAlign' => 'center',
-              ],
-              [
-                  'label' => 'Answer',
-                  'attribute' => 'answer',
-                  'width' => '10px',
-                  'vAlign' => 'middle',
-                  'hAlign' => 'center',
-              ],
-              [
-                  'label' => 'Amount Choices',
-                  'attribute' => 'max_select_choice',
-                  'width' => '10px',
-                  'vAlign' => 'middle',
-                  'hAlign' => 'center',
-              ],
-              [
-                  'label' => 'Image',
-                  'attribute' => 'png',
-                  'width' => '10px',
-                  'vAlign' => 'middle',
-                  'hAlign' => 'center',
-              ],
-              [
-                  'vAlign' => 'middle',
-                  'hAlign' => 'center',
-                  'width' => '10px',
-                  'format' => 'html',
-                  'value' => function($model) {
-                    return '<a target="_blank" href="' . Url::to(['question/update', 'id' => $model->id]) . '">'
-                            . '<i class="fa fa-edit"></i>'
-                            . '</a>';
-//                    return '<a target="_blank" href="' . Yii::$app->getUrlManager()->getBaseUrl() . '/question/update?id=' . $model->id . '">'
-//                            . '<i class="fa fa-edit"></i>'
-//                            . '</a>';
-                  }
-                      ],
-                  ]
-              ])
-              ?>
+      <?= GridTableQuestion::widget(['dataProvider' => $dataProvider, 'searchModel' => $questionSearch]) ?>
     </div>
   </div>
 

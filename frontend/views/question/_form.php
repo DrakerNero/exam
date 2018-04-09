@@ -21,7 +21,9 @@ $maxSelectChoice = (!empty($model->max_select_choice) && isset($model->max_selec
 
     <?= $form->field($model, 'part')->textInput(['placeholder' => 'Part'])->label('Part') ?>
 
-    <?= $form->field($model, 'question')->textarea(['rows' => 8])->label('Topic') ?>
+    <?= $form->field($model, 'question_topic')->textarea(['rows' => 8])->label('Topic') ?>
+    
+    <?= $form->field($model, 'question')->textarea(['rows' => 8])->label('Question') ?>
 
     <?php
     echo ($model->png == 1) ? QuestionPNG::widget(['model' => $model]) : '';
