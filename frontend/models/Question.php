@@ -85,8 +85,8 @@ class Question extends \yii\db\ActiveRecord {
   public function rules() {
     return [
         [['id', 'question', 'choices', 'answer', 'updated_at', 'part', 'is_mission_tree'], 'required'],
-        [['id', 'question_topic', 'mp3', 'png', 'txt', 'max_select_choice', 'type_question', 'part'], 'integer'],
-        [['question', 'choices', 'answer_detail', 'answers', 'answer_score', 'mission_tree_questions'], 'string'],
+        [['id', 'mp3', 'png', 'txt', 'max_select_choice', 'type_question', 'part'], 'integer'],
+        [['question', 'choices', 'answer_detail', 'answers', 'answer_score', 'mission_tree_questions', 'question_topic',], 'string'],
         [[
         'choice_1', 'answer_1', // 'tree_1',
         'choice_2', 'answer_2', // 'tree_2',
