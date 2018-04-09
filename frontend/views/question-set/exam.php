@@ -75,7 +75,6 @@ foreach ($questions as $question) {
   } else {
     
   }
-  echo 'Hello: ' . $modulePart . '.' . $conutQuestionWithModule;
   $conutQuestionWithModule++;
 }
 

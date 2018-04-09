@@ -63,7 +63,7 @@ h6{
 }
 .content{
   min-height: 645px;
-  margin-top: 50px;
+  /*margin-top: 50px;*/
 }
 footer{
   margin-left: 20%;
