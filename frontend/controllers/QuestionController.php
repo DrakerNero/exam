@@ -122,7 +122,7 @@ class QuestionController extends Controller {
     $model = new Question();
     $model = $this->decodeModelWithArray($model, $this->choiceNames(), 'choices');
     $model = $this->decodeModelWithArray($model, $this->answerNames(), 'answers');
-    $model = $this->decodeModelWithArray($model, $this->treeNames(), 'mission_tree_questions');
+//    $model = $this->decodeModelWithArray($model, $this->treeNames(), 'mission_tree_questions');
 
     $model->mp3 = 0;
     $model->png = 0;
@@ -139,7 +139,7 @@ class QuestionController extends Controller {
       }
       $model = $this->encodeModelWithArray($model, $this->choiceNames(), 'choices');
       $model = $this->encodeModelWithArray($model, $this->answerNames(), 'answers');
-      $model = $this->encodeModelWithArray($model, $this->treeNames(), 'mission_tree_questions');
+//      $model = $this->encodeModelWithArray($model, $this->treeNames(), 'mission_tree_questions');
 
       $model->updated_at = date('Y-m-d H:i:s');
 
@@ -163,12 +163,12 @@ class QuestionController extends Controller {
     $model = $this->findModel($id);
     $model = $this->decodeModelWithArray($model, $this->choiceNames(), 'choices');
     $model = $this->decodeModelWithArray($model, $this->answerNames(), 'answers');
-    $model = $this->decodeModelWithArray($model, $this->treeNames(), 'mission_tree_questions');
+//    $model = $this->decodeModelWithArray($model, $this->treeNames(), 'mission_tree_questions');
 
     if ($model->load(Yii::$app->request->post())) {
       $model = $this->encodeModelWithArray($model, $this->choiceNames(), 'choices');
       $model = $this->encodeModelWithArray($model, $this->answerNames(), 'answers');
-      $model = $this->encodeModelWithArray($model, $this->treeNames(), 'mission_tree_questions');
+//      $model = $this->encodeModelWithArray($model, $this->treeNames(), 'mission_tree_questions');
       if ($model->uploadFile('file_upload') != false) {
         $uploadFile = $model->uploadFile('file_upload');
         $uploadFile->saveAs('uploads/png/' . $model->id . '.png');

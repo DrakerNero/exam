@@ -11,9 +11,11 @@ class GridTableQuestion extends \yii\bootstrap\Widget {
 
   public $dataProvider;
   public $searchModel;
+  public $updatePage;
 
   public function run() {
     $pngs = [1 => 'Yes', 0 => 'No'];
+
     echo GridView::widget([
         'dataProvider' => $this->dataProvider,
         'filterModel' => $this->searchModel,
@@ -66,15 +68,27 @@ class GridTableQuestion extends \yii\bootstrap\Widget {
                 'hAlign' => 'center',
                 'filter' => $pngs,
                 'value' => function($model) {
+
                   return ($model->png == 1) ? '<i class="fa fa-check _bg-green"></i>' : '<i  class="fa fa-times _bg-red"></i>';
                 },
                 'format' => 'html'
             ],
-            [
-                'class' => 'yii\grid\ActionColumn',
-            ],
-        ]
-    ]);
-  }
+            ($this->updatePage == true) ? [
+                'vAlign' => 'top',
+                'hAlign' => 'center',
+                'width' => '10px',
+                'format' => 'html',
+                'value' => function($model) {
+                  return '<a target="_blank" href="' . Url::to(['question/update', 'id' => $model->id]) . '">'
+                          . '<i class="fa fa-edit"></i>'
+                          . '</a>';
+                }
+                            ] : [
+                        'class' => 'yii\grid\ActionColumn',
+                            ],
+                ]
+            ]);
+          }
 
-}
+        }
+        

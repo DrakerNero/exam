@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
       <?= Html::a('Create Question', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-    <?= GridTableQuestion::widget(['dataProvider' => $dataProvider, 'searchModel' => $searchModel]) ?>
+    <?= GridTableQuestion::widget(['dataProvider' => $dataProvider, 'searchModel' => $searchModel, 'updatePage'=> false]) ?>
     ?>
 
   </div>

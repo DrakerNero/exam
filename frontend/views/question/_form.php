@@ -22,7 +22,7 @@ $maxSelectChoice = (!empty($model->max_select_choice) && isset($model->max_selec
     <?= $form->field($model, 'part')->textInput(['placeholder' => 'Part'])->label('Part') ?>
 
     <?= $form->field($model, 'question_topic')->textarea(['rows' => 8])->label('Topic') ?>
-    
+
     <?= $form->field($model, 'question')->textarea(['rows' => 8])->label('Question') ?>
 
     <?php
@@ -110,28 +110,34 @@ $maxSelectChoice = (!empty($model->max_select_choice) && isset($model->max_selec
             <?= $form->field($model, 'answer_15')->textInput(['placeholder' => 'Answer Score 15'])->label(false) ?>
           </div>
         </div>
-        <div class="col-md-3 exam-mission-tree">
+        <?php
+        /*
+          <div class="col-md-3 exam-mission-tree">
           <div class="input-choice" style="padding-left: 0;">
-            <div class="input-tree">
-              <?= $form->field($model, 'tree_1')->textInput(['placeholder' => 'Mission Tree Input 1'])->label(false) ?>
-              <?= $form->field($model, 'tree_2')->textInput(['placeholder' => 'Mission Tree Input 2'])->label(false) ?>
-              <?= $form->field($model, 'tree_3')->textInput(['placeholder' => 'Mission Tree Input 3'])->label(false) ?>
-              <?= $form->field($model, 'tree_4')->textInput(['placeholder' => 'Mission Tree Input 4'])->label(false) ?>
-              <?= $form->field($model, 'tree_5')->textInput(['placeholder' => 'Mission Tree Input 5'])->label(false) ?>
-              <?= $form->field($model, 'tree_6')->textInput(['placeholder' => 'Mission Tree Input 6'])->label(false) ?>
-              <?= $form->field($model, 'tree_7')->textInput(['placeholder' => 'Mission Tree Input 7'])->label(false) ?>
-              <?= $form->field($model, 'tree_8')->textInput(['placeholder' => 'Mission Tree Input 8'])->label(false) ?>
-              <?= $form->field($model, 'tree_9')->textInput(['placeholder' => 'Mission Tree Input 9'])->label(false) ?>
-              <?= $form->field($model, 'tree_10')->textInput(['placeholder' => 'Mission Tree Input 10'])->label(false) ?>
-              <?= $form->field($model, 'tree_11')->textInput(['placeholder' => 'Mission Tree Input 11'])->label(false) ?>
-              <?= $form->field($model, 'tree_12')->textInput(['placeholder' => 'Mission Tree Input 12'])->label(false) ?>
-              <?= $form->field($model, 'tree_13')->textInput(['placeholder' => 'Mission Tree Input 13'])->label(false) ?>
-              <?= $form->field($model, 'tree_14')->textInput(['placeholder' => 'Mission Tree Input 14'])->label(false) ?>
-              <?= $form->field($model, 'tree_15')->textInput(['placeholder' => 'Mission Tree Input 15'])->label(false) ?>
+          <div class="input-tree">
+          <?= $form->field($model, 'tree_1')->textInput(['placeholder' => 'Mission Tree Input 1'])->label(false) ?>
+          <?= $form->field($model, 'tree_2')->textInput(['placeholder' => 'Mission Tree Input 2'])->label(false) ?>
+          <?= $form->field($model, 'tree_3')->textInput(['placeholder' => 'Mission Tree Input 3'])->label(false) ?>
+          <?= $form->field($model, 'tree_4')->textInput(['placeholder' => 'Mission Tree Input 4'])->label(false) ?>
+          <?= $form->field($model, 'tree_5')->textInput(['placeholder' => 'Mission Tree Input 5'])->label(false) ?>
+          <?= $form->field($model, 'tree_6')->textInput(['placeholder' => 'Mission Tree Input 6'])->label(false) ?>
+          <?= $form->field($model, 'tree_7')->textInput(['placeholder' => 'Mission Tree Input 7'])->label(false) ?>
+          <?= $form->field($model, 'tree_8')->textInput(['placeholder' => 'Mission Tree Input 8'])->label(false) ?>
+          <?= $form->field($model, 'tree_9')->textInput(['placeholder' => 'Mission Tree Input 9'])->label(false) ?>
+          <?= $form->field($model, 'tree_10')->textInput(['placeholder' => 'Mission Tree Input 10'])->label(false) ?>
+          <?= $form->field($model, 'tree_11')->textInput(['placeholder' => 'Mission Tree Input 11'])->label(false) ?>
+          <?= $form->field($model, 'tree_12')->textInput(['placeholder' => 'Mission Tree Input 12'])->label(false) ?>
+          <?= $form->field($model, 'tree_13')->textInput(['placeholder' => 'Mission Tree Input 13'])->label(false) ?>
+          <?= $form->field($model, 'tree_14')->textInput(['placeholder' => 'Mission Tree Input 14'])->label(false) ?>
+          <?= $form->field($model, 'tree_15')->textInput(['placeholder' => 'Mission Tree Input 15'])->label(false) ?>
 
-            </div>
           </div>
-        </div>
+          </div>
+          </div>
+         */
+        ?>
+
+
       </div>
     </div>
 

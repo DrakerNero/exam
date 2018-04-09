@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = 'Update';
       </div>
     </div>
     <div class="wrapper-question-seach">
-      <?= GridTableQuestion::widget(['dataProvider' => $dataProvider, 'searchModel' => $questionSearch]) ?>
+      <?= GridTableQuestion::widget(['dataProvider' => $dataProvider, 'searchModel' => $questionSearch ,'updatePage'=> true]) ?>
     </div>
   </div>
 
