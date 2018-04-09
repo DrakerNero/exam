@@ -891,7 +891,12 @@ span.wrapper-logo>.left>img {
   min-height: 50px;
   border-radius: 0;
 }
-
+.content.main-content #w0, .content.main-content .site-error {
+  padding-top: 50px;
+}
+.site-error {
+  padding-left: 30px;
+}
 @media (max-width: 767px) {
   .main-header .navbar {
     margin: 0;

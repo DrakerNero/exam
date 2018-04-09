@@ -37,7 +37,7 @@ class SiteController extends Controller {
     ];
   }
 
-  public function actionIndex() {
+  protected function popupModal() {
     $session = Yii::$app->session;
     $popup = false;
     if (!empty(Yii::$app->user->identity->id) && isset(Yii::$app->user->identity->id) && Yii::$app->user->identity->id != null) {
@@ -50,6 +50,24 @@ class SiteController extends Controller {
     } else {
       
     }
+
+    return $popup;
+  }
+
+  public function actionIndex() {
+    $popup = $this->popupModal();
+//    $session = Yii::$app->session;
+//    $popup = false;
+//    if (!empty(Yii::$app->user->identity->id) && isset(Yii::$app->user->identity->id) && Yii::$app->user->identity->id != null) {
+//      if ($session->get('dateFirstLogin') == date('Ymd')) {
+//        
+//      } else {
+//        $popup = true;
+//        $session->set('dateFirstLogin', date('Ymd'));
+//      }
+//    } else {
+//      
+//    }
 
     $subject_id = 'all';
     $pageEnd = 12;
@@ -172,6 +190,100 @@ class SiteController extends Controller {
       return $this->redirect(['monitor-profile-user', 'userId' => $id]);
     }
     return $this->render('edit_profile_user', ['model' => $model, 'id' => $id]);
+  }
+
+  public function actionExamSuccessPage() {
+    $iconName = 'ic-3.png';
+    $colorClass = 'wsq-green';
+    $userId = (!empty(Yii::$app->user->identity->id) && isset(Yii::$app->user->identity->id) && Yii::$app->user->identity->id != null) ? Yii::$app->user->identity->id : null;
+    if (!empty($userId) && isset($userId) && $userId != null) {
+      $popup = $this->popupModal();
+//      $models = QuestionSet::find()->where(['status' => 1])->all();
+      $arrQuestionSave = [];
+      $checkUnique = null;
+      $questionSaves = QuestionSave::find()->where(['user_id' => $userId, 'status' => 3])->andWhere(['>=', 'score', '80'])->all();
+
+      foreach ($questionSaves as $questionSave) {
+        if ($checkUnique != $questionSave->question_set_id) {
+          $checkUnique = $questionSave->question_set_id;
+          array_push($arrQuestionSave, $questionSave);
+        } else {
+          
+        }
+      }
+
+      return $this->render('_exam_status_page', ['models' => $arrQuestionSave, 'popup' => $popup, 'iconName' => $iconName, 'colorClass' => $colorClass]);
+    } else {
+      return $this->redirect(['index']);
+    }
+  }
+
+  public function actionExamDoingPage() {
+    $iconName = 'ic-2.png';
+    $colorClass = 'wsq-orange';
+    $userId = (!empty(Yii::$app->user->identity->id) && isset(Yii::$app->user->identity->id) && Yii::$app->user->identity->id != null) ? Yii::$app->user->identity->id : null;
+    if (!empty($userId) && isset($userId) && $userId != null) {
+      $getQuestionSuccessIds = [];
+      $popup = $this->popupModal();
+      $arrQuestionSave = [];
+      $checkUnique = null;
+      $questionSaves = QuestionSave::find()->where(['user_id' => $userId])->all();
+      $questionSaveSuccess = QuestionSave::find()->where(['user_id' => $userId, 'status' => 3])->andWhere(['>=', 'score', '80'])->all();
+
+      foreach ($questionSaveSuccess as $model) {
+        array_push($getQuestionSuccessIds, $model->questionSet->id);
+      }
+
+      foreach ($questionSaves as $questionSave) {
+        if (!in_array($questionSave->questionSet->id, $getQuestionSuccessIds)) {
+
+          if ($checkUnique != $questionSave->question_set_id) {
+            $checkUnique = $questionSave->question_set_id;
+            array_push($arrQuestionSave, $questionSave);
+          } else {
+            
+          }
+        }
+      }
+
+
+      return $this->render('_exam_status_page', ['models' => $arrQuestionSave, 'popup' => $popup, 'iconName' => $iconName, 'colorClass' => $colorClass]);
+    } else {
+      return $this->redirect(['index']);
+    }
+  }
+
+  public function actionExamNotDoPage() {
+    $notDo = true;
+    $iconName = 'ic-1.png';
+    $colorClass = 'wsq-gray';
+    $userId = (!empty(Yii::$app->user->identity->id) && isset(Yii::$app->user->identity->id) && Yii::$app->user->identity->id != null) ? Yii::$app->user->identity->id : null;
+    if (!empty($userId) && isset($userId) && $userId != null) {
+      $popup = $this->popupModal();
+      $questionSetIds = [];
+      $questionSaves = QuestionSave::find()->where(['user_id' => $userId])->all();
+
+      foreach ($questionSaves as $questionSave) {
+        array_push($questionSetIds, $questionSave->question_set_id);
+      }
+
+      $questionSets = QuestionSet::find()->where(['status' => 1])->all();
+      $arrQuestionSets = [];
+      foreach ($questionSets as $questionSet) {
+        if (!in_array($questionSet->id, $questionSetIds)) {
+          array_push($arrQuestionSets, $questionSet);
+        } else {
+          
+        }
+      }
+
+//      echo '<pre>';
+//      print_r($arrQuestionSets);
+//      print_r(array_unique($questionSetIds));
+      return $this->render('_exam_status_page', ['models' => $arrQuestionSets, 'popup' => $popup, 'iconName' => $iconName, 'colorClass' => $colorClass, 'notDo' => $notDo]);
+    } else {
+      return $this->redirect(['index']);
+    }
   }
 
   public function actionTestAuth() {

@@ -41,34 +41,21 @@ class HeaderMenuLeft extends \yii\bootstrap\Widget {
               <h6> All</h6>
             </a>                            
           </li>
-          <?php
-          $i = 0;
-          foreach ($exam_arr as $key) {
-            ?>
-            <li>
-              <a href="#" onclick="ShowOtherMenu(<?= $i ?>)">
-                <span><h6><?= $key ?></h6></span>
-                <i class="fa fa-angle-left pull-right" ></i>
-              </a>
-              <div style="display:none;" id="menu<?= $i ?>">
-                <?php
-                $model = Subject::find()->where(['exam_class' => $key, 'status' => 1])->all();
-                foreach ($model as $key => $value) {
-                  $questionSet = QuestionSet::find()->where(['subject_id' => $value->id])->all();
-                  ?>
-                  <ul class="list-menu" title="<?= $value->exam_subclass ?>">                           
-                    <li>
-                      <a href="<?= Yii::$app->urlManager->createUrl(['site/index', 'subject_id' => $value->id]) ?>" >
-                        <i class="fa fa-angle-double-right"></i><span><?= $value->exam_subclass ?> (<?= sizeof($questionSet) ?>)</span>
-                      </a>
-                    </li>
-                  </ul>
-                <?php } ?>
-              </div>
-              <?php
-              $i++;
-            }
-            ?>
+          <li>
+            <a href="<?= Yii::$app->urlManager->createUrl(['site/exam-success-page']) ?>" >
+              <h6> Success</h6>
+            </a>                            
+          </li>
+          <li>
+            <a href="<?= Yii::$app->urlManager->createUrl(['site/exam-doing-page']) ?>" >
+              <h6> Doning</h6>
+            </a>                            
+          </li>
+          <li>
+            <a href="<?= Yii::$app->urlManager->createUrl(['site/exam-not-do-page']) ?>" >
+              <h6> Not do</h6>
+            </a>                            
+          </li>
           </li>
         </ul>
       </section>                
