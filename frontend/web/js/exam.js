@@ -370,11 +370,17 @@ function ShowAnswer() {
     var agree = handleOnShowAnswer() + '%';
 
   } else {
-    title = ShowTitleAnswer(percent);
+//    title = ShowTitleAnswer(percent);
 
   }
   var percent = (agree * 100) / countQuestion;
+  percent = (percent <= 0) ? 0 : percent;
+  if (title >= 80) {
+    title = 'ยินดีด้วยท่านผ่านเกณฑ์ 80% ของข้อสอบชุดนี้';
+  } else {
+    title = 'ท่านไม่ผ่านเกณฑ์คะแนนขั้นต่ำ กรุณากดปุ่ม Reset เพื่อทำใหม่อีกครั้ง';
 
+  }
 
   if (questionType !== '2') {
     $('.load-score').html(agree + "<br>");
@@ -391,6 +397,7 @@ function ShowAnswer() {
 //        agree = '##';
     $('score-m').html('## คะแนน');
   } else {
+
     (!multiChoice) ? $('.load-score').append('<div class="an-ti-show"><br>' + percent + '% ' + title + '</div>') : null;
 
     $('.tb2-ex-left').show();
@@ -628,7 +635,7 @@ function handleMissionTree() {
       }),
       success: function (data) {
         console.log(data);
-        
+
       },
       error: function (data) {
         console.log("ไม่มีการส่งข้อมูล");
