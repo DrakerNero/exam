@@ -314,6 +314,35 @@ class SiteController extends Controller {
     echo 'false';
   }
 
+  public function actionTestQuestion() {
+    $questionSaves = QuestionSave::find()->where(['id' => 20])->all();
+    echo '<pre>';
+
+    foreach ($questionSaves as $questionSave) {
+      $choices = json_decode($questionSave->answer, true);
+
+      foreach ($choices as $choice) {
+        if (!empty($choice) && isset($choice)) {
+          $choice = array_values($choice);
+//          print_r($choice);
+          $key = 0;
+          if (!empty($choice[$key]) && isset($choice[$key])) {
+//          print_r($choices[$key]['part']);
+            for ($i = 0; $i <= 14; $i++) {
+              $choiceCheck = (!empty($choice[$i][2]) && isset($choice[$i][2])) ? $choice[$i][2] : 0;
+              echo $choiceCheck . ',';
+            }
+          } else {
+//          
+          }
+        } else {
+          
+        }
+        echo ' <br />';
+      }
+    }
+  }
+
 //  public function actionTestLdap() {
 ////    $ldap_dn = 'cn=read-only-admin,dc=example,dc=com';
 ////    $ldap_password = 'password';

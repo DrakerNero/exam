@@ -62,9 +62,10 @@ class Subjectwidget extends \yii\bootstrap\Widget {
           $iconName = 'ic-1.png';
           $colorClass = 'wsq-gray';
         }
+        
         ?>       
-        <a href="<?= Url::to(['question-set/teacher', 'id' => $model->id]) ?>" onmouseover="ShowOtherData(<?= $model->id ?>)" onmouseout="NotShowOtherData(<?= $model->id ?>)">
-          <div class="col-md-4">
+        <div class="col-md-4">
+          <a href="<?= Url::to(['question-set/teacher', 'id' => $model->id]) ?>" onmouseover="ShowOtherData(<?= $model->id ?>)" onmouseout="NotShowOtherData(<?= $model->id ?>)">
             <div class="wrapper-select-question <?= $colorClass ?>">
               <div class="flex-select-question">
                 <div class="left">
@@ -75,8 +76,8 @@ class Subjectwidget extends \yii\bootstrap\Widget {
                 </div>
               </div>
             </div>
-          </div>
-        </a>
+          </a>
+        </div>
         <?php
       }
     } else {

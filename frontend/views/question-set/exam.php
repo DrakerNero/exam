@@ -8,7 +8,7 @@ use frontend\widgets\BottomMenuCenter;
 use frontend\widgets\LoadQuestionSave;
 use yii\web\View;
 
-$this->title = $model->subject->exam_class . ' > ' . $model->subject->exam_subclass . ' > ' . $model->name;
+$this->title = $model->name;
 $disableChoice = (isset($disableChoice) && !empty($disableChoice)) ? $disableChoice : false;
 
 

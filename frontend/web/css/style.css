@@ -708,6 +708,8 @@ input[type="checkbox"]:checked + #inputRadio {
   position: relative;
   top: 50%;
   transform: translate(0,-50%);
+  height: 53px;
+  width: auto;
 }
 .flex-select-question>.right {
   flex-grow: 2;
