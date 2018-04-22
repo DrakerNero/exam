@@ -145,7 +145,7 @@ class QuestionSaveController extends Controller {
   public function actionSaveStateDone() {
     $model = $this->findModel($_POST['questionSaveId']);
     $model->status = 3;
-    $model->score = $_POST['score'];
+    $model->score = intval($_POST['score']);
     $model->elapse_time += time() - $model->created_at;
 
     if ($model->save()) {
@@ -158,13 +158,6 @@ class QuestionSaveController extends Controller {
     }
   }
 
-//  public function actionClickSaveMultiChoice() {
-//    $id = $_POST['questionId'];
-//    $choices = $_POST['choices'];
-//    $questionSaveId = $_POST['questionSaveId'];
-//
-//    $model = $this->findModel($_POST['questionSaveId']);
-//  }
 
   public function actionClickSave() {
     $questionId = $_POST['questionId'];

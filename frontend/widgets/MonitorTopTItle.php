@@ -14,7 +14,7 @@ class MonitorTopTItle extends \yii\bootstrap\Widget {
 
   public function run() {
     ?>
-    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    <div class="animated flipInY col-lg-4 col-md-4 col-sm-4 col-xs-12">
       <div class="tile-stats">
         <div class="icon"><i class="fa <?= $this->icon ?>"></i></div>
         <div class="count"><?= $this->count ?></div>

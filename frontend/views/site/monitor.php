@@ -12,24 +12,16 @@ $this->title = 'Chula Interactive Medical Case';
     MonitorTopTItle::widget([
         'icon' => 'fa-users',
         'count' => $userCount,
-        'topic' => 'Users',
-        'detail' => 'จำนวนผู้ใช้งานในระบบ',
-    ])
-    ?>
-    <?=
-    MonitorTopTItle::widget([
-        'icon' => 'fa-comments-o',
-        'count' => $examCount,
-        'topic' => 'Exams',
-        'detail' => 'จำนวนชุดข้อสอบในระบบ',
+        'topic' => 'จำนวนผู้ส่งข้อสอบ',
+        'detail' => 'ที่ผ่านมากกว่า 80%',
     ])
     ?>
     <?=
     MonitorTopTItle::widget([
         'icon' => 'fa-sort-amount-desc',
-        'count' => $questionCount,
-        'topic' => 'Questions',
-        'detail' => 'จำนวนคำถามในระบบ',
+        'count' => count($modelUsersSummit),
+        'topic' => 'จำนวนผู้ส่งข้อสอบ',
+        'detail' => 'ตามการค้นหา',
     ])
     ?>
     <?=
@@ -106,7 +98,8 @@ $this->title = 'Chula Interactive Medical Case';
               <?=
               QuestionSaveMonitorGridView::widget([
                   'dataProvider' => $dataProvider,
-                  'searchModel' => $searchUser
+                  'searchModel' => $searchUser,
+                  'examCount'=>$examCount,
               ]);
               ?>
             </div>

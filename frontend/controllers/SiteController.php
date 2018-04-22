@@ -131,11 +131,18 @@ class SiteController extends Controller {
     ($academic != null) ? $arrWhere['start_study'] = $academic : null;
     ($rotation != null) ? $arrWhere['rotation'] = $rotation : null;
 
-    $modelUsers = User::find()->where($arrWhere)->all();
+    $userIds = [];
+    $users = User::find()->where($arrWhere)->all();
+    foreach ($users as $user) {
+      array_push($userIds, $user->id);
+    }
+
+    $modelUsersSuccess = QuestionSave::find()->where(['>=', 'score', '80'])->all();
+    $modelUsersSummit = QuestionSave::find()->where(['user_id' => $userIds])->all();
     $usersActives = User::find()->where(['status' => 1])->all();
-    $userCount = count($modelUsers);
+    $userCount = count($modelUsersSuccess);
     $examCount = QuestionSet::find()->where(['status' => 1])->count();
-    $questionCount = Question::find()->count();
+//    $questionCount = Question::find()->count();
     $questionSaveCount = QuestionSave::find()->count();
     $arrAcademics = [];
     foreach ($usersActives as $usersActives) {
@@ -155,12 +162,13 @@ class SiteController extends Controller {
                 'dataProvider' => $dataProvider,
                 'userCount' => $userCount,
                 'examCount' => $examCount,
-                'questionCount' => $questionCount,
+//                'questionCount' => $questionCount,
                 'questionSaveCount' => $questionSaveCount,
                 'resultAcademics' => $resultAcademics,
                 'usersActives' => $usersActives,
                 'academic' => $academic,
                 'rotation' => $rotation,
+                'modelUsersSummit' => $modelUsersSummit,
     ]);
   }
 

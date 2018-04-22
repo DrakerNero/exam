@@ -86,4 +86,9 @@ class User extends \yii\db\ActiveRecord {
     return $this->hasOne(UserProfile::className(), ['user_id' => 'id']);
   }
 
+  public function getUserQuestionScore() {
+    return $this->hasMany(QuestionSave::className(), ['user_id' => 'id'])
+                    ->where(['>=', 'score', '80']);
+  }
+
 }

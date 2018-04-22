@@ -11,9 +11,9 @@ class QuestionSaveMonitorGridView extends \yii\bootstrap\Widget {
 
   public $dataProvider;
   public $searchModel;
+  public $examCount;
 
   public function run() {
-
     echo GridView::widget([
         'dataProvider' => $this->dataProvider,
         'filterModel' => $this->searchModel,
@@ -33,6 +33,14 @@ class QuestionSaveMonitorGridView extends \yii\bootstrap\Widget {
                 'attribute' => 'last_name',
                 'value' => 'last_name',
 //                'width' => '100px',
+            ],
+            [
+                'label' => 'Question Success',
+                'contentOptions' => ['style' => 'text-align: center;'],
+                'width' => '50px',
+                'value' => function($model) {
+          return count($model->userQuestionScore) . '/' . $this->examCount;
+        }
             ],
             [
                 'attribute' => 'start_study',
@@ -60,7 +68,7 @@ class QuestionSaveMonitorGridView extends \yii\bootstrap\Widget {
                 }
                     ],
                 ],
-            ]);
+                    ], ['examCount' => $this->examCount]);
           }
 
         }
