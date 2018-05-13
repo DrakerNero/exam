@@ -158,7 +158,6 @@ class QuestionSaveController extends Controller {
     }
   }
 
-
   public function actionClickSave() {
     $questionId = $_POST['questionId'];
     $choices = $_POST['choices'];
@@ -220,12 +219,14 @@ class QuestionSaveController extends Controller {
 
   public function actionRescore() {
     $questionSetId = $_POST['questionSetId'];
+    $questionSaveId = $_POST['questionSaveId'];
     $userId = Yii::$app->user->identity->id;
     $userId = $userId . '';
     $model = QuestionSave::find()->where([
+                'id' => $questionSaveId,
                 'user_id' => $userId,
                 'question_set_id' => $questionSetId,
-                'status' => 3
+//                'status' => 3
             ])->one();
     $model->status = 4;
     $model->save();

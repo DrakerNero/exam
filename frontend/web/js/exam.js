@@ -434,10 +434,12 @@ function Rescore(getUrl) {
   var urlPost = (getUrl == null || getUrl == undefined || getUrl == '') ? 'index.php?r=question-save/rescore' : getUrl;
   var csrfToken = $('meta[name="csrf-token"]').attr("content");
   var questionSetId = $('.question-set-id').attr('data-id');
+  var questionSaveId = $('.question-save').attr('data-id');
   $.ajax({
     type: "POST",
     url: urlPost,
     data: ({
+      questionSaveId: questionSaveId,
       questionSetId: questionSetId,
       _csrf: csrfToken
     }),
