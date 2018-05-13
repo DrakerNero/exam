@@ -12,7 +12,7 @@ $this->title = $model->name;
 $disableChoice = (isset($disableChoice) && !empty($disableChoice)) ? $disableChoice : false;
 
 
-if (isset($onAdmin) && !empty($onAdmin) && $onAdmin == true) {
+if (isset($isAdmin) && !empty($isAdmin) && $isAdmin == true) {
 //  $stringScript = "$('.wrapper-disable-click-choice').hide();";
 //  echo $questionSave->module_part;
   $questionSaveParts = $questionSave->module_part;
@@ -71,6 +71,7 @@ foreach ($questions as $question) {
         'countQuestion' => $i,
         'questionNumber' => $modulePart . '.' . $conutQuestionWithModule,
         'modelQuestion' => $model,
+        'isAdmin' => $isAdmin
     ]);
   } else {
     
@@ -149,7 +150,7 @@ if ($questionSave->status == 1) {
 <br><br>
 
 
-<?= LoadQuestionSave::widget(['questionSave' => $questionSave]); ?>
+<?= LoadQuestionSave::widget(['questionSave' => $questionSave, 'isAdmin' => $isAdmin]); ?>
 <?= ExamMenuLeftProgressBar::widget(['countQuestion' => $i, 'from' => $model->from, 'to' => $model->to, 'questionSet' => $model, 'disableChoice' => $disableChoice, 'questions' => $questions, 'questionSave' => $questionSave]) ?>
 <a class="question-from" data-id="<?= $model->from ?>"></a>
 <a class="question-to" data-id="<?= $model->to ?>"></a>

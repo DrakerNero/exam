@@ -248,6 +248,7 @@ function handleOnSumScore() {
     from++;
   }
   var resute = (sumPoint * 100) / totalPoint;
+//  alert(sumPoint+' : '+ totalPoint);
   $('.progress').remove();
   (parseInt(resute) >= percentPass) ? handlePercentPass() : null;
 

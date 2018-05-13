@@ -17,6 +17,7 @@ class LoadViewQuestion extends \yii\bootstrap\Widget {
   public $countQuestion;
   public $modelQuestion;
   public $questionNumber;
+  public $isAdmin = false;
 
   public function run() {
     $name = $this->countDiv;
@@ -44,7 +45,7 @@ class LoadViewQuestion extends \yii\bootstrap\Widget {
                   ?>
 
                   <h3 class="box-title">
-                    <?= (!empty($this->question->question_topic) && isset($this->question->question_topic) && $this->question->question_topic != '') ? nl2br($this->question->question_topic).'<br />' : '' ?>
+                    <?= (!empty($this->question->question_topic) && isset($this->question->question_topic) && $this->question->question_topic != '') ? nl2br($this->question->question_topic) . '<br />' : '' ?>
                     <?= $this->questionNumber . '. ' ?><?= nl2br($this->question->question) ?>
                   </h3>
                 </div>
@@ -80,7 +81,7 @@ class LoadViewQuestion extends \yii\bootstrap\Widget {
                                 <?= ($multiChoice) ? 'class="choice-question-' . $this->question->id . '"' : '' ?>
                                 style="display: none;"
                                 >
-                              <label id="inputRadio"  for="<?= Html::encode($IDradio) ?>" ><?php echo $key . ".  " . $value ?>  </label>
+                              <label id="inputRadio"  for="<?= Html::encode($IDradio) ?>" ><?php echo $key . ".  " . $value ?>  <?= ($this->isAdmin == true) ? '&nbsp;&nbsp; [ ' . $answers[$key] . ' ]' : '' ?>  </label>
                               <?php
                               ?>
                               <br>

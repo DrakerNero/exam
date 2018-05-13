@@ -185,7 +185,7 @@ class QuestionSetController extends Controller {
   }
 
   public function actionDoExam($questionSetId) {
-    $onAdmin = false;
+    $isAdmin = false;
     $model = QuestionSet::findOne($questionSetId);
     if (!empty($model)) {
       $arrQuestion = [];
@@ -241,7 +241,7 @@ class QuestionSetController extends Controller {
                   'uniquePart' => $uniquePart,
                   'newQuestions' => $questionSuccess,
                   'doPart' => $doPart,
-                  'onAdmin' => $onAdmin,
+                  'isAdmin' => $isAdmin,
 //                  'inArrayModulePart' => $inArrayModulePart,
       ]);
     } else {
@@ -260,7 +260,7 @@ class QuestionSetController extends Controller {
 
   public function actionMonitorUserDoExam($questionSaveId) {
     $disableChoice = false;
-    $onAdmin = true;
+    $isAdmin = true;
     $questionSave = QuestionSave::findOne($questionSaveId);
     if (!empty($questionSave)) {
       if (Yii::$app->user->identity->user_status == 1) {
@@ -269,9 +269,61 @@ class QuestionSetController extends Controller {
                 ->where(['>=', 'id', $model->from])
                 ->andWhere(['<=', 'id', $model->to])
                 ->all();
-        return $this->render('exam', ['model' => $model, 'questionSave' => $questionSave, 'questions' => $questions, 'disableChoice' => $disableChoice, 'onAdmin' => $onAdmin]);
+
+
+
+
+        // START
+
+        $arrQuestion = [];
+        for ($i = $model->from; $i <= $model->to; $i++) {
+          $arrQuestion[$i] = $i;
+        }
+        $questions = Question::find()->where(['id' => $arrQuestion])->all();
+        $parts = [];
+        $moduleQuestion = [];
+        $questionSuccess = [];
+        foreach ($questions as $question) {
+          if (!empty($question->part) && isset($question->part)) {
+            array_push($parts, $question->part);
+          } else {
+            
+          }
+        }
+        $uniquePart = array_values(array_unique($parts));
+        $questionSave = QuestionSave::LoadQuestionSave($model->id, min($uniquePart));
+
+        foreach (array_rand($uniquePart, $model->total_module) as $keyModule) { // loop เพื่อ random module ของ question_set
+          array_push($moduleQuestion, $uniquePart[$keyModule]);
+        }
+
+        $totalModule = array_rand(array_values(array_unique($parts)), $model->total_module);
+        if ($questionSave->module_part === '' || $questionSave->module_part === null) {
+          $questionSave->module_part = json_encode($moduleQuestion);
+          $questionSuccess = $this->setRandomQuestionForExam($questions, $moduleQuestion);
+          $questionSave->save();
+        } else {
+          $questionSave->module_part = json_decode($questionSave->module_part);
+          $questionSuccess = $this->setRandomQuestionForExam($questions, $questionSave->module_part);
+        }
+
+        $questionSaveChoices = json_decode($questionSave->answer);
+        $doPart = 0;
+        if (isset($questionSaveChoices)) {
+
+          foreach ($questionSaveChoices as $answer) {
+            $doPart = $answer->part;
+          }
+        } else {
+          
+        }
+
+        // END
+
+
+        return $this->render('exam', ['model' => $model, 'questionSave' => $questionSave, 'questions' => $questionSuccess, 'disableChoice' => $disableChoice, 'isAdmin' => $isAdmin]);
       } else {
-//        return $this->redirect(['site/index']);
+        return $this->redirect(['site/index']);
       }
     } else {
       throw new NotFoundHttpException('The question set you have requested is not available');

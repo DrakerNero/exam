@@ -8,6 +8,7 @@ class LoadQuestionSave extends \yii\bootstrap\Widget {
 
   public $status;
   public $questionSave;
+  public $isAdmin = false;
 
   public function run() {
 
@@ -38,7 +39,7 @@ class LoadQuestionSave extends \yii\bootstrap\Widget {
         $i++;
       }
     }
-    if ($this->questionSave->status == 3) {
+    if ($this->questionSave->status == 3 || $this->isAdmin == true) {
       $jsLoadAns = "
                     ShowAnswer();
                     ";
