@@ -248,10 +248,10 @@ function handleOnSumScore() {
     from++;
   }
   var resute = (sumPoint * 100) / totalPoint;
-//  alert(sumPoint+' : '+ totalPoint);
+//  alert(sumPoint + ' : ' + totalPoint);
   $('.progress').remove();
   (parseInt(resute) >= percentPass) ? handlePercentPass() : null;
-
+  console.log('resute.toFixed(0): ' + resute.toFixed(0));
   return resute.toFixed(0);
 //  console.log(from, to);
 }
@@ -260,6 +260,7 @@ function handleOnShowAnswer() {
   $('[id*="render-question-no-"]').show();
   $('[id*=showAnswer]').show();
   $('[id*=showAnswer]').css({'background': '#006100', 'color': '#fff'});
+  console.log('handleOnSumScore: ', handleOnSumScore());
   return handleOnSumScore();
 }
 
@@ -368,8 +369,8 @@ function ShowAnswer() {
 
   }
   if (multiChoice) {
-    var agree = handleOnShowAnswer() + '%';
-
+    var agree = handleOnShowAnswer();
+    
   } else {
 //    title = ShowTitleAnswer(percent);
 
@@ -384,7 +385,7 @@ function ShowAnswer() {
   }
 
   if (questionType !== '2') {
-    $('.load-score').html(agree + "<br>");
+    $('.load-score').html(agree + "% <br>");
   } else {
     $('.load-score').html("## <br>");
   }
@@ -419,7 +420,7 @@ function ShowAnswer() {
   $("#carousel-example-generic input").prop('disabled', true);
 
   (parseInt(handleOnShowAnswer()) >= percentPass) ? handlePercentPass() : null;
-//  alert(handleOnShowAnswer() + ' : ' + percentPass);
+  console.log('hello 741: ' + handleOnShowAnswer() + ' : ' + percentPass + ' : ' + agree);
   return agree;
 //  }
 }
