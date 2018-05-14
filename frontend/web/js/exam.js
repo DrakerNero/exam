@@ -238,7 +238,7 @@ function handleOnSumScore() {
         } else {
 
         }
-        console.log(totalPoint, ' : ', parseInt(point), ' : ', '#answer-point-' + from + '-' + i);
+//        console.log(totalPoint, ' : ', parseInt(point), ' : ', '#answer-point-' + from + '-' + i);
         if (selectChoice.includes(i)) {
           sumPoint = sumPoint + parseInt(point);
         }
@@ -251,7 +251,7 @@ function handleOnSumScore() {
 //  alert(sumPoint + ' : ' + totalPoint);
   $('.progress').remove();
   (parseInt(resute) >= percentPass) ? handlePercentPass() : null;
-  console.log('resute.toFixed(0): ' + resute.toFixed(0));
+//  console.log('resute.toFixed(0): ' + resute.toFixed(0));
   return resute.toFixed(0);
 //  console.log(from, to);
 }
@@ -260,7 +260,7 @@ function handleOnShowAnswer() {
   $('[id*="render-question-no-"]').show();
   $('[id*=showAnswer]').show();
   $('[id*=showAnswer]').css({'background': '#006100', 'color': '#fff'});
-  console.log('handleOnSumScore: ', handleOnSumScore());
+//  console.log('handleOnSumScore: ', handleOnSumScore());
   return handleOnSumScore();
 }
 
@@ -420,7 +420,7 @@ function ShowAnswer() {
   $("#carousel-example-generic input").prop('disabled', true);
 
   (parseInt(handleOnShowAnswer()) >= percentPass) ? handlePercentPass() : null;
-  console.log('hello 741: ' + handleOnShowAnswer() + ' : ' + percentPass + ' : ' + agree);
+//  console.log('hello 741: ' + handleOnShowAnswer() + ' : ' + percentPass + ' : ' + agree);
   return agree;
 //  }
 }
