@@ -34,9 +34,8 @@ if ($countPage >= 2) {
 
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false"     >
-  <div class="modal-dialog col-md-12" role="document" style="color: #d53c31; font-weight: bold; text-align: center; font-size: 20px; width: 750px; left: 50%;
-       transform: translate(-50%, 20%);">
+<div class="modal fade title-modal-exam" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false"     >
+  <div class="modal-dialog col-md-12 date-modal" role="document" style="">
     <div class="modal-content" style="border-radius: 3px;">
       <div class="modal-body" style="padding: 30px;">
         CU Interactive Medical Cases are designed for 6th year medical student <br />

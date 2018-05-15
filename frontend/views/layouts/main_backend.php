@@ -53,7 +53,7 @@ AssetBackendLayout::register($this);
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            Chula Interactive Medical Case
+            CU Interactive Medical Cases
           </div>
           <div class="clearfix"></div>
         </footer>

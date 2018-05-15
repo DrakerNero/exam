@@ -43,17 +43,17 @@ class HeaderMenuLeft extends \yii\bootstrap\Widget {
           </li>
           <li>
             <a href="<?= Yii::$app->urlManager->createUrl(['site/exam-success-page']) ?>" >
-              <h6> Success</h6>
+              <h6> Passed</h6>
             </a>                            
           </li>
           <li>
             <a href="<?= Yii::$app->urlManager->createUrl(['site/exam-doing-page']) ?>" >
-              <h6> Doning</h6>
+              <h6> Doing</h6>
             </a>                            
           </li>
           <li>
             <a href="<?= Yii::$app->urlManager->createUrl(['site/exam-not-do-page']) ?>" >
-              <h6> Not do</h6>
+              <h6> Not done</h6>
             </a>                            
           </li>
           </li>
