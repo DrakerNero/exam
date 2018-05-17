@@ -16,7 +16,14 @@
           </div>
         </a>
         <div class="teacher-detail">
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+          CU Interactive Medical Cases are designed for 6th year medical student
+          practicing crucial management in Medicine.
+          You were a doctor at a primary care hospital. Two random cases form 
+          each module would be your patients. You have 10 minutes to take care
+          each of them. Your score will depend on the impact of your decision.
+          Your patients would be defined as safe if you could manage them
+          properly over 80%.
+          Please be honest with yourself and make the most of this simulation.
         </div>
       </div>
     </div>

@@ -549,7 +549,8 @@ input[type="checkbox"]:checked + #inputRadio {
 }
 .teacher-img {
   height: auto;
-  width: 80%;
+  width: 100%;
+  padding-bottom: 10px;
   /*box-shadow: 5px 5px 20px 1px #959595;*/
 }
 .teacher-header {
@@ -946,6 +947,21 @@ span.wrapper-logo>.left>img {
     /*    top: auto;
         left: auto;*/
   }
+  .teacher-detail {
+    font-size: 15px;
+  }
+  .button-teacher {
+    width: 220px;
+  }
+  .teacher-img {
+    width: 100%;
+  }
+  .bg-teacher .circle-teacher {
+    width: 170%;
+    height: 140%;
+    top: -45%;
+    left: -35%;
+  }
   /*  .date-modal{
       width: 100%;
       left: 0;
@@ -1042,9 +1058,15 @@ title-ex-left{
   line-height: 1.5;
 }
 .skin-blue .main-header .logo {
-  background-color: #6b2942 !important;
+  background-color: #1f683a !important;
 }
 
 .skin-blue .main-header .navbar {
-  background-color: #bc697b !important;
+  background-color: #33984a !important;
+}
+.content-wrapper {
+  background: #e8f2d9;
+}
+#thumbnail-exam-module {
+  padding: 5px;
 }
