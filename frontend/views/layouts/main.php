@@ -37,6 +37,11 @@ if (!empty(Yii::$app->user->identity->id)) {
       </span>
     </a>
     <nav class="navbar navbar-static-top" role="navigation">
+      <div class="title-top-nav">
+        <span>
+          CU Interactive Medical Cases
+        </span>
+      </div>
       <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
         <span class="sr-only"><?php echo Yii::t('frontend', 'Toggle navigation') ?></span>
         <span class="icon-bar"></span>

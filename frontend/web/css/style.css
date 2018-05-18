@@ -696,6 +696,8 @@ input[type="checkbox"]:checked + #inputRadio {
   padding: 20px 10px;
   display: flex;
   flex-direction: row;
+  height: 125px;
+  overflow: hidden;
 }
 .flex-select-question>.left {
   flex-grow: 1;
@@ -912,7 +914,9 @@ span.wrapper-logo>.left>img {
   left: 50%;
   transform: translate(-50%, 20%) !important;
 }
-
+#wrapper-module-exam {
+  padding-left: 27px;
+}
 @media (max-width: 990px) {
   .modal-dialog {
     margin: 0 !important
@@ -1069,4 +1073,11 @@ title-ex-left{
 }
 #thumbnail-exam-module {
   padding: 5px;
+}
+.title-top-nav {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  color: #fff;
 }

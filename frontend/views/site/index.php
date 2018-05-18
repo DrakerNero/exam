@@ -26,7 +26,7 @@ if ($countPage >= 2) {
     </nav>
   </div>
 <?php } ?>
-<div class="row">
+<div class="row" id="wrapper-module-exam">
   <?= Subjectwidget::widget(['models' => $models]) ?>
 </div>
 <?php Pjax::end(); ?>
