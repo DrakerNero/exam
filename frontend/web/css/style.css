@@ -658,7 +658,10 @@ input[type="checkbox"]:checked + #inputRadio {
   opacity: 1;
 }
 .login-page {
-  background: #c4697b !important;
+  /*background: #c4697b !important;*/
+  background: url('../uploads/static/bg-login.jpg');
+  background-repeat: no-repeat;
+  background-size: auto 100%;
 }
 .wrapper-login-box {
   padding: 2px;
@@ -666,11 +669,11 @@ input[type="checkbox"]:checked + #inputRadio {
   border: 1px solid #080307;
 }
 .form-group.has-success label {
-  color: #712941 !important;
+  color: #2e9345 !important;
   font-size: 12px !important;
 }
 .login-box-footer>button {
-  background: #712941 !important;
+  background: #1f683a !important;
 }
 .main-sidebar::-webkit-scrollbar-track {
   background-color: #ebebeb !important;
@@ -1080,4 +1083,10 @@ title-ex-left{
   align-items: center;
   padding-left: 20px;
   color: #fff;
+}
+
+@media(min-width: 1840px) {
+  .login-page {
+    background-size: 100% auto;
+  }
 }
