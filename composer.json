@@ -53,8 +53,8 @@
     "bower-asset/html5shiv": "^3.0",
     "bower-asset/jquery-slimscroll": "^1.3",
     "bower-asset/flot": "^0.8",
-    "kartik-v/yii2-grid": "*",
-    "kartik-v/yii2-mpdf": "*"
+    "kartik-v/yii2-mpdf": "*",
+    "2amigos/yii2-ckeditor-widget": "~1.0"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "^2.0.0",

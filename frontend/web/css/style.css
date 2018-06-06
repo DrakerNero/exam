@@ -338,6 +338,7 @@ input[type="checkbox"]:checked + #inputRadio {
 }
 #backgroundDoExam{
   min-height: 500px;
+  padding-top: 60px;
   /*    padding: 50px 0 0 20px;*/
 }
 .sidebar-toggle{
@@ -919,6 +920,7 @@ span.wrapper-logo>.left>img {
 }
 #wrapper-module-exam {
   padding-left: 27px;
+  padding-top: 50px;
 }
 @media (max-width: 990px) {
   .modal-dialog {

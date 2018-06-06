@@ -50,6 +50,7 @@ $modulePart = '';
 $checkModulePart = '';
 $conutQuestionWithModule = 1;
 foreach ($questions as $question) {
+  $marginTop = '';
   $i++;
   $arrQuestionPart[$question->part] = $i;
 //  $modulePart = (!empty($modulePart) && isset($modulePart) && $modulePart)
@@ -57,6 +58,7 @@ foreach ($questions as $question) {
     $modulePart = 1;
     $checkModulePart = $question->part;
   } else if ($checkModulePart != $question->part) {
+    $marginTop = 'margin-top: 100px !important;';
     $modulePart = $modulePart + 1;
     $checkModulePart = $question->part;
     $conutQuestionWithModule = 1;
@@ -71,7 +73,8 @@ foreach ($questions as $question) {
         'countQuestion' => $i,
         'questionNumber' => $modulePart . '.' . $conutQuestionWithModule,
         'modelQuestion' => $model,
-        'isAdmin' => $isAdmin
+        'isAdmin' => $isAdmin,
+        'marginTop' => $marginTop
     ]);
   } else {
     

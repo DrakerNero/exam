@@ -18,15 +18,17 @@ class LoadViewQuestion extends \yii\bootstrap\Widget {
   public $modelQuestion;
   public $questionNumber;
   public $isAdmin = false;
+  public $marginTop;
 
   public function run() {
     $name = $this->countDiv;
     $idPart = (!empty($this->question->part) || isset($this->question->part)) ? 'frame-question-section-' . $this->question->part : '';
     $multiChoice = (!empty($this->question->max_select_choice) && isset($this->question->max_select_choice)) ? true : false;
     ?>
-    <div class="frame-exam " id="<?= $idPart ?>" >
+    <?= $this->marginTop ?>
+    <div class="frame-exam " id="<?= $idPart ?>"  >
       <div  class="col-md-10" disabled>
-        <div id="render-question-no-<?= $this->countQuestion ?>">
+        <div id="render-question-no-<?= $this->countQuestion ?>" style="<?= $this->marginTop ?>">
           <div class="frameExam" id="scroll_<?= $this->countDiv; ?>">
             <div class="box box-solid">
               <div class="box-header with-border" id="frameHeader">

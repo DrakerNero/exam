@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use frontend\widgets\QuestionPNG;
+use dosamigos\ckeditor\CKEditor;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Question */
@@ -21,9 +22,19 @@ $maxSelectChoice = (!empty($model->max_select_choice) && isset($model->max_selec
 
     <?= $form->field($model, 'part')->textInput(['placeholder' => 'Part'])->label('Part') ?>
 
-    <?= $form->field($model, 'question_topic')->textarea(['rows' => 8])->label('Topic') ?>
+    <?=
+    $form->field($model, 'question_topic')->widget(CKEditor::className(), [
+        'options' => ['rows' => 4],
+        'preset' => 'standard'
+    ])->label('Topic *')
+    ?>
 
-    <?= $form->field($model, 'question')->textarea(['rows' => 8])->label('Question') ?>
+    <?=
+    $form->field($model, 'question')->widget(CKEditor::className(), [
+        'options' => ['rows' => 4],
+        'preset' => 'standard'
+    ])->label('Question *')
+    ?>
 
     <?php
     echo ($model->png == 1) ? QuestionPNG::widget(['model' => $model]) : '';
