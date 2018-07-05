@@ -756,6 +756,10 @@ span.wrapper-logo>.left>img {
 .frame-exam  {
   margin-top: 0 !important;
 }
+img.mfp-img {
+  width: 100vh !important;
+  height: 100% !important;
+}
 
 @media (max-width:991px){
   .exam-title{

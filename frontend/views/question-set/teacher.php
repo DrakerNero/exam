@@ -15,15 +15,10 @@
             <!--<i class="fa fa-check"></i>-->
           </div>
         </a>
-        <div class="teacher-detail">
-          CU Interactive Medical Cases are designed for 6th year medical student
-          practicing crucial management in Medicine.
-          You were a doctor at a primary care hospital. Two random cases form 
-          each module would be your patients. You have 10 minutes to take care
-          each of them. Your score will depend on the impact of your decision.
-          Your patients would be defined as safe if you could manage them
-          properly over 80%.
-          Please be honest with yourself and make the most of this simulation.
+        <div class="teacher-detail" style="text-align: center; font-size: 20px; margin-top: 20px;">
+          คะแนนของผู้ป่วยจำลองนี้ไม่มีผลต่อการตัดเกรด <br />
+          สำคัญคือคุณหมอต้องถามตัวเองว่า รู้หรือไม่รู้ จะออกไปรักษาผู้คนได้จริงหรือไม่ <br />
+          แค่ลอกคำตอบตามกันให้ผ่านอาจทำให้คุณหมอเสียเวลาเปล่า <br />
         </div>
       </div>
     </div>

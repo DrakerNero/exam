@@ -54,6 +54,7 @@ class LoadViewQuestion extends \yii\bootstrap\Widget {
               <div class="box-body">
                 <div class="col-sm-12">
                   <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" >
+                    <div class="wrapper-not-choice" id="wrapper-question-section-<?= $this->countQuestion ?>"></div>
 
                     <?php
                     if (is_array($this->question) || is_object($this->question)) {
@@ -105,7 +106,7 @@ class LoadViewQuestion extends \yii\bootstrap\Widget {
                 }
                 ?>
 
-                <div class="wrapper-not-choice" id="wrapper-question-section-<?= $this->countQuestion ?>"></div>
+                <!--<div class="wrapper-not-choice" id="wrapper-question-section-<?= $this->countQuestion ?>"></div>-->
 
               </div><!-- /.box-body -->
             </div><!-- /.box -->

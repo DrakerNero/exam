@@ -20,12 +20,14 @@ class FrontendAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
+        'magnific/magnific-popup.css',
         'css/style.css',
         'css/style_2.css',
     ];
     public $js = [
         'js/app.js',
         'js/exam.js',
+        'magnific/jquery.magnific-popup.min.js',
 //        'js/jquery-2.1.3.js',
 //        'js/jquery-3.2.1.min.js',
        

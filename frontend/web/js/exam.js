@@ -370,7 +370,7 @@ function ShowAnswer() {
   }
   if (multiChoice) {
     var agree = handleOnShowAnswer();
-    
+
   } else {
 //    title = ShowTitleAnswer(percent);
 
@@ -656,5 +656,9 @@ function handleMissionTree() {
 $(document).ready(function () {
   renderPreSentQuestion();
   renderProgressBar();
+  $('.popup-link').magnificPopup({
+    type: 'image'
+            // other options
+  });
 });
 
