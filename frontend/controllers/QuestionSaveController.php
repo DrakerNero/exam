@@ -145,7 +145,7 @@ class QuestionSaveController extends Controller {
   public function actionSaveStateDone() {
     $model = $this->findModel($_POST['questionSaveId']);
     $model->status = 3;
-    $model->score = intval($_POST['score']);
+    $model->score = $_POST['score'];
     $model->elapse_time += time() - $model->created_at;
 
     if ($model->save()) {
@@ -224,11 +224,12 @@ class QuestionSaveController extends Controller {
     $userId = $userId . '';
     $model = QuestionSave::find()->where([
                 'id' => $questionSaveId,
-                'user_id' => $userId,
-                'question_set_id' => $questionSetId,
+//                'user_id' => $userId,
+//                'question_set_id' => $questionSetId,
 //                'status' => 3
             ])->one();
     $model->status = 4;
+    $model->mode = '';
     $model->save();
     if ($model->save()) {
       $newModel = new QuestionSave();
@@ -237,6 +238,7 @@ class QuestionSaveController extends Controller {
       $newModel->elapse_time = $model->questionSet->total_time;
       $newModel->multi_select_choice = $model->multi_select_choice;
       $newModel->present_question = 1;
+      $newModel->mode = '';
       $newModel->status = 1;
       if ($newModel->save()) {
         echo '1';

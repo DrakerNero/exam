@@ -35,15 +35,15 @@ class QuestionSaveBase extends \yii\db\ActiveRecord {
    */
   public function rules() {
     return [
-        [['question_set_id', 'elapse_time', 'status',  'created_at', 'updated_at', 'present_question'], 'integer'],
-        [['answer', 'module_part', 'score'], 'string'],
-        [['user_id', 'mode'], 'string', 'max' => 255],
+        [['question_set_id', 'elapse_time', 'status', 'created_at', 'updated_at', 'present_question', 'multi_select_choice', 'score'], 'integer'],
+        [['answer', 'module_part', 'user_id', 'mode'], 'string'],
+//        [['user_id', 'mode'], 'string', 'max' => 255],
     ];
   }
 
   /**
    * @inheritdoc
-   */
+   */ 
   public function attributeLabels() {
     return [
         'id' => 'ID',
@@ -58,6 +58,7 @@ class QuestionSaveBase extends \yii\db\ActiveRecord {
         'status' => 'Status',
         'created_at' => 'Created At',
         'updated_at' => 'Updated At',
+        'multi_select_choice' => 'multi_select_choice',
     ];
   }
 

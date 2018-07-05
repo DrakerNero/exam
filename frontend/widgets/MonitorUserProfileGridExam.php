@@ -37,7 +37,7 @@ class MonitorUserProfileGridExam extends \yii\bootstrap\Widget {
                 'attribute' => 'status',
                 'filter' => MainHelper::arrayQuestionSaveStatus(),
                 'value' => function($model) {
-                  return MainHelper::arrayQuestionSaveStatus()[$model->status];
+                  return MainHelper::questionSaveStatus($model->status, $model->score);
                 },
                 'width' => '200px',
             ],

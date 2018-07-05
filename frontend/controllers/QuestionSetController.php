@@ -270,9 +270,6 @@ class QuestionSetController extends Controller {
                 ->andWhere(['<=', 'id', $model->to])
                 ->all();
 
-
-
-
         // START
 
         $arrQuestion = [];
@@ -291,7 +288,7 @@ class QuestionSetController extends Controller {
           }
         }
         $uniquePart = array_values(array_unique($parts));
-        $questionSave = QuestionSave::LoadQuestionSave($model->id, min($uniquePart));
+//        $questionSave = QuestionSave::LoadQuestionSave($model->id, min($uniquePart));
 
         foreach (array_rand($uniquePart, $model->total_module) as $keyModule) { // loop เพื่อ random module ของ question_set
           array_push($moduleQuestion, $uniquePart[$keyModule]);

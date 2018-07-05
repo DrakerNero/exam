@@ -25,7 +25,6 @@ class LoadViewQuestion extends \yii\bootstrap\Widget {
     $idPart = (!empty($this->question->part) || isset($this->question->part)) ? 'frame-question-section-' . $this->question->part : '';
     $multiChoice = (!empty($this->question->max_select_choice) && isset($this->question->max_select_choice)) ? true : false;
     ?>
-    <?= $this->marginTop ?>
     <div class="frame-exam " id="<?= $idPart ?>"  >
       <div  class="col-md-10" disabled>
         <div id="render-question-no-<?= $this->countQuestion ?>" style="<?= $this->marginTop ?>">
@@ -47,7 +46,7 @@ class LoadViewQuestion extends \yii\bootstrap\Widget {
                   ?>
 
                   <h3 class="box-title">
-                    <?= (!empty($this->question->question_topic) && isset($this->question->question_topic) && $this->question->question_topic != '') ? nl2br($this->question->question_topic) . '<br />' : '' ?>
+                    <?= (!empty($this->question->question_topic) && isset($this->question->question_topic) && $this->question->question_topic != '') ? nl2br($this->question->question_topic) . '<br /><br />' : '' ?>
                     <?= $this->questionNumber . '. ' ?><?= nl2br($this->question->question) ?>
                   </h3>
                 </div>
