@@ -47,7 +47,7 @@ class LoadViewQuestion extends \yii\bootstrap\Widget {
 
                   <h3 class="box-title">
                     <?= (!empty($this->question->question_topic) && isset($this->question->question_topic) && $this->question->question_topic != '') ? nl2br($this->question->question_topic) . '<br /><br />' : '' ?>
-                    <?= $this->questionNumber . '. ' ?><?= nl2br($this->question->question) ?>
+                    <?= $this->questionNumber . '&nbsp;&nbsp; ' ?><?= nl2br($this->question->question) ?>
                   </h3>
                 </div>
               </div><!-- /.box-header -->
