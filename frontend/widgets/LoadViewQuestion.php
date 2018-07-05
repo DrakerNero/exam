@@ -45,7 +45,7 @@ class LoadViewQuestion extends \yii\bootstrap\Widget {
                   echo ($this->question->png == 1) ? QuestionPNG::widget(['model' => $this->question]) : '';
                   ?>
 
-                  <h3 class="box-title">
+                  <h3 class="box-title" id="not-p">
                     <?= (!empty($this->question->question_topic) && isset($this->question->question_topic) && $this->question->question_topic != '') ? nl2br($this->question->question_topic) . '<br /><br />' : '' ?>
                     <?= $this->questionNumber . '&nbsp;&nbsp; ' ?><?= nl2br($this->question->question) ?>
                   </h3>

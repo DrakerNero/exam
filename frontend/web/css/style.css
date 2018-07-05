@@ -753,6 +753,9 @@ span.wrapper-logo>.left>img {
 .carousel-indicators>li {
   border-color: #000 !important;
 }
+#not-p p {
+  display: inline-block !important;
+}
 .frame-exam  {
   margin-top: 0 !important;
 }
