@@ -95,6 +95,18 @@ class SiteController extends Controller {
       }
     }
 
+    if (!empty(Yii::$app->user->identity) && isset(Yii::$app->user->identity) && Yii::$app->user->identity != null) {
+      $user = User::find()->where(['id' => Yii::$app->user->identity->id])->one();
+      if ($user->student_id == '' || $user->student_id == null) {
+        $user->student_id = Yii::$app->user->identity->username;
+        $user->save();
+      } else {
+        
+      }
+    } else {
+      
+    }
+
     return $this->render('index', [
                 'models' => $models,
                 'countPage' => $countPage,
@@ -145,8 +157,12 @@ class SiteController extends Controller {
 //    $questionCount = Question::find()->count();
     $questionSaveCount = QuestionSave::find()->count();
     $arrAcademics = [];
-    foreach ($usersActives as $usersActives) {
-      array_push($arrAcademics, $usersActives->start_study);
+    $countUserActive = 0;
+    foreach ($usersActives as $usersActive) {
+      array_push($arrAcademics, $usersActive->start_study);
+      if (!empty($usersActive->rotation) && isset($usersActive->rotation) && $usersActive->rotation != '' && $usersActive->rotation != null) {
+        $countUserActive++;
+      }
     }
 
     $resultAcademics = array_unique($arrAcademics);
@@ -169,6 +185,7 @@ class SiteController extends Controller {
                 'academic' => $academic,
                 'rotation' => $rotation,
                 'modelUsersSummit' => $modelUsersSummit,
+                'countUserActive' => $countUserActive,
     ]);
   }
 

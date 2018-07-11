@@ -90,5 +90,8 @@ class User extends \yii\db\ActiveRecord {
     return $this->hasMany(QuestionSave::className(), ['user_id' => 'id'])
                     ->where(['>=', 'score', '80']);
   }
+  public function getMyRotation() {
+    return $this->hasOne(Rotation::className(), ['id' => 'rotation']);
+  }
 
 }

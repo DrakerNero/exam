@@ -345,4 +345,23 @@ class QuestionSetController extends Controller {
 ////    $models = QuestionSet::find()->where(['id' => $id])->all();
 //    
 //  }
+
+  public function actionExam2($id) {
+    $questionSet = QuestionSet::find()->where(['id' => $id])->one();
+
+    if (!empty($questionSet) && isset($questionSet) && $questionSet != null) {
+      if ($questionSet->mode == 2) {
+        
+        //
+        return $this->render(['exam2']);
+      } else if ($questionSet->mode == 1) {
+        return $this->redirect(['do-exam', ['questionSetId' => $id]]);
+      } else {
+        return $this->redirect(['site/index']);
+      }
+    } else {
+      return $this->redirect(['site/index']);
+    }
+  }
+
 }

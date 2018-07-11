@@ -36,7 +36,7 @@ class QuestionSetBase extends \yii\db\ActiveRecord {
     return [
 //        [['question_type'], 'required'],
         [['explanation'], 'string'],
-        [['from', 'to', 'total_time', 'total_score', 'select_question_type', 'total_module', 'multi_select_choice', 'status'], 'integer'],
+        [['from', 'to', 'total_time', 'total_score', 'select_question_type', 'total_module', 'multi_select_choice', 'status','mode'], 'integer'],
         [['created_at', 'updated_at'], 'safe'],
         [['subject_id'], 'string', 'max' => 15],
         [['name'], 'string', 'max' => 150],
@@ -64,6 +64,7 @@ class QuestionSetBase extends \yii\db\ActiveRecord {
         'status' => 'Status',
         'created' => 'Created',
         'updated' => 'Updated',
+        'mode' => 'Mode',
     ];
   }
 

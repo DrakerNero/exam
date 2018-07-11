@@ -6,6 +6,7 @@ use Yii;
 use kartik\grid\GridView;
 use frontend\helpers\MainHelper;
 use yii\helpers\Url;
+use frontend\models\Rotation;
 
 class QuestionSaveMonitorGridView extends \yii\bootstrap\Widget {
 
@@ -14,6 +15,11 @@ class QuestionSaveMonitorGridView extends \yii\bootstrap\Widget {
   public $examCount;
 
   public function run() {
+    $arrRotation = [0 => ''];
+    $rotations = Rotation::find()->all();
+    foreach ($rotations as $rotation) {
+      $arrRotation[$rotation->id] = $rotation->name;
+    }
     echo GridView::widget([
         'dataProvider' => $this->dataProvider,
         'filterModel' => $this->searchModel,
@@ -56,7 +62,10 @@ class QuestionSaveMonitorGridView extends \yii\bootstrap\Widget {
                 'value' => 'rotation',
                 'width' => '50px',
                 'label' => 'Rotation',
-                'filter' => false,
+                'filter' => $arrRotation,
+                'value' => function($model) {
+                  return (!empty($model->myRotation) && isset($model->myRotation) && $model->myRotation->name != null && $model->myRotation->name != '' ) ? $model->myRotation->name : '-';
+                },
                 'contentOptions' => ['style' => 'text-align: center;']
             ],
             [

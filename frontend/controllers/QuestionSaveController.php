@@ -198,10 +198,13 @@ class QuestionSaveController extends Controller {
               ->all();
       $genGraphQuestion = QuestionHistory::Gen_Graph_Question($models);
       $genCounrNumber = QuestionHistory::Gen_Counr_Number($models);
+      $countExamSuccess = QuestionSave::find()->where(['user_id' => Yii::$app->user->identity->id])->andWhere(['>=', 'score', '80'])->count();
+
       return $this->render('history', [
                   'models' => $models,
                   'genGraphQuestion' => $genGraphQuestion,
-                  'genCounrNumber' => $genCounrNumber
+                  'genCounrNumber' => $genCounrNumber,
+                  'countExamSuccess' => $countExamSuccess
       ]);
     } else {
       throw new NotFoundHttpException('คุณยังไม่ได้เข้าสู่ระบบ กรุณาเข้าส่ระบบ.');

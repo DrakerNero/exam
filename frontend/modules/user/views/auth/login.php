@@ -44,7 +44,7 @@ $this->params['body-class'] = 'login-page';
 
   <div class="login-page-link text-center">
     <!--<a href="<?= Url::to(['auth/signup']) ?>">Sign Up</a> |-->
-    <a style="color: #ffffff; font-weight: bold;" href="https://userportal.it.chula.ac.th/Login.aspx">>> Forgot password <<</a>
+    <a style="color: #1f683a; font-weight: bold;" href="https://userportal.it.chula.ac.th/Login.aspx">>> Forgot password <<</a>
   </div>
 </div>
 

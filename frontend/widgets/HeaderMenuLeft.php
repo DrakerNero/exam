@@ -7,18 +7,43 @@ use yii\widgets\Pjax;
 use yii\helpers\Html;
 use frontend\models\Subject;
 use frontend\models\QuestionSet;
+use frontend\models\QuestionSave;
 
 class HeaderMenuLeft extends \yii\bootstrap\Widget {
 
   public $countQuestion;
 
+  public function renderCountMenu($data) {
+    return (!empty($data) && isset($data) && $data != null) ? '(' . $data . ')' : '';
+  }
+
   public function run() {
-    $subjects = Subject::find()->where(['status' => 1])->all();
-    $exam_arr = [];
-    foreach ($subjects as $subject) {
-      if (!in_array($subject->exam_class, $exam_arr)) {
-        $exam_arr[] = $subject->exam_class;
+    $user = Yii::$app->user->identity;
+    $countQuestionSuccess = 0;
+    $arrQuestionSuccess = [];
+    $arrQuestionDoing = [];
+    $successUnique = [];
+    $questionDoingUnique = [];
+    $questionNotDoing = 0;
+    $countQuestionAll = [];
+    $countQuestionPass = [];
+    $countQuestionNots = [];
+    if (!empty($user) && isset($user) && $user != null) {
+      $countQuestionAll = QuestionSet::find()->where(['status' => 1])->count();
+      $countQuestionPass = QuestionSave::find()->where(['user_id' => $user->id])->andWhere(['>=', 'score', '80'])->all();
+      $countQuestionNots = QuestionSave::find()->where(['user_id' => $user->id])->andWhere(['<', 'score', '80'])->all();
+      foreach ($countQuestionPass as $countQuestion) {
+        array_push($arrQuestionSuccess, $countQuestion->question_set_id);
+        $countQuestionSuccess++;
       }
+      foreach ($countQuestionNots as $countQuestionNot) {
+        array_push($arrQuestionDoing, $countQuestionNot->question_set_id);
+      }
+      $successUnique = array_unique($arrQuestionSuccess);
+      $questionDoingUnique = array_unique($arrQuestionDoing);
+      $questionNotDoing = $countQuestionAll - (sizeof(array_diff($questionDoingUnique, $successUnique)) + sizeof($successUnique));
+    } else {
+      
     }
     ?>     
 
@@ -38,22 +63,22 @@ class HeaderMenuLeft extends \yii\bootstrap\Widget {
         <ul class="sidebar-menu">
           <li>
             <a href="<?= Yii::$app->urlManager->createUrl(['site/index', 'subject_id' => 'all']) ?>" >
-              <h6> All</h6>
+              <h6> All<?= $this->renderCountMenu($countQuestionAll) ?></h6>
             </a>                            
           </li>
           <li>
             <a href="<?= Yii::$app->urlManager->createUrl(['site/exam-success-page']) ?>" >
-              <h6> Passed</h6>
+              <h6> Passed<?= $this->renderCountMenu(sizeof($successUnique)) ?></h6>
             </a>                            
           </li>
           <li>
             <a href="<?= Yii::$app->urlManager->createUrl(['site/exam-doing-page']) ?>" >
-              <h6> Doing</h6>
+              <h6> Doing <?= $this->renderCountMenu(sizeof(array_diff($questionDoingUnique, $successUnique))) ?></h6>
             </a>                            
           </li>
           <li>
             <a href="<?= Yii::$app->urlManager->createUrl(['site/exam-not-do-page']) ?>" >
-              <h6> Not done</h6>
+              <h6> Not Doing <?= $this->renderCountMenu($questionNotDoing) ?></h6>
             </a>                            
           </li>
           </li>

@@ -27,6 +27,19 @@ class SideBarMenuList extends \yii\bootstrap\Widget {
               <!--<li><a href="#">Excel Upload</a></li>-->
             </ul>
           </li>
+          <li><a><i class="fa fa-graduation-cap"></i> Students <span class="fa fa-chevron-down"></span></a>
+            <ul class="nav child_menu">
+              <li><a href="<?= Url::to(['user-main/index']) ?>">All</a></li>
+              <li><a href="<?= Url::to(['question/create']) ?>">Active</a></li>
+              <li><a href="<?= Url::to(['profile-student/index']) ?>">Profile</a></li>
+              <!--<li><a href="#">Excel Upload</a></li>-->
+            </ul>
+          </li>
+          <li><a><i class="fa fa-cog"></i> Option <span class="fa fa-chevron-down"></span></a>
+            <ul class="nav child_menu">
+              <li><a href="<?= Url::to(['rotation/index']) ?>">Rotation</a></li>
+            </ul>
+          </li>
           </li>
         </ul>
       </div>

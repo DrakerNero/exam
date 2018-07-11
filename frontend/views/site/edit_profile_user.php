@@ -2,9 +2,15 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use frontend\models\Rotation;
 use yii\helpers\Url;
 
 $this->title = 'Edit Profile';
+$arrRotation = [0 => ''];
+$rotations = Rotation::find()->all();
+foreach ($rotations as $rotation) {
+  $arrRotation[$rotation->id] = $rotation->name;
+}
 ?>
 
 <?php $form = ActiveForm::begin(); ?>
@@ -67,7 +73,7 @@ $this->title = 'Edit Profile';
         <div class="form-group">
           <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Rotation</label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <?= $form->field($model, 'rotation')->dropDownList([1 => '1 - (1 ม.ค. - 4 เม.ย.)', 2 => '2 - (1 ม.ค. - 4 เม.ย.)', 3 => '3 - (1 ม.ค. - 4 เม.ย.)'])->label(false) ?>
+            <?= $form->field($model, 'rotation')->dropDownList($arrRotation)->label(false) ?>
           </div>
         </div>
 

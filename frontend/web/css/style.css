@@ -1,6 +1,9 @@
 body {
   font-size: 15px;
 }
+body.skin-blue {
+  background: #e8f2d9;
+}
 .article-item {
   margin-bottom: 15px;
 }
@@ -163,8 +166,11 @@ a.desc:after {
 .frameExam {
 
 }
+.main-sidebar::-webkit-scrollbar-track {
+  display: none;
+}
 .wrapper, .main-sidebar {
-  background: #ebebeb !important;
+  background: #fff !important;
 }
 .frameExam #frameHeader {
 
@@ -658,11 +664,12 @@ input[type="checkbox"]:checked + #inputRadio {
 .button-teacher:active {
   opacity: 1;
 }
-.login-page {
+body.login-page.skin-blue {
   /*background: #c4697b !important;*/
-  background: url('../uploads/static/bg-login.jpg');
-  background-repeat: no-repeat;
-  background-size: auto 100%;
+  background: url('../uploads/static/bg-login.jpg') ;
+  background-repeat: no-repeat ;
+  background-size: auto 140% ;
+  background-position: center;
 }
 .wrapper-login-box {
   padding: 2px;

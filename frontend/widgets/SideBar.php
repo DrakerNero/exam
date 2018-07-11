@@ -29,9 +29,7 @@ class SideBar extends \yii\bootstrap\Widget {
           </div>
         </div>
         <!-- /menu profile quick info -->
-
         <br />
-
         <!-- sidebar menu -->
         <?= SideBarMenuList::widget() ?>
       </div>

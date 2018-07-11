@@ -82,7 +82,7 @@ class UserSearch extends User {
     $arrWhere = ['status' => 1];
     ($academic != null) ? $arrWhere['start_study'] = $academic : null;
     ($rotation != null) ? $arrWhere['rotation'] = $rotation : null;
-    $query = User::find()->where($arrWhere);
+    $query = User::find()->where([])->andWhere(['!=', 'start_study', ''])->andWhere(['!=', 'rotation', '']);
 
     $dataProvider = new ActiveDataProvider([
         'query' => $query,

@@ -17,8 +17,16 @@ $model->select_question_type = 1;
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'explanation')->textarea(['rows' => 4]) ?>
-    <?= $form->field($model, 'subject_id')->textInput(['type' => 'number']) ?>
 
+
+
+    <div class="row">
+      <div class="col-md-6 col-sm-9 col-xs-12">
+        <?= $form->field($model, 'subject_id')->textInput(['type' => 'number']) ?>
+        <?= $form->field($model, 'mode')->dropDownList([1 => 'ชุดข้อสอบทั่วไป', 2 => 'ชุดข้อที่มีการกระโดด']) ?>
+      </div>
+    </div>
+    <br />
     <?php
 //    $form->field($model, 'select_question_type')->radioList(
 //            [
