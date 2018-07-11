@@ -15,7 +15,7 @@ class QuestionSaveMonitorGridView extends \yii\bootstrap\Widget {
   public $examCount;
 
   public function run() {
-    $arrRotation = [0 => ''];
+    $arrRotation = [];
     $rotations = Rotation::find()->all();
     foreach ($rotations as $rotation) {
       $arrRotation[$rotation->id] = $rotation->name;
