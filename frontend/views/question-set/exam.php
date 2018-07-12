@@ -1,7 +1,7 @@
 <?php
 
 use frontend\widgets\LoadViewQuestion;
-use frontend\widgets\ExamMenuLeft;
+//use frontend\widgets\ExamMenuLeft;
 use frontend\widgets\ExamMenuLeftProgressBar;
 use frontend\widgets\HeaderMenuRight;
 use frontend\widgets\BottomMenuCenter;
@@ -178,6 +178,3 @@ if ($disableChoice) {
 
 //print_r($arrQuestionPart);
 ?>
-<div class="wrapper-restart-temporary">
-  <button id="btn-restart-temporary" >Restart</button>
-</div>

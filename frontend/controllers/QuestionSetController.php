@@ -12,6 +12,7 @@ use yii\filters\VerbFilter;
 use frontend\models\Question;
 use frontend\models\QuestionSearch;
 use frontend\models\QuestionSave;
+use frontend\models\QuestionMaster;
 
 /**
  * QuestionSetController implements the CRUD actions for QuestionSet model.
@@ -37,6 +38,7 @@ class QuestionSetController extends Controller {
                         'monitor-user-do-exam',
                         'teacher',
                         'print-file-exam',
+                        'exam2',
                     ],
                     'allow' => true,
                     'roles' => ['@']
@@ -346,15 +348,63 @@ class QuestionSetController extends Controller {
 //    
 //  }
 
-  public function actionExam2($id) {
-    $questionSet = QuestionSet::find()->where(['id' => $id])->one();
+  public function getQuestionWithPart($part, $from, $to) {
+    $arr = [];
+    $arrName = [];
+    $models = Question::find()
+            ->where(['part' => $part])
+            ->andWhere(['>=', 'id', $from])
+            ->andWhere(['<=', 'id', $to])
+            ->all();
+    foreach ($models as $model) {
+      array_push($arrName, [
+          'id' => $model->id,
+      ]);
+    }
+    $arr['questions'] = $arrName;
+    return $arr;
+  }
 
-    if (!empty($questionSet) && isset($questionSet) && $questionSet != null) {
-      if ($questionSet->mode == 2) {
-        
+  public function getArrQuestionSet($subjectId) {
+    $model = QuestionSet::find()->where(['subject_id' => $subjectId])->one();
+    $arrPart = [];
+    $arrModelSuccess = [];
+    $arrModel = [];
+    $questions = Question::find()
+            ->where(['>=', 'id', $model->from])
+            ->andWhere(['<=', 'id', $model->to])
+            ->all();
+    foreach ($questions as $question) {
+      array_push($arrPart, $question->part);
+    }
+    $randomArrPart = array_rand(array_values(array_unique($arrPart))) + 1;
+//    array_push($arrModel, $this->getQuestionWithPart($randomArrPart, $model->from, $model->to));
+    
+//    return $arrModel;
+    return $this->getQuestionWithPart($randomArrPart, $model->from, $model->to);
+  }
+
+  public function actionExam2($id) {
+    $questionMaster = QuestionMaster::find()->where(['id' => $id])->one();
+
+    if (!empty($questionMaster) && isset($questionMaster) && $questionMaster != null) {
+      if ($questionMaster->mode == 2) {
+        $newQuestionMaster = [];
+        $questions = [];
+        $questionSave = (object) ['status' => 0];  // mock data
+        $exploreQuestionSets = explode(',', $questionMaster->question_sets);
+        foreach ($exploreQuestionSets as $exploreQuestionSet) {
+//          $this->getArrQuestionSet($exploreQuestionSet);
+//          echo $exploreQuestionSet;
+          array_push($questions, $this->getArrQuestionSet($exploreQuestionSet));
+//          $newQusetions[$exploreQuestionSet] = $this->getArrQuestionSet($exploreQuestionSet);
+        }
         //
-        return $this->render(['exam2']);
-      } else if ($questionSet->mode == 1) {
+        return $this->render('exam2', [
+                    'questionSave' => $questionSave,
+                    'questionMasters' => (object)$questions,
+        ]);
+      } else if ($questionMaster->mode == 1) {
         return $this->redirect(['do-exam', ['questionSetId' => $id]]);
       } else {
         return $this->redirect(['site/index']);

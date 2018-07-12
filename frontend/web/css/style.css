@@ -1089,6 +1089,8 @@ title-ex-left{
 }
 .content-wrapper {
   background: #e8f2d9;
+  min-height: 100vh !important;
+  height: 100%;
 }
 #thumbnail-exam-module {
   padding: 5px;

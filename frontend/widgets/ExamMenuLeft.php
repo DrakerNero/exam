@@ -27,17 +27,17 @@ class ExamMenuLeft extends \yii\bootstrap\Widget {
                   <i class="fa  fa-clock-o"></i>&nbsp;&nbsp;<time>--:--</time>
                 </div>
               </td>
-    <?php
-    if (!$this->disableChoice) {
-      ?>
+              <?php
+              if (!$this->disableChoice) {
+                ?>
                 <td class="btn btn-primary btn-flat btn-block" id="insert-answer"onclick="return SaveState(3)">
                   ส่ง
                 </td>
-      <?php
-    } else {
-      null;
-    }
-    ?>
+                <?php
+              } else {
+                null;
+              }
+              ?>
             </tr>
             <tr>
               <td colspan="2"><br></td>
@@ -60,15 +60,15 @@ class ExamMenuLeft extends \yii\bootstrap\Widget {
         <div>
           <table class="jump-panel-table">
             <tr>
-    <?php
-    $i = $this->from;
-    $numChoices = 1;
-    foreach ($this->questions as $question) {
+              <?php
+              $i = $this->from;
+              $numChoices = 1;
+              foreach ($this->questions as $question) {
 //              for ($i = $this->questionSet->from; $i <= $this->questionSet->to; $i++) {
-      if (($numChoices - 1 ) % 5 == 0) {
-        echo '<tr>';
-      }
-      ?>
+                if (($numChoices - 1 ) % 5 == 0) {
+                  echo '<tr>';
+                }
+                ?>
                 <td onclick="ScrollOnClick(<?= $question->id ?>)">
                   <div class="examDivBottomMenu" id="name_<?= $question->id ?>"  >
                     <center>
@@ -76,10 +76,10 @@ class ExamMenuLeft extends \yii\bootstrap\Widget {
                     </center>
                   </div>
                 </td>
-      <?php
-      $numChoices++;
-    }
-    ?>
+                <?php
+                $numChoices++;
+              }
+              ?>
           </table>
         </div>
         <!--</ul>-->
