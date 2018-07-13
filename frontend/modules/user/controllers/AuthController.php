@@ -95,14 +95,14 @@ class AuthController extends \yii\web\Controller {
       return ActiveForm::validate($model);
     }
     if ($model->load(Yii::$app->request->post())) {
-      if ($this->handleAuthenWithRadius($model) == true) {
-        $model->radiusLogin();
-//        echo 'true';
-      } else {
-        $model->login();
-//        echo 'false';
-      }
-//      $model->login();
+//      if ($this->handleAuthenWithRadius($model) == true) {
+//        $model->radiusLogin();
+////        echo 'true';
+//      } else {
+//        $model->login();
+////        echo 'false';
+//      }
+      $model->login();
 
       return $this->goBack();
     } else {
