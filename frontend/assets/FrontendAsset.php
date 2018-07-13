@@ -27,6 +27,7 @@ class FrontendAsset extends AssetBundle
     public $js = [
         'js/app.js',
         'js/exam.js',
+        'js/exam2.js',
         'magnific/jquery.magnific-popup.min.js',
 //        'js/jquery-2.1.3.js',
 //        'js/jquery-3.2.1.min.js',

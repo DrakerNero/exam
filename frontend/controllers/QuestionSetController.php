@@ -359,10 +359,22 @@ class QuestionSetController extends Controller {
     foreach ($models as $model) {
       array_push($arrName, [
           'id' => $model->id,
+          'question_topic' => $model->question_topic,
+          'question' => $model->question,
+          'part' => $model->part,
+          'type_question' => $model->type_question,
+          'max_select_choice' => $model->max_select_choice,
+          'choices' => $model->choices,
+          'answer' => $model->answer,
+          'answers' => $model->answers,
+          'answer_score' => $model->answer_score,
+          'answer_detail' => $model->answer_detail,
+          'mp3' => $model->mp3,
+          'png' => $model->png,
       ]);
     }
-    $arr['questions'] = $arrName;
-    return $arr;
+
+    return $arrName;
   }
 
   public function getArrQuestionSet($subjectId) {
@@ -370,6 +382,21 @@ class QuestionSetController extends Controller {
     $arrPart = [];
     $arrModelSuccess = [];
     $arrModel = [];
+    $arrModel['questionSet'] = [
+        'id' => $model->id,
+        'subject_id' => $model->subject_id,
+        'mode' => $model->mode,
+        'name' => $model->name,
+        'explanation' => $model->explanation,
+        'total_module' => $model->total_module,
+        'multi_select_choice' => $model->multi_select_choice,
+        'from' => $model->from,
+        'to' => $model->to,
+        'total_time' => $model->total_time,
+        'total_score' => $model->total_score,
+        'question_type' => $model->question_type,
+        'select_question_type' => $model->select_question_type,
+    ];
     $questions = Question::find()
             ->where(['>=', 'id', $model->from])
             ->andWhere(['<=', 'id', $model->to])
@@ -378,10 +405,9 @@ class QuestionSetController extends Controller {
       array_push($arrPart, $question->part);
     }
     $randomArrPart = array_rand(array_values(array_unique($arrPart))) + 1;
-//    array_push($arrModel, $this->getQuestionWithPart($randomArrPart, $model->from, $model->to));
-    
-//    return $arrModel;
-    return $this->getQuestionWithPart($randomArrPart, $model->from, $model->to);
+    $arrModel['questions'] = $this->getQuestionWithPart($randomArrPart, $model->from, $model->to);
+
+    return $arrModel;
   }
 
   public function actionExam2($id) {
@@ -389,20 +415,17 @@ class QuestionSetController extends Controller {
 
     if (!empty($questionMaster) && isset($questionMaster) && $questionMaster != null) {
       if ($questionMaster->mode == 2) {
-        $newQuestionMaster = [];
         $questions = [];
         $questionSave = (object) ['status' => 0];  // mock data
         $exploreQuestionSets = explode(',', $questionMaster->question_sets);
         foreach ($exploreQuestionSets as $exploreQuestionSet) {
-//          $this->getArrQuestionSet($exploreQuestionSet);
-//          echo $exploreQuestionSet;
           array_push($questions, $this->getArrQuestionSet($exploreQuestionSet));
-//          $newQusetions[$exploreQuestionSet] = $this->getArrQuestionSet($exploreQuestionSet);
         }
         //
         return $this->render('exam2', [
                     'questionSave' => $questionSave,
-                    'questionMasters' => (object)$questions,
+                    'models' => (object) $questions,
+                    'questionMaster' => $questionMaster,
         ]);
       } else if ($questionMaster->mode == 1) {
         return $this->redirect(['do-exam', ['questionSetId' => $id]]);
