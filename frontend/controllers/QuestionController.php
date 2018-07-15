@@ -117,12 +117,48 @@ class QuestionController extends Controller {
     ];
   }
 
+  public function jumpChoiceName() {
+    return [
+        'jump_choice_1',
+        'jump_choice_2',
+        'jump_choice_3',
+        'jump_choice_4',
+        'jump_choice_5',
+        'jump_choice_6',
+        'jump_choice_7',
+        'jump_choice_8',
+        'jump_choice_9',
+        'jump_choice_10',
+        'jump_choice_11',
+        'jump_choice_12',
+        'jump_choice_13',
+        'jump_choice_14',
+        'jump_choice_15',
+    ];
+  }
+
+  public function setJsonJump() {
+    return [
+        'jump_type' => 1, // 1: กระโดดตาม choice ที่เลือก,  2: ใช้ผลรวมในการกระโดด
+        'jump_constraint' => 1, // 1: >=,  2: <=,  3: =
+        'jump_score' => 0,
+        'jump_constraint_true' => '',
+        'jump_constraint_false' => '',
+    ];
+  }
+
   public function actionCreate() {
     $this->layout = 'main_backend';
     $model = new Question();
     $model = $this->decodeModelWithArray($model, $this->choiceNames(), 'choices');
     $model = $this->decodeModelWithArray($model, $this->answerNames(), 'answers');
-//    $model = $this->decodeModelWithArray($model, $this->treeNames(), 'mission_tree_questions');
+    $model = $this->decodeModelWithArray($model, $this->jumpChoiceName(), 'jump_choices');
+    $model->jump_json = json_encode($this->setJsonJump());
+    $model->jump_json = json_decode($model->jump_json);
+//
+    $model->jump_type = $model->jump_json->jump_type;
+    $model->jump_constraint = $model->jump_json->jump_constraint;
+    $model->jump_score = $model->jump_json->jump_score;
 
     $model->mp3 = 0;
     $model->png = 0;
@@ -139,7 +175,13 @@ class QuestionController extends Controller {
       }
       $model = $this->encodeModelWithArray($model, $this->choiceNames(), 'choices');
       $model = $this->encodeModelWithArray($model, $this->answerNames(), 'answers');
-//      $model = $this->encodeModelWithArray($model, $this->treeNames(), 'mission_tree_questions');
+      $model = $this->encodeModelWithArray($model, $this->jumpChoiceName(), 'jump_choices');
+
+      $model->jump_json->jump_type = $model->jump_type;
+      $model->jump_json->jump_constraint = $model->jump_constraint;
+      $model->jump_json->jump_score = $model->jump_score;
+
+      $model->jump_json = json_encode($model->jump_json);
 
       $model->updated_at = date('Y-m-d H:i:s');
 
@@ -163,12 +205,24 @@ class QuestionController extends Controller {
     $model = $this->findModel($id);
     $model = $this->decodeModelWithArray($model, $this->choiceNames(), 'choices');
     $model = $this->decodeModelWithArray($model, $this->answerNames(), 'answers');
-//    $model = $this->decodeModelWithArray($model, $this->treeNames(), 'mission_tree_questions');
+    $model = $this->decodeModelWithArray($model, $this->jumpChoiceName(), 'jump_choices');
+    ($model->jump_json == '' || $model->jump_json == null) ? $model->jump_json = json_encode($this->setJsonJump()) : null;
+    $model->jump_json = json_decode($model->jump_json);
+    //
+    $model->jump_type = $model->jump_json->jump_type;
+    $model->jump_constraint = $model->jump_json->jump_constraint;
+    $model->jump_score = $model->jump_json->jump_score;
 
     if ($model->load(Yii::$app->request->post())) {
       $model = $this->encodeModelWithArray($model, $this->choiceNames(), 'choices');
       $model = $this->encodeModelWithArray($model, $this->answerNames(), 'answers');
-//      $model = $this->encodeModelWithArray($model, $this->treeNames(), 'mission_tree_questions');
+      $model = $this->encodeModelWithArray($model, $this->jumpChoiceName(), 'jump_choices');
+      //
+      $model->jump_json->jump_type = $model->jump_type;
+      $model->jump_json->jump_constraint = $model->jump_constraint;
+      $model->jump_json->jump_score = $model->jump_score;
+
+      $model->jump_json = json_encode($model->jump_json);
       if ($model->uploadFile('file_upload') != false) {
         $uploadFile = $model->uploadFile('file_upload');
         $uploadFile->saveAs('uploads/png/' . $model->id . '.png');
@@ -252,7 +306,7 @@ class QuestionController extends Controller {
     $models = Question::find()->where(['id' => $questions])->all();
     $arr = [];
     $count = 0;
-    foreach($models as $model) {
+    foreach ($models as $model) {
       $arr[$count]['id'] = $model->id;
       $arr[$count]['question_topic'] = $model->id;
       $arr[$count]['question'] = $model->id;
@@ -261,7 +315,7 @@ class QuestionController extends Controller {
       $arr[$count]['mission_tree_questions'] = $model->id;
       $count++;
     }
-    
+
     $newArr = json_encode($arr);
 //    
     return json_encode($newArr);

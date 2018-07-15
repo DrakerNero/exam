@@ -43,15 +43,35 @@ $maxSelectChoice = (!empty($model->max_select_choice) && isset($model->max_selec
     <?= $form->field($model, 'file_upload')->fileInput()->label(false); ?>
 
     <?=
-    $form->field($model, 'type_question')->radioList([1 => 'พื้นฐาน', 2 => 'แต่ละตัวเลือกมีคะแนน'], [
+    $form->field($model, 'type_question')->radioList([1 => 'พื้นฐาน', 2 => 'แต่ละตัวเลือกมีคะแนน', 3 => 'ข้อสอบกระโดด'], [
         'class' => 'select-type-question',
     ])->label('เลือกการประเภทคำถาม')
     ?>
-    <?php
-//    $form->field($model, 'is_mission_tree')->radioList([0 => 'No', 1 => 'Yes'], [
-//    ])->label('Mission Tree')
-    ?>
 
+    <div class="frame-jump-form" style="margin: 40px 0 40px 0;">
+      <div class="row">
+        <div class="col-md-4">
+          <?=
+          $form->field($model, 'jump_type')->dropDownList([1 => '1: กระโดดตาม choice ที่เลือก', 2 => '2: ใช้ผลรวมในการกระโดด'], [
+          ])->label('เลือกการประเภทการกระโดด')
+          ?>
+          <?=
+          $form->field($model, 'jump_constraint')->dropDownList([1 => '>=', 2 => '<=', 3 => '='])->label('เงื่อนไขกระโดดตามคะแนน')
+          ?>
+          <?=
+          $form->field($model, 'jump_score')->textInput()->label('คะแนนที่อยู่ในเงื่อนไข')
+          ?>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <?= $form->field($model, 'jump_constraint_true')->textInput()->label('ถ้าใช่กระโดดข้อ') ?>
+        </div>
+        <div class="col-md-4">
+          <?= $form->field($model, 'jump_constraint_false')->textInput()->label('ถ้าใช่กระโดดข้อ') ?>
+        </div>
+      </div>
+    </div>
 
 
     <div class="exam-doctor">
@@ -121,32 +141,25 @@ $maxSelectChoice = (!empty($model->max_select_choice) && isset($model->max_selec
             <?= $form->field($model, 'answer_15')->textInput(['placeholder' => 'Answer Score 15'])->label(false) ?>
           </div>
         </div>
-        <?php
-        /*
-          <div class="col-md-3 exam-mission-tree">
+        <div class="col-md-2 exam-doctor">
           <div class="input-choice" style="padding-left: 0;">
-          <div class="input-tree">
-          <?= $form->field($model, 'tree_1')->textInput(['placeholder' => 'Mission Tree Input 1'])->label(false) ?>
-          <?= $form->field($model, 'tree_2')->textInput(['placeholder' => 'Mission Tree Input 2'])->label(false) ?>
-          <?= $form->field($model, 'tree_3')->textInput(['placeholder' => 'Mission Tree Input 3'])->label(false) ?>
-          <?= $form->field($model, 'tree_4')->textInput(['placeholder' => 'Mission Tree Input 4'])->label(false) ?>
-          <?= $form->field($model, 'tree_5')->textInput(['placeholder' => 'Mission Tree Input 5'])->label(false) ?>
-          <?= $form->field($model, 'tree_6')->textInput(['placeholder' => 'Mission Tree Input 6'])->label(false) ?>
-          <?= $form->field($model, 'tree_7')->textInput(['placeholder' => 'Mission Tree Input 7'])->label(false) ?>
-          <?= $form->field($model, 'tree_8')->textInput(['placeholder' => 'Mission Tree Input 8'])->label(false) ?>
-          <?= $form->field($model, 'tree_9')->textInput(['placeholder' => 'Mission Tree Input 9'])->label(false) ?>
-          <?= $form->field($model, 'tree_10')->textInput(['placeholder' => 'Mission Tree Input 10'])->label(false) ?>
-          <?= $form->field($model, 'tree_11')->textInput(['placeholder' => 'Mission Tree Input 11'])->label(false) ?>
-          <?= $form->field($model, 'tree_12')->textInput(['placeholder' => 'Mission Tree Input 12'])->label(false) ?>
-          <?= $form->field($model, 'tree_13')->textInput(['placeholder' => 'Mission Tree Input 13'])->label(false) ?>
-          <?= $form->field($model, 'tree_14')->textInput(['placeholder' => 'Mission Tree Input 14'])->label(false) ?>
-          <?= $form->field($model, 'tree_15')->textInput(['placeholder' => 'Mission Tree Input 15'])->label(false) ?>
-
+            <?= $form->field($model, 'jump_choice_1')->textInput(['placeholder' => 'QA Jump ID 1'])->label(false) ?>
+            <?= $form->field($model, 'jump_choice_2')->textInput(['placeholder' => 'QA Jump ID 2'])->label(false) ?>
+            <?= $form->field($model, 'jump_choice_3')->textInput(['placeholder' => 'QA Jump ID 3'])->label(false) ?>
+            <?= $form->field($model, 'jump_choice_4')->textInput(['placeholder' => 'QA Jump ID 4'])->label(false) ?>
+            <?= $form->field($model, 'jump_choice_5')->textInput(['placeholder' => 'QA Jump ID 5'])->label(false) ?>
+            <?= $form->field($model, 'jump_choice_6')->textInput(['placeholder' => 'QA Jump ID 6'])->label(false) ?>
+            <?= $form->field($model, 'jump_choice_7')->textInput(['placeholder' => 'QA Jump ID 7'])->label(false) ?>
+            <?= $form->field($model, 'jump_choice_8')->textInput(['placeholder' => 'QA Jump ID 8'])->label(false) ?>
+            <?= $form->field($model, 'jump_choice_9')->textInput(['placeholder' => 'QA Jump ID 9'])->label(false) ?>
+            <?= $form->field($model, 'jump_choice_10')->textInput(['placeholder' => 'QA Jump ID 10'])->label(false) ?>
+            <?= $form->field($model, 'jump_choice_11')->textInput(['placeholder' => 'QA Jump ID 11'])->label(false) ?>
+            <?= $form->field($model, 'jump_choice_12')->textInput(['placeholder' => 'QA Jump ID 12'])->label(false) ?>
+            <?= $form->field($model, 'jump_choice_13')->textInput(['placeholder' => 'QA Jump ID 13'])->label(false) ?>
+            <?= $form->field($model, 'jump_choice_14')->textInput(['placeholder' => 'QA Jump ID 14'])->label(false) ?>
+            <?= $form->field($model, 'jump_choice_15')->textInput(['placeholder' => 'QA Jump ID 15'])->label(false) ?>
           </div>
-          </div>
-          </div>
-         */
-        ?>
+        </div>
 
 
       </div>

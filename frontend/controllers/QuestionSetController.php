@@ -186,66 +186,173 @@ class QuestionSetController extends Controller {
 //        $model = Question::findBySql($sql)
   }
 
+  public function getModelQuestionWithPart($questions, $parts) {
+    $arr = [];
+    $arrQuestion = [];
+    $totalQuestion = 0;
+    foreach ($questions as $question) {
+      if (in_array($question->part, $parts)) {
+        array_push($arrQuestion, [
+            'id' => $question->id,
+            'question_topic' => $question->question_topic,
+            'question' => $question->question,
+            'part' => $question->part,
+            'type_question' => $question->type_question,
+            'max_select_choice' => $question->max_select_choice,
+            'choices' => $question->choices,
+            'answer' => $question->answer,
+            'answers' => $question->answers,
+            'answer_score' => $question->answer_score,
+            'answer_detail' => $question->answer_detail,
+            'mp3' => $question->mp3,
+            'png' => $question->png,
+        ]);
+
+        $totalQuestion++;
+      }
+    }
+
+    return [
+        'questions' => $arrQuestion,
+        'totalQuestion' => $totalQuestion,
+    ];
+  }
+
+  public function handleRandomSizeArray($arr) {
+    return rand(1, sizeof(array_values(array_unique($arr))) - 1);
+  }
+
+  public function getArrQuestion($model) {
+    $arrPart = [];
+    $arrModel = [];
+    $arrMode_1 = [];
+    $arrMode_2 = [];
+    $arrModel['questionSet'] = [
+        'id' => $model->id,
+        'subject_id' => $model->subject_id,
+        'mode' => $model->mode,
+        'name' => $model->name,
+        'explanation' => $model->explanation,
+        'total_module' => $model->total_module,
+        'multi_select_choice' => $model->multi_select_choice,
+        'from' => $model->from,
+        'to' => $model->to,
+        'total_time' => $model->total_time,
+        'total_score' => $model->total_score,
+        'question_type' => $model->question_type,
+        'select_question_type' => $model->select_question_type,
+    ];
+    $questions = Question::find()
+            ->where(['>=', 'id', $model->from])
+            ->andWhere(['<=', 'id', $model->to])
+            ->all();
+    foreach ($questions as $question) {
+      if ($question->part < 100) {
+        array_push($arrMode_1, $question->part);
+      } else {
+        array_push($arrMode_2, $question->part);
+      }
+    }
+    $random_1 = array_values(array_unique($arrMode_1))[$this->handleRandomSizeArray(array_values(array_unique($arrMode_1)))];
+    $random_2 = array_values(array_unique($arrMode_2))[$this->handleRandomSizeArray(array_values(array_unique($arrMode_2)))];
+
+    array_push($arrPart, $random_1);
+    array_push($arrPart, $random_2);
+    $arr = [];
+    $modelQuestionWithPart = $this->getModelQuestionWithPart($questions, $arrPart);
+
+    $arr['questions'] = $modelQuestionWithPart['questions'];
+    $arr['totalModule'] = $modelQuestionWithPart['totalQuestion'];
+    $arr['parts'] = $arrPart;
+
+    $questions = Question::find()
+            ->where(['part' => $arrPart])
+            ->andWhere(['>=', 'id', $model->from])
+            ->andWhere(['<=', 'id', $model->to])
+            ->all();
+    return $questions;
+//    return $arr;
+  }
+
   public function actionDoExam($questionSetId) {
     $isAdmin = false;
     $model = QuestionSet::findOne($questionSetId);
     if (!empty($model)) {
-      $arrQuestion = [];
-      for ($i = $model->from; $i <= $model->to; $i++) {
-        $arrQuestion[$i] = $i;
-      }
-      $questions = Question::find()->where(['id' => $arrQuestion])->all();
-      $parts = [];
-      $moduleQuestion = [];
-      $questionSuccess = [];
-      foreach ($questions as $question) {
-        if (!empty($question->part) && isset($question->part)) {
-          array_push($parts, $question->part);
+      if (!empty($model->mode) && isset($model->mode) && $model->mode == 2) {
+        $handleQuestions = $this->getArrQuestion($model);
+//        echo '<pre>';
+//        print_r($this->getArrQuestion($model));
+        return $this->render('exam', [
+                    'model' => $model,
+                    'questionSave' => (object) ['status' => 0],
+                    'questions' => $this->getArrQuestion($model),
+//                    'totalModule' => $totalModule,
+//                    'part' => $parts,
+//                    'uniquePart' => $uniquePart,
+//                    'newQuestions' => $questionSuccess,
+//                    'doPart' => $doPart,
+                    'isAdmin' => $isAdmin,
+//                  'inArrayModulePart' => $inArrayModulePart,
+        ]);
+      } else {
+
+        $arrQuestion = [];
+        for ($i = $model->from; $i <= $model->to; $i++) {
+          $arrQuestion[$i] = $i;
+        }
+        $questions = Question::find()->where(['id' => $arrQuestion])->all();
+        $parts = [];
+        $moduleQuestion = [];
+        $questionSuccess = [];
+        foreach ($questions as $question) {
+          if (!empty($question->part) && isset($question->part)) {
+            array_push($parts, $question->part);
+          } else {
+            
+          }
+        }
+        $uniquePart = array_values(array_unique($parts));
+        $questionSave = QuestionSave::LoadQuestionSave($model->id, min($uniquePart));
+
+        foreach (array_rand($uniquePart, $model->total_module) as $keyModule) { // loop เพื่อ random module ของ question_set
+          array_push($moduleQuestion, $uniquePart[$keyModule]);
+        }
+
+        $totalModule = array_rand(array_values(array_unique($parts)), $model->total_module);
+        if ($questionSave->module_part === '' || $questionSave->module_part === null) {
+          $questionSave->module_part = json_encode($moduleQuestion);
+          $questionSuccess = $this->setRandomQuestionForExam($questions, $moduleQuestion);
+          $questionSave->save();
+        } else {
+          $questionSave->module_part = json_decode($questionSave->module_part);
+          $questionSuccess = $this->setRandomQuestionForExam($questions, $questionSave->module_part);
+        }
+
+        $questionSaveChoices = json_decode($questionSave->answer);
+        $doPart = 0;
+        if (isset($questionSaveChoices)) {
+
+          foreach ($questionSaveChoices as $answer) {
+            $doPart = $answer->part;
+          }
         } else {
           
         }
-      }
-      $uniquePart = array_values(array_unique($parts));
-      $questionSave = QuestionSave::LoadQuestionSave($model->id, min($uniquePart));
-
-      foreach (array_rand($uniquePart, $model->total_module) as $keyModule) { // loop เพื่อ random module ของ question_set
-        array_push($moduleQuestion, $uniquePart[$keyModule]);
-      }
-
-      $totalModule = array_rand(array_values(array_unique($parts)), $model->total_module);
-      if ($questionSave->module_part === '' || $questionSave->module_part === null) {
-        $questionSave->module_part = json_encode($moduleQuestion);
-        $questionSuccess = $this->setRandomQuestionForExam($questions, $moduleQuestion);
-        $questionSave->save();
-      } else {
-        $questionSave->module_part = json_decode($questionSave->module_part);
-        $questionSuccess = $this->setRandomQuestionForExam($questions, $questionSave->module_part);
-      }
-
-      $questionSaveChoices = json_decode($questionSave->answer);
-      $doPart = 0;
-      if (isset($questionSaveChoices)) {
-
-        foreach ($questionSaveChoices as $answer) {
-          $doPart = $answer->part;
-        }
-      } else {
-        
-      }
 
 
-      return $this->render('exam', [
-                  'model' => $model,
-                  'questionSave' => $questionSave,
-                  'questions' => $questionSuccess,
-                  'totalModule' => $totalModule,
-                  'part' => $parts,
-                  'uniquePart' => $uniquePart,
-                  'newQuestions' => $questionSuccess,
-                  'doPart' => $doPart,
-                  'isAdmin' => $isAdmin,
+        return $this->render('exam', [
+                    'model' => $model,
+                    'questionSave' => $questionSave,
+                    'questions' => $questionSuccess,
+                    'totalModule' => $totalModule,
+                    'part' => $parts,
+//                    'uniquePart' => $uniquePart,
+//                    'newQuestions' => $questionSuccess,
+                    'doPart' => $doPart,
+                    'isAdmin' => $isAdmin,
 //                  'inArrayModulePart' => $inArrayModulePart,
-      ]);
+        ]);
+      }
     } else {
       throw new NotFoundHttpException('The question set you have requested is not available');
     }
@@ -411,6 +518,7 @@ class QuestionSetController extends Controller {
   }
 
   public function actionExam2($id) {
+    $this->layout = 'main_exam_2';
     $questionMaster = QuestionMaster::find()->where(['id' => $id])->one();
 
     if (!empty($questionMaster) && isset($questionMaster) && $questionMaster != null) {

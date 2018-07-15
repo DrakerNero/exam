@@ -74,6 +74,28 @@ class Question extends \yii\db\ActiveRecord {
 //  public $tree_15;
 //
   public $file_upload;
+  //
+
+  public $jump_type;
+  public $jump_constraint;
+  public $jump_score;
+  public $jump_choice_1;
+  public $jump_choice_2;
+  public $jump_choice_3;
+  public $jump_choice_4;
+  public $jump_choice_5;
+  public $jump_choice_6;
+  public $jump_choice_7;
+  public $jump_choice_8;
+  public $jump_choice_9;
+  public $jump_choice_10;
+  public $jump_choice_11;
+  public $jump_choice_12;
+  public $jump_choice_13;
+  public $jump_choice_14;
+  public $jump_choice_15;
+  public $jump_constraint_true;
+  public $jump_constraint_false;
 
   public static function tableName() {
     return 'question';
@@ -86,7 +108,13 @@ class Question extends \yii\db\ActiveRecord {
     return [
         [['id', 'question', 'choices', 'answer', 'updated_at', 'part'], 'required'],
         [['id', 'mp3', 'png', 'txt', 'max_select_choice', 'type_question', 'part'], 'integer'],
-        [['question', 'choices', 'answer_detail', 'answers', 'answer_score', 'question_topic',], 'string'],
+        [['question', 'choices', 'answer_detail', 'answers', 'answer_score', 'question_topic', 'jump_json', 'jump_choices'], 'string'],
+        [['jump_type', 'jump_constraint', 'jump_score','jump_constraint_true', 'jump_constraint_false'], 'string'],
+        [[
+        'jump_choice_1', 'jump_choice_2', 'jump_choice_3', 'jump_choice_4', 'jump_choice_5',
+        'jump_choice_6', 'jump_choice_7', 'jump_choice_8', 'jump_choice_9', 'jump_choice_10',
+        'jump_choice_11', 'jump_choice_12', 'jump_choice_13', 'jump_choice_14', 'jump_choice_15',
+            ], 'string'],
         [[
         'choice_1', 'answer_1', // 'tree_1',
         'choice_2', 'answer_2', // 'tree_2',
@@ -125,6 +153,8 @@ class Question extends \yii\db\ActiveRecord {
         'png' => 'Png',
         'txt' => 'Txt',
         'part' => 'Part',
+        'jump_json' => 'Jump Json',
+        'jump_choices' => 'Jump Choices',
 //        'is_mission_tree' => 'Is Mission Tree',
 //        'mission_tree_questions' => 'Mission Tree Questions',
         'updated_at' => 'Updated',

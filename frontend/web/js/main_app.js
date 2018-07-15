@@ -5,7 +5,7 @@ function hideExamDoctor(hide) {
   if (hide == 1) {
     $('.not-exam-doctor').show();
     $('.exam-doctor').hide();
-  } else if (hide == 2) {
+  } else if (hide == 2 || hide == 3) {
     $('.exam-doctor').show();
     $('.not-exam-doctor').hide();
 

@@ -53,14 +53,14 @@ class QuestionSearch extends Question {
     }
 
     $query->andFilterWhere([
-        'id' => $this->id,
+//        'id' => $this->id,
 //            'question_number' => $this->question_number,
         'type_question' => $this->type_question,
         'created' => $this->updated_at,
     ]);
 
     $query->andFilterWhere(['like', 'question', $this->question])
-//            ->andFilterWhere(['like', 'choices_1', $this->choices_1])
+            ->andFilterWhere(['like', 'id', $this->id])
 //            ->andFilterWhere(['like', 'choices_2', $this->choices_2])
 //            ->andFilterWhere(['like', 'choices_3', $this->choices_3])
 //            ->andFilterWhere(['like', 'choices_4', $this->choices_4])

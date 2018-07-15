@@ -20,13 +20,14 @@ class LoadViewQuestion2 extends \yii\bootstrap\Widget {
   public $isAdmin = false;
   public $marginTop;
   public $questionMasterId;
+  public $count;
 
   public function run() {
     $name = $this->countDiv;
     $idPart = (!empty($this->question->part) || isset($this->question->part)) ? 'frame-question2-section-' . $this->modelQuestion->id . '-' . $this->question->part : '';
     $multiChoice = (!empty($this->question->max_select_choice) && isset($this->question->max_select_choice)) ? true : false;
     ?>
-    <div class="frame-exam2" id="<?= $idPart ?>"  >
+    <div class="frame-exam2 exam2-question-frame-<?= $this->count ?>" id="<?= $idPart ?>" style="display: none;"  >
       <div  class="col-md-10" disabled>
         <div id="render-question2-no-<?= $this->countQuestion ?>" style="<?= $this->marginTop ?>">
           <div class="frameExam2" id="scroll_<?= $this->countDiv; ?>">
@@ -54,8 +55,14 @@ class LoadViewQuestion2 extends \yii\bootstrap\Widget {
               </div><!-- /.box-header -->
               <div class="box-body">
                 <div class="col-sm-12">
+                  <a 
+                    id="question-no-<?= $this->count ?>" 
+                    data-question-master-id="<?= $this->questionMasterId ?>" 
+                    data-question-set-id="<?= $this->questionSetID; ?>" 
+                    data-question-id="<?= $this->question->id ?>" >
+                  </a>
                   <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" >
-                    <div class="wrapper-not-choice" id="wrapper-question2-section-<?= $this->countQuestion ?>"></div>
+                    <div class="wrapper-not-choice" id="wrapper-question2-section-<?= $this->count ?>"></div>
 
                     <?php
                     if (is_array($this->question) || is_object($this->question)) {
@@ -76,12 +83,12 @@ class LoadViewQuestion2 extends \yii\bootstrap\Widget {
                               ?>
                               <input
                                 data-id="<?= $this->question->id ?>"
-                                onclick="onClickSaveChoiceExam2(<?= $this->questionMasterId ?>,<?= $this->questionSetID; ?>,<?= $this->question->id ?>, <?= $i ?>)" 
+                                onclick="onClickSaveChoiceExam2()" 
                                 id="<?= Html::encode($IDradio) ?>" 
                                 name="name_<?= Html::encode($this->countDiv) ?>"
                                 value="<?= $i ?>" 
                                 <?= ($multiChoice) ? 'type="checkbox"' : 'type="radio"' ?>
-                                <?= ($multiChoice) ? 'class="choice-question-' . $this->question->id . '"' : '' ?>
+                                <?= ($multiChoice) ? 'class="choice-question-' . $this->count . '"' : '' ?>
                                 style="display: none;"
                                 >
                               <label id="inputRadio"  for="<?= Html::encode($IDradio) ?>" ><?php echo $key . ".  " . $value ?>  <?= ($this->isAdmin == true) ? '&nbsp;&nbsp; [ ' . $answers[$key] . ' ]' : '' ?>  </label>
@@ -107,7 +114,7 @@ class LoadViewQuestion2 extends \yii\bootstrap\Widget {
                 }
                 ?>
 
-                    <!--<div class="wrapper-not-choice" id="wrapper-question-section-<?= $this->countQuestion ?>"></div>-->
+                            <!--<div class="wrapper-not-choice" id="wrapper-question-section-<?= $this->countQuestion ?>"></div>-->
 
               </div><!-- /.box-body -->
             </div><!-- /.box -->
