@@ -1,7 +1,6 @@
 var csrfToken = $('meta[name="csrf-token"]').attr("content");
 var dataMultiChoice = $('.is-multi-select-choice').attr('data-multi');
 var multiChoice = (dataMultiChoice == 1) ? true : false;
-var questionSetMode = $('.question-set-mode').attr('data-mode'); // 1: ปกติ,  2: มีข้อกระโดด
 
 var percentPass = 80;
 
@@ -39,18 +38,11 @@ function InsertQuestion(from, to) {
 function autoCheckSideLeftBar(subjectId, questionId, choices, part) {
   var checkInput = $('input[name="name_' + questionId + '"]:checked').val();
   var maxChoice = $('.max-select-choice-question-' + questionId).attr('data-max-choice');
-
   if (checkInput !== null) {
     $('.scroll_' + questionId).css({"background": "#3c8dbc", "color": "#fff"});
     insertChoicesToHeadbar();
     if (maxChoice !== undefined && maxChoice !== '' && maxChoice > 0) {
-      if (questionSetMode == 2) {
-        $('.btn-next-present').show();
-
-      } else {
-        clickSaveMultiChoice(questionId, part);
-
-      }
+      clickSaveMultiChoice(questionId, part);
     } else {
       ClickSave(questionId, choices);
     }
@@ -487,77 +479,30 @@ function hidingSectionPart(doPart) { // ทำให้ display: none
 }
 
 $('.btn-next-present').click(function () {
+  presentQuestion = parseInt(presentQuestion) + 1;
   if (presentQuestion > endFirstQuestion) {
 //    hidingSectionPart(keyEndPart); // ทำให้ display: none
   } else {
 
   }
   $('.doing-question-section').attr('data-present-question', presentQuestion);
-  if (questionSetMode == 2) {
-    handleRenderQuestionJumpType();
-  } else {
-    presentQuestion = parseInt(presentQuestion) + 1;
-    $.ajax({
-      type: "POST",
+  $.ajax({
+    type: "POST",
 //    url: "../../question-save/update-present-question",
-      url: "index.php?r=question-save/update-present-question",
-      data: ({
-        presentQuestion: presentQuestion,
-        id: questionSaveId,
-        _csrf: csrfToken
-      }),
-      success: function (data) {
+    url: "index.php?r=question-save/update-present-question",
+    data: ({
+      presentQuestion: presentQuestion,
+      id: questionSaveId,
+      _csrf: csrfToken
+    }),
+    success: function (data) {
 //      hidingSectionPart(data);
-      }
-    });
-    renderProgressBar(); // คำนวน progress bar ใหม่
-    renderPreSentQuestion(); // เปิดข้อสอบข้อต่อไป
-  }
+    }
+  });
+  renderProgressBar(); // คำนวน progress bar ใหม่
+  renderPreSentQuestion(); // เปิดข้อสอบข้อต่อไป
   $(this).hide();
 });
-
-function handleRenderQuestionJumpType() {
-  var forceQuestion = $('.render-force-question-id').attr('data-id');
-  var selectEl = '';
-  if (forceQuestion != undefined && forceQuestion != '') {
-    selectEl = '#no-question-data-question-id-' + forceQuestion;
-  } else {
-    selectEl = '.no-question-data-' + presentQuestion;
-
-  }
-
-  console.log(selectEl + ', ' + forceQuestion);
-  var typeQuestion = $(selectEl).attr('data-question-type');
-  var questionId = $(selectEl).attr('data-question-id');
-  var jumpType = $(selectEl).attr('data-jump-type');
-  var jumpConstraint = $(selectEl).attr('data-jump-constraint');
-  var jumpScore = $(selectEl).attr('data-jump-score');
-  var jumpConstraintTrue = $(selectEl).attr('data-jump-constraint-true');
-  var jumpConstraintFalse = $(selectEl).attr('data-jump-constraint-false');
-
-  if (typeQuestion == 3) {
-    if (jumpType == 1) {
-      var radioCheck = $('.radio-preset-' + questionId + ':checked').val();
-      var renderQuestionId = $('.jump-question-' + questionId + '-' + radioCheck).attr('data-jump-question');
-      $('.render-force-question-id').attr('data-id', renderQuestionId);
-      $('.question-id-' + renderQuestionId).show();
-      
-      alert(renderQuestionId);
-      if(renderQuestionId == '' || renderQuestionId == undefined || renderQuestionId == null) {
-        $('.wrapper-send-exam').show();
-      }
-
-    } else if (jumpType == 2) {
-
-    } else {
-
-    }
-
-  } else {
-    presentQuestion = parseInt(presentQuestion) + 1;
-    renderPreSentQuestion();
-  }
-}
 
 function renderPreSentQuestion() {
   var disable = 0;
@@ -592,31 +537,27 @@ function renderBtnSendExam() {
 }
 
 function handleOnNextSection() {
-  if ($('.question-save') !== undefined) {
-    var questionSaveId = $('.question-save').attr('data-id');
-    $.ajax({
-      type: "POST",
-      url: "../../question-save/save-present-section",
-      data: ({
-        questionSaveId: questionSaveId,
-        sectionQuestionMax: sectionQuestionMax,
-        presentSection: activeSectionQuestion,
-        _csrf: csrfToken
-      }),
-      success: function (data) {
-        if (data === '1') {
-          location.reload();
-        } else if (data === '0') {
-          console.log('เกิดข้อผิดพลาด');
-        }
-      },
-      error: function (data) {
-        console.log("ไม่มีการส่งข้อมูล");
+  var questionSaveId = $('.question-save').attr('data-id');
+  $.ajax({
+    type: "POST",
+    url: "../../question-save/save-present-section",
+    data: ({
+      questionSaveId: questionSaveId,
+      sectionQuestionMax: sectionQuestionMax,
+      presentSection: activeSectionQuestion,
+      _csrf: csrfToken
+    }),
+    success: function (data) {
+      if (data === '1') {
+        location.reload();
+      } else if (data === '0') {
+        console.log('เกิดข้อผิดพลาด');
       }
-    });
-
-  } else {
-  }
+    },
+    error: function (data) {
+      console.log("ไม่มีการส่งข้อมูล");
+    }
+  });
 }
 
 function onDisableChoiceWithSectionQuestion(activeSection) {
@@ -637,7 +578,7 @@ function nextSectionQuestion() {
   }
 }
 
-$('[class*="choice-question-"]').click(function () {
+$('[class^="choice-question-"]').click(function () {
   var choiceId = $(this).attr('data-id');
   handleClickChoice(choiceId);
 });
@@ -645,7 +586,7 @@ $('[class*="choice-question-"]').click(function () {
 function handleClickChoice(choiceId) {
   var maxChoice = $('.max-select-choice-question-' + choiceId).attr('data-max-choice');
   var bol = $(".choice-question-" + choiceId + ":checked").length >= maxChoice;
-  $("[class*='choice-question-" + choiceId + "']").not(":checked").attr("disabled", bol);
+  $("[class^='choice-question-" + choiceId + "']").not(":checked").attr("disabled", bol);
 }
 
 function autoSelectChoice(choiceId, multiSelectChoice) {
@@ -720,4 +661,3 @@ $(document).ready(function () {
             // other options
   });
 });
-
