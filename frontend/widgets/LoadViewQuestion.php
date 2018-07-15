@@ -40,7 +40,7 @@ class LoadViewQuestion extends \yii\bootstrap\Widget {
       $jumpConstraintFalse = $jumpJson->jump_constraint_false;
 
       $countChoice = 1;
-      
+
       foreach ($jumpChoices as $jumpChoice) {
         if ($jumpChoice != '') {
           ?>
@@ -59,6 +59,8 @@ class LoadViewQuestion extends \yii\bootstrap\Widget {
     <div class="frame-exam " id="<?= $idPart ?>"  >
       <a 
         class="no-question-data-<?= $this->countQuestion ?>" 
+        id="no-question-data-question-id-<?= $this->question->id ?>"
+        data-question-id="<?= $this->question->id?>"
         data-question-type="<?= $this->question->type_question ?>"
         data-jump-type="<?= $jumpType ?>"
         data-jump-constraint="<?= $jumpConstraint ?>"
@@ -116,12 +118,12 @@ class LoadViewQuestion extends \yii\bootstrap\Widget {
                               <input
                                 data-id="<?= $this->question->id ?>"
                                 onclick="autoCheckSideLeftBar(<?= $this->questionSetID ?>,<?= $this->countDiv; ?>,<?= $i ?>, <?= $this->question->part ?>)" 
-                                id="<?= Html::encode($IDradio) ?> " 
+                                id="<?= Html::encode($IDradio) ?>" 
                                 name="name_<?= Html::encode($this->countDiv) ?>"
                                 value="<?= $i ?>" 
-                                class=""
+                                class="radio-preset-<?= $this->countDiv ?> <?= ($multiChoice) ? 'choice-question-' . $this->question->id : '' ?>"
                                 <?= ($multiChoice) ? 'type="checkbox"' : 'type="radio"' ?>
-                                <?= ($multiChoice) ? 'class="choice-question-' . $this->question->id . '"' : '' ?>
+
                                 style="display: none;"
                                 >
                               <label id="inputRadio"  for="<?= Html::encode($IDradio) ?>" ><?php echo $key . ".  " . $value ?>  <?= ($this->isAdmin == true) ? '&nbsp;&nbsp; [ ' . $answers[$key] . ' ]' : '' ?>  </label>
@@ -149,7 +151,7 @@ class LoadViewQuestion extends \yii\bootstrap\Widget {
                 }
                 ?>
 
-                                                    <!--<div class="wrapper-not-choice" id="wrapper-question-section-<?= $this->countQuestion ?>"></div>-->
+                                                        <!--<div class="wrapper-not-choice" id="wrapper-question-section-<?= $this->countQuestion ?>"></div>-->
 
               </div><!-- /.box-body -->
             </div><!-- /.box -->

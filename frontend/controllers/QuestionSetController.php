@@ -280,9 +280,7 @@ class QuestionSetController extends Controller {
     if (!empty($model)) {
       if (!empty($model->mode) && isset($model->mode) && $model->mode == 2) {
         $handleQuestions = $this->getArrQuestion($model);
-//        echo '<pre>';
-//        print_r($this->getArrQuestion($model));
-        return $this->render('exam', [
+        return $this->render('exam2', [
                     'model' => $model,
                     'questionSave' => (object) ['status' => 0],
                     'questions' => $this->getArrQuestion($model),

@@ -170,6 +170,7 @@ if ($model->mode == 2 && $isAdmin == true) {
 <a class="question-set-mode" data-mode="<?= $model->mode ?>"></a>
 <a class="max-question-data" data-max="<?= sizeof($questions) ?>"></a>
 <a class="is-multi-select-choice" data-multi="<?= (!empty($model->multi_select_choice) && isset($model->multi_select_choice)) ? $model->multi_select_choice : '0' ?>"></a>
+<a class="render-force-question-id" data-id=""></a>
 <?php
 if ($model->mode == 2 && $isAdmin == true) {
   ?>

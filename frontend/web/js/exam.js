@@ -517,16 +517,35 @@ $('.btn-next-present').click(function () {
 });
 
 function handleRenderQuestionJumpType() {
-  var typeQuestion = $('.no-question-data-' + presentQuestion).attr('data-question-type');
-  var jumpType = $('.no-question-data-' + presentQuestion).attr('data-jump-type');
-//  var jumpConstraint = $('.no-question-data-' + presentQuestion).attr('data-jump-constraint');
-//  var jumpScore = $('.no-question-data-' + presentQuestion).attr('data-jump-score');
-//  var jumpConstraintTrue = $('.no-question-data-' + presentQuestion).attr('data-jump-constraint-true');
-//  var jumpConstraintFalse = $('.no-question-data-' + presentQuestion).attr('data-jump-constraint-false');
+  var forceQuestion = $('.render-force-question-id').attr('data-id');
+  var selectEl = '';
+  if (forceQuestion != undefined && forceQuestion != '') {
+    selectEl = '#no-question-data-question-id-' + forceQuestion;
+  } else {
+    selectEl = '.no-question-data-' + presentQuestion;
+
+  }
+
+  console.log(selectEl + ', ' + forceQuestion);
+  var typeQuestion = $(selectEl).attr('data-question-type');
+  var questionId = $(selectEl).attr('data-question-id');
+  var jumpType = $(selectEl).attr('data-jump-type');
+  var jumpConstraint = $(selectEl).attr('data-jump-constraint');
+  var jumpScore = $(selectEl).attr('data-jump-score');
+  var jumpConstraintTrue = $(selectEl).attr('data-jump-constraint-true');
+  var jumpConstraintFalse = $(selectEl).attr('data-jump-constraint-false');
 
   if (typeQuestion == 3) {
     if (jumpType == 1) {
+      var radioCheck = $('.radio-preset-' + questionId + ':checked').val();
+      var renderQuestionId = $('.jump-question-' + questionId + '-' + radioCheck).attr('data-jump-question');
+      $('.render-force-question-id').attr('data-id', renderQuestionId);
+      $('.question-id-' + renderQuestionId).show();
       
+      alert(renderQuestionId);
+      if(renderQuestionId == '' || renderQuestionId == undefined || renderQuestionId == null) {
+        $('.wrapper-send-exam').show();
+      }
 
     } else if (jumpType == 2) {
 
@@ -618,7 +637,7 @@ function nextSectionQuestion() {
   }
 }
 
-$('[class^="choice-question-"]').click(function () {
+$('[class*="choice-question-"]').click(function () {
   var choiceId = $(this).attr('data-id');
   handleClickChoice(choiceId);
 });
@@ -626,7 +645,7 @@ $('[class^="choice-question-"]').click(function () {
 function handleClickChoice(choiceId) {
   var maxChoice = $('.max-select-choice-question-' + choiceId).attr('data-max-choice');
   var bol = $(".choice-question-" + choiceId + ":checked").length >= maxChoice;
-  $("[class^='choice-question-" + choiceId + "']").not(":checked").attr("disabled", bol);
+  $("[class*='choice-question-" + choiceId + "']").not(":checked").attr("disabled", bol);
 }
 
 function autoSelectChoice(choiceId, multiSelectChoice) {
