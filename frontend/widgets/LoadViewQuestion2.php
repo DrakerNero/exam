@@ -45,7 +45,7 @@ class LoadViewQuestion2 extends \yii\bootstrap\Widget {
       foreach ($jumpChoices as $jumpChoice) {
         if ($jumpChoice != '') {
           ?>
-          <a class="jump-question-<?= $this->question->id ?>-<?= $countChoice ?>" data-score="<?= $answers[$countChoice - 1] ?>" data-jump-question="<?= $jumpChoice ?>"></a>
+          <a class="jump-question-<?= $this->question->id ?>-<?= $countChoice ?>" data-score="<?= (!empty($answers[$countChoice - 1]) && isset($answers[$countChoice - 1])) ? $answers[$countChoice - 1] : '' ?>" data-jump-question="<?= $jumpChoice ?>"></a>
 
           <?php
         } else {
@@ -150,7 +150,7 @@ class LoadViewQuestion2 extends \yii\bootstrap\Widget {
                 }
                 ?>
 
-                                                                <!--<div class="wrapper-not-choice" id="wrapper-question-section-<?= $this->countQuestion ?>"></div>-->
+                                                                    <!--<div class="wrapper-not-choice" id="wrapper-question-section-<?= $this->countQuestion ?>"></div>-->
 
               </div><!-- /.box-body -->
             </div><!-- /.box -->
