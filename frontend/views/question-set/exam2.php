@@ -1,6 +1,6 @@
 <?php
 
-use frontend\widgets\LoadViewQuestion;
+use frontend\widgets\LoadViewQuestion2;
 //use frontend\widgets\ExamMenuLeft;
 use frontend\widgets\ExamMenuLeftProgressBar;
 use frontend\widgets\HeaderMenuRight;
@@ -66,7 +66,7 @@ foreach ($questions as $question) {
     
   }
   if (!empty($question)) {
-    echo LoadViewQuestion::widget([
+    echo LoadViewQuestion2::widget([
         'question' => $question,
         'countDiv' => $question->id,
         'questionSetID' => $model->id,
@@ -110,7 +110,7 @@ if (!$disableChoice) {
 }
 ?>
 <?php
-if ($questionSave->status == 1 || $model->mode == 2) {
+if ($questionSave->status == 1) {
   ?>
   <div class="col-md-10">
     <center>
@@ -154,10 +154,10 @@ if ($questionSave->status == 1 || $model->mode == 2) {
 
 
 <?php
-if ($model->mode == 2 && $isAdmin == true) {
+if ($questionSave->status > 1) {
   echo LoadQuestionSave::widget(['questionSave' => $questionSave, 'isAdmin' => $isAdmin]);
 } else if ($model->mode == 1) {
-  echo LoadQuestionSave::widget(['questionSave' => $questionSave, 'isAdmin' => $isAdmin]);
+//  echo LoadQuestionSave::widget(['questionSave' => $questionSave, 'isAdmin' => $isAdmin]);
 } else {
   
 }
@@ -171,11 +171,12 @@ if ($model->mode == 2 && $isAdmin == true) {
 <a class="max-question-data" data-max="<?= sizeof($questions) ?>"></a>
 <a class="is-multi-select-choice" data-multi="<?= (!empty($model->multi_select_choice) && isset($model->multi_select_choice)) ? $model->multi_select_choice : '0' ?>"></a>
 <a class="render-force-question-id" data-id=""></a>
+<a class="question-save" data-id="<?= $questionSave->id ?>" ></a>
+<a class="question-save-status" data-id="<?= $questionSave->status ?>" ></a>
+<a class="question-save-score" data-id="<?= $questionSave->score ?>"></a>
 <?php
 if ($model->mode == 2 && $isAdmin == true) {
-  ?>
-  <a class="question-save" data-id="<?= $questionSave->id ?>" ></a>
-  <?php
+  
 } else if ($model->mode == 2) {
   ?>
   <a class="doing-question-section" data-present-question="1" ></a>
@@ -183,7 +184,6 @@ if ($model->mode == 2 && $isAdmin == true) {
 } else if ($model->mode == 1) {
   ?>
   <a class="doing-question-section" data-present-question="<?= $questionSave->present_question ?>" data-question-last="<?= $newQuestionPart[0] ?>" data-key-part="<?= $getKeyArrQuestionPart[1] ?>" data-render=""></a>
-  <a class="question-save" data-id="<?= $questionSave->id ?>" ></a>
   <?php
 } else {
   

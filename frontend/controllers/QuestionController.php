@@ -140,7 +140,7 @@ class QuestionController extends Controller {
   public function setJsonJump() {
     return [
         'jump_type' => 1, // 1: กระโดดตาม choice ที่เลือก,  2: ใช้ผลรวมในการกระโดด
-        'jump_constraint' => 1, // 1: >=,  2: <=,  3: =
+        'jump_constraint' => 1, // 1: >=,  2: <=,  3: ==
         'jump_score' => 0,
         'jump_constraint_true' => '',
         'jump_constraint_false' => '',
@@ -159,6 +159,8 @@ class QuestionController extends Controller {
     $model->jump_type = $model->jump_json->jump_type;
     $model->jump_constraint = $model->jump_json->jump_constraint;
     $model->jump_score = $model->jump_json->jump_score;
+    $model->jump_constraint_true = $model->jump_json->jump_constraint_true;
+    $model->jump_constraint_false = $model->jump_json->jump_constraint_false;
 
     $model->mp3 = 0;
     $model->png = 0;
@@ -180,6 +182,8 @@ class QuestionController extends Controller {
       $model->jump_json->jump_type = $model->jump_type;
       $model->jump_json->jump_constraint = $model->jump_constraint;
       $model->jump_json->jump_score = $model->jump_score;
+      $model->jump_json->jump_constraint_true = $model->jump_constraint_true;
+      $model->jump_json->jump_constraint_false = $model->jump_constraint_false;
 
       $model->jump_json = json_encode($model->jump_json);
 
@@ -212,6 +216,8 @@ class QuestionController extends Controller {
     $model->jump_type = $model->jump_json->jump_type;
     $model->jump_constraint = $model->jump_json->jump_constraint;
     $model->jump_score = $model->jump_json->jump_score;
+    $model->jump_constraint_true = $model->jump_json->jump_constraint_true;
+    $model->jump_constraint_false = $model->jump_json->jump_constraint_false;
 
     if ($model->load(Yii::$app->request->post())) {
       $model = $this->encodeModelWithArray($model, $this->choiceNames(), 'choices');
@@ -221,6 +227,8 @@ class QuestionController extends Controller {
       $model->jump_json->jump_type = $model->jump_type;
       $model->jump_json->jump_constraint = $model->jump_constraint;
       $model->jump_json->jump_score = $model->jump_score;
+      $model->jump_json->jump_constraint_true = $model->jump_constraint_true;
+      $model->jump_json->jump_constraint_false = $model->jump_constraint_false;
 
       $model->jump_json = json_encode($model->jump_json);
       if ($model->uploadFile('file_upload') != false) {

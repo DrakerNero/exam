@@ -222,7 +222,28 @@ class QuestionSetController extends Controller {
     return rand(1, sizeof(array_values(array_unique($arr))) - 1);
   }
 
+  public function newModelQuestionSave($questionSetId, $parts) {
+    $model = new QuestionSave();
+    $model->question_set_id = $questionSetId;
+    $model->user_id = '' . Yii::$app->user->identity->id;
+    $model->module_part = json_encode($parts);
+    $model->present_question = 1;
+    $model->multi_select_choice = 1;
+    $model->score = '';
+    $model->elapse_time = 0;
+    $model->status = 1;
+    $model->mode = '';
+    $model->answer = '';
+//    $model->created_at = 1531653284;
+//    $model->updated_at = 1531653284;
+//    echo '<pre>';
+//    print_r($model);
+
+    $model->save();
+  }
+
   public function getArrQuestion($model) {
+    $questionSave = $this->isQuestionSaveExamTypeJump($model->id);
     $arrPart = [];
     $arrModel = [];
     $arrMode_1 = [];
@@ -242,55 +263,71 @@ class QuestionSetController extends Controller {
         'question_type' => $model->question_type,
         'select_question_type' => $model->select_question_type,
     ];
-    $questions = Question::find()
-            ->where(['>=', 'id', $model->from])
-            ->andWhere(['<=', 'id', $model->to])
-            ->all();
-    foreach ($questions as $question) {
-      if ($question->part < 100) {
-        array_push($arrMode_1, $question->part);
-      } else {
-        array_push($arrMode_2, $question->part);
+    if (!empty($questionSave) && isset($questionSave) && $questionSave->module_part != null && $questionSave->module_part != '') {
+      $questions = Question::find()
+              ->where(['part' => json_decode($questionSave->module_part)])
+              ->andWhere(['>=', 'id', $model->from])
+              ->andWhere(['<=', 'id', $model->to])
+              ->all();
+    } else {
+      $questions = Question::find()
+              ->where(['>=', 'id', $model->from])
+              ->andWhere(['<=', 'id', $model->to])
+              ->all();
+      foreach ($questions as $question) {
+        if ($question->part < 100) {
+          array_push($arrMode_1, $question->part);
+        } else {
+          array_push($arrMode_2, $question->part);
+        }
       }
+      $random_1 = array_values(array_unique($arrMode_1))[$this->handleRandomSizeArray(array_values(array_unique($arrMode_1)))];
+      $random_2 = array_values(array_unique($arrMode_2))[$this->handleRandomSizeArray(array_values(array_unique($arrMode_2)))];
+
+      array_push($arrPart, $random_1);
+      array_push($arrPart, $random_2);
+      $arr = [];
+      $modelQuestionWithPart = $this->getModelQuestionWithPart($questions, $arrPart);
+      $this->newModelQuestionSave($model->id, $arrPart);
+
+
+      $arr['questions'] = $modelQuestionWithPart['questions'];
+      $arr['totalModule'] = $modelQuestionWithPart['totalQuestion'];
+      $arr['parts'] = $arrPart;
+      $questions = Question::find()
+              ->where(['part' => $arrPart])
+              ->andWhere(['>=', 'id', $model->from])
+              ->andWhere(['<=', 'id', $model->to])
+              ->all();
     }
-    $random_1 = array_values(array_unique($arrMode_1))[$this->handleRandomSizeArray(array_values(array_unique($arrMode_1)))];
-    $random_2 = array_values(array_unique($arrMode_2))[$this->handleRandomSizeArray(array_values(array_unique($arrMode_2)))];
-
-    array_push($arrPart, $random_1);
-    array_push($arrPart, $random_2);
-    $arr = [];
-    $modelQuestionWithPart = $this->getModelQuestionWithPart($questions, $arrPart);
-
-    $arr['questions'] = $modelQuestionWithPart['questions'];
-    $arr['totalModule'] = $modelQuestionWithPart['totalQuestion'];
-    $arr['parts'] = $arrPart;
-
-    $questions = Question::find()
-            ->where(['part' => $arrPart])
-            ->andWhere(['>=', 'id', $model->from])
-            ->andWhere(['<=', 'id', $model->to])
-            ->all();
-    return $questions;
+    $returnArr = ['questions' => $questions, 'questionSave' => $questionSave];
+    return $returnArr;
 //    return $arr;
+  }
+
+  public function isQuestionSaveExamTypeJump($questionSetId) {
+    $model = QuestionSave::find()->where(['user_id' => Yii::$app->user->identity->id, 'status' => [1, 3], 'question_set_id' => $questionSetId])->one();
+    if (!empty($model) && isset($model)) {
+      return $model;
+    }
+
+    return null;
   }
 
   public function actionDoExam($questionSetId) {
     $isAdmin = false;
     $model = QuestionSet::findOne($questionSetId);
     if (!empty($model)) {
-      if (!empty($model->mode) && isset($model->mode) && $model->mode == 2) {
-        $handleQuestions = $this->getArrQuestion($model);
+      if (!empty($model->mode) && isset($model->mode) && $model->mode == 2) { // ข้อสอบกระโดด
+        $this->layout = 'main_exam_2';
+        $getDataQuestion = $this->getArrQuestion($model);
+        $handleQuestions = $getDataQuestion['questions'];
+        $questionSave = $getDataQuestion['questionSave'];
         return $this->render('exam2', [
                     'model' => $model,
-                    'questionSave' => (object) ['status' => 0],
-                    'questions' => $this->getArrQuestion($model),
-//                    'totalModule' => $totalModule,
-//                    'part' => $parts,
-//                    'uniquePart' => $uniquePart,
-//                    'newQuestions' => $questionSuccess,
-//                    'doPart' => $doPart,
+                    'questionSave' => $questionSave,
+                    'questions' => $handleQuestions,
                     'isAdmin' => $isAdmin,
-//                  'inArrayModulePart' => $inArrayModulePart,
         ]);
       } else {
 
@@ -395,7 +432,6 @@ class QuestionSetController extends Controller {
           }
         }
         $uniquePart = array_values(array_unique($parts));
-//        $questionSave = QuestionSave::LoadQuestionSave($model->id, min($uniquePart));
 
         foreach (array_rand($uniquePart, $model->total_module) as $keyModule) { // loop เพื่อ random module ของ question_set
           array_push($moduleQuestion, $uniquePart[$keyModule]);

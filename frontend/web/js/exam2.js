@@ -2,6 +2,10 @@ var csrfToken = $('meta[name="csrf-token"]').attr("content");
 var dataMultiChoice = $('.is-multi-select-choice').attr('data-multi');
 var multiChoice = (dataMultiChoice == 1) ? true : false;
 var questionSetMode = $('.question-set-mode').attr('data-mode'); // 1: ปกติ,  2: มีข้อกระโดด
+var questionFrom = $('.question-from').attr('data-id');
+var questionTo = $('.question-to').attr('data-id');
+var questionSaveStatus = $('.question-save-status').attr('data-id');
+var questionSaveScore = $('.question-save-score').attr('data-id');
 
 var percentPass = 80;
 
@@ -193,32 +197,123 @@ function ShowTitleAnswer(point, questionType) {
   }
 }
 
-function SaveState(state) {
-  $('.wrapper-send-exam').remove();
-  var questionSaveStatus = $('.question-save-status').attr('data-id');
-  var questionType = $('.question-type').attr('data-id');
-  if (questionSaveStatus == 3) {
-    return true;
-  } else if (state == 2) {
-    if (confirm('ออกจากการทำข้อสอบ?')) {
-      SaveStateDoing();
-      return true;
-    } else {
-      return false;
-    }
-  } else if (state == 3) {
-    if (confirm('Confirm?')) {
-      var score = ShowAnswer();
 
-      if (multiChoice == true) {
-        score = handleOnShowAnswer();
-//        handleOnSumScore();
+function renderScoreBoard(score, totalScore) {
+  var title = '';
+  var percent = (score * totalScore) / 100;
+  percent = (percent <= 0) ? 0 : percent;
+  if (percent >= 80) {
+    title = 'ยินดีด้วยท่านผ่านเกณฑ์ 80% ของข้อสอบชุดนี้';
+  } else {
+    title = 'ท่านไม่ผ่านเกณฑ์คะแนนขั้นต่ำ กรุณากดปุ่ม Reset เพื่อทำใหม่อีกครั้ง';
+
+  }
+  $('.td-ex-body>h6').text(title);
+  $('.load-score').html(percent.toFixed(0) + "% <br>");
+}
+
+function handleQuestionSetJumpModeSaveScore() {
+  var questionIds = [];
+  var totalScore = 0;
+  var myScore = 0;
+  var questionSelectChoices = [];
+  var stringSelectChoice = '';
+  for (var i = questionFrom; i <= questionTo; i++) {
+    var check = $("input[name^='name_" + i + "']").is(':checked');
+    if (check != undefined && check == 1) {
+      questionIds.push(i);
+    } else {
+
+    }
+  }
+  questionIds.forEach(function (questionId) {
+    var selectChoices = [];
+    var stringChoice = '';
+    for (var i2 = 1; i2 <= 15; i2++) {
+      var getScoreChoice = $('#answer-point-' + questionId + '-' + i2).attr('data-point');
+      var getSelectChoice = $('#radio_' + questionId + '_' + i2 + ':checked');
+      var scoreChoice = 0;
+      if (getSelectChoice.val() != undefined) { // รวมคะแนนจาก choice ที่เราเลือก
+        myScore = myScore + parseInt(getScoreChoice);
+
+        selectChoices.push(i2);
+        stringChoice = (stringChoice === '') ? '' + i2 : stringChoice + ',' + i2;
       } else {
 
       }
-      SaveStateDone(score);
-    } else {
-      return false;
+      if (getScoreChoice > 0) { // รวมคะแนนสูงสูด
+        totalScore = totalScore + parseInt(getScoreChoice);
+      } else {
+
+      }
+    }
+
+    stringSelectChoice = (stringSelectChoice === '') ? '' + questionId + ',' + stringChoice : stringSelectChoice + '&' + questionId + ',' + stringChoice;
+
+    questionSelectChoices[questionId] = selectChoices;
+
+  });
+
+  console.log(stringSelectChoice);
+//  console.log(JSON.stringify(questionSelectChoices));
+  renderScoreBoard(myScore, totalScore);
+//  ShowAnswer();
+  postSaveExam(myScore, stringSelectChoice);
+//  stringSelectChoice = stringSelectChoice + '&' +
+}
+
+function postSaveExam(score, stringSelectChoice) {
+  var questionSaveId = $('.question-save').attr('data-id');
+  var csrfToken = $('meta[name="csrf-token"]').attr("content");
+  $.ajax({
+    type: "POST",
+    url: "index.php?r=question-save/handle-post-submit-exam",
+    cache: false,
+    data: ({
+      stringSelectChoice: stringSelectChoice,
+      questionSaveId: questionSaveId,
+      score: score,
+      _csrf: csrfToken
+    }),
+    success: function (data) {
+      location.reload();
+    },
+    error: function (data) {
+      return "ไม่มีการส่งข้อมูล";
+    }
+  });
+}
+
+function SaveState(state) {
+  $('.wrapper-send-exam').remove();
+  if (questionSetMode == 2) {
+    handleQuestionSetJumpModeSaveScore();
+  } else {
+    var questionSaveStatus = $('.question-save-status').attr('data-id');
+    var questionType = $('.question-type').attr('data-id');
+    if (questionSaveStatus == 3) {
+      return true;
+    } else if (state == 2) {
+      if (confirm('ออกจากการทำข้อสอบ?')) {
+        SaveStateDoing();
+        return true;
+      } else {
+        return false;
+      }
+    } else if (state == 3) {
+      if (confirm('Confirm?')) {
+        var score = ShowAnswer();
+
+        if (multiChoice == true) {
+          score = handleOnShowAnswer();
+//        handleOnSumScore();
+        } else {
+
+        }
+        SaveStateDone(score);
+      } else {
+        return false;
+      }
     }
   }
 }
@@ -310,6 +405,48 @@ function SaveStateDone(score) {
   });
 }
 
+function openAnswerWithFromTo() {
+  var numQuestion = 0;
+  var questionType = $('.question-type').attr('data-id');
+  var arrColor = {
+    1: "rgb(0, 166, 90)",
+    2: "rgb(221, 75, 57)",
+    3: ""
+  };
+  var answerCorrect = "";
+  var answerWrong = "";
+  if (questionType !== "2") {
+    answerCorrect = arrColor[1];
+    answerWrong = arrColor[2];
+
+  } else {
+    answerCorrect = arrColor[0];
+    answerWrong = arrColor[0];
+//        $('.frame-submit-mobile').css({'opacity': '0'});
+    $('.frame-submit-mobile').css({'opacity': '0'});
+  }
+
+  while (from <= to) {
+    var answer = $('#qa-' + from).attr('data-id');
+    var question = $('input:radio[name="name_' + from + '"]:checked').val();
+    if (question) {
+      if (question === answer) {
+        $('.class_' + from).css({"background-color": "#00A65A", "color": "#fff"});
+        $('.scroll_' + from).css({'background': answerCorrect});
+        $('.class_' + from).show();
+        agree++;
+        numQuestion++;
+      } else {
+        $('.class_' + from).css({"background-color": "#DD4B39", "color": "#fff"});
+        $('.scroll_' + from).css({'background': answerWrong});
+        $('.class_' + from).show();
+        numQuestion++;
+      }
+    }
+    from++;
+  }
+}
+
 function ShowAnswer() {
 
   $('.question-save-status').attr('data-id', '3');
@@ -385,7 +522,14 @@ function ShowAnswer() {
   }
   var percent = (agree * 100) / countQuestion;
   percent = (percent <= 0) ? 0 : percent;
-  if (title >= 80) {
+  if (questionSaveStatus > 1) {
+    percent = questionSaveScore;
+    agree = questionSaveScore;
+  } else {
+
+  }
+
+  if (percent >= 80) {
     title = 'ยินดีด้วยท่านผ่านเกณฑ์ 80% ของข้อสอบชุดนี้';
   } else {
     title = 'ท่านไม่ผ่านเกณฑ์คะแนนขั้นต่ำ กรุณากดปุ่ม Reset เพื่อทำใหม่อีกครั้ง';
@@ -428,7 +572,6 @@ function ShowAnswer() {
   $("#carousel-example-generic input").prop('disabled', true);
 
   (parseInt(handleOnShowAnswer()) >= percentPass) ? handlePercentPass() : null;
-//  console.log('hello 741: ' + handleOnShowAnswer() + ' : ' + percentPass + ' : ' + agree);
   return agree;
 //  }
 }
@@ -516,6 +659,36 @@ $('.btn-next-present').click(function () {
   $(this).hide();
 });
 
+function handleRenderQuestion(renderQuestionId) {
+  $('.render-force-question-id').attr('data-id', renderQuestionId);
+  $('.question-id-' + renderQuestionId).show();
+}
+
+function handleSumScoreQuestion(quesitonId) {
+  var selectChoice = [];
+  var scores = [];
+  $("[class*='choice-question-" + quesitonId + "']").each(function () {
+    if ($(this).is(':checked')) {
+      selectChoice.push(parseInt($(this).val()));
+    } else {
+
+    }
+  });
+  selectChoice.forEach(function (element) {
+    var score = $('#answer-point-' + quesitonId + '-' + element).attr('data-point');
+    scores.push(parseInt(score));
+  });
+  if (selectChoice.length > 1) {
+    var sumScore = 0;
+    scores.forEach(function (element) {
+      sumScore = sumScore + parseInt(element);
+    });
+    return sumScore;
+  } else {
+    return scores[0];
+  }
+}
+
 function handleRenderQuestionJumpType() {
   var forceQuestion = $('.render-force-question-id').attr('data-id');
   var selectEl = '';
@@ -526,7 +699,6 @@ function handleRenderQuestionJumpType() {
 
   }
 
-  console.log(selectEl + ', ' + forceQuestion);
   var typeQuestion = $(selectEl).attr('data-question-type');
   var questionId = $(selectEl).attr('data-question-id');
   var jumpType = $(selectEl).attr('data-jump-type');
@@ -535,19 +707,37 @@ function handleRenderQuestionJumpType() {
   var jumpConstraintTrue = $(selectEl).attr('data-jump-constraint-true');
   var jumpConstraintFalse = $(selectEl).attr('data-jump-constraint-false');
 
+  var successScore = true;
+
   if (typeQuestion == 3) {
     if (jumpType == 1) {
       var radioCheck = $('.radio-preset-' + questionId + ':checked').val();
       var renderQuestionId = $('.jump-question-' + questionId + '-' + radioCheck).attr('data-jump-question');
-      $('.render-force-question-id').attr('data-id', renderQuestionId);
-      $('.question-id-' + renderQuestionId).show();
-      
-      alert(renderQuestionId);
-      if(renderQuestionId == '' || renderQuestionId == undefined || renderQuestionId == null) {
+      handleRenderQuestion(renderQuestionId);
+//      $('.render-force-question-id').attr('data-id', renderQuestionId);
+//      $('.question-id-' + renderQuestionId).show();
+
+      if (renderQuestionId == '' || renderQuestionId == undefined || renderQuestionId == null) {
         $('.wrapper-send-exam').show();
       }
 
     } else if (jumpType == 2) {
+      var checkScore = handleSumScoreQuestion(questionId);
+      if (jumpConstraint == 1) {
+        successScore = (checkScore >= jumpScore);
+      } else if (jumpConstraint == 2) {
+        successScore = (checkScore <= jumpScore);
+      } else if (jumpConstraint == 3) {
+        successScore = (checkScore == jumpScore);
+      } else {
+
+      }
+      if (successScore === true) {
+        handleRenderQuestion(jumpConstraintTrue);
+      } else {
+        handleRenderQuestion(jumpConstraintFalse);
+      }
+
 
     } else {
 
@@ -650,7 +840,7 @@ function handleClickChoice(choiceId) {
 
 function autoSelectChoice(choiceId, multiSelectChoice) {
   var arrayMultiSelectChoice = multiSelectChoice.split(',');
-  $("[class^='choice-question-" + choiceId + "']").each(function (i) {
+  $("[class*='choice-question-" + choiceId + "']").each(function (i) {
     if (arrayMultiSelectChoice.includes($(this).val())) {
       $(this).attr('checked', true);
     }
@@ -712,6 +902,34 @@ function handleMissionTree() {
   }
 }
 
+function removeQuestionEl(questionId) {
+  $('.question-id-' + questionId).remove();
+}
+
+function handleRemoveQuestionEl() {
+  for (var i = questionFrom; i <= questionTo; i++) {
+    var check = $("input[name^='name_" + i + "']").is(':checked');
+    console.log(i + ' : ' + check);
+    if (check != undefined && check == 1) {
+//      questionIds.push(i);
+    } else { // ถ้าไม่มีให้ remove ทิ่ง
+      removeQuestionEl(i);
+    }
+  }
+}
+
+function renderScore() {
+  var title = '';
+  if (questionSaveScore >= 80) {
+    title = 'ยินดีด้วยท่านผ่านเกณฑ์ 80% ของข้อสอบชุดนี้';
+  } else {
+    title = 'ท่านไม่ผ่านเกณฑ์คะแนนขั้นต่ำ กรุณากดปุ่ม Reset เพื่อทำใหม่อีกครั้ง';
+
+  }
+//  $('.td-ex-body>h6').text(title);
+  $('.load-score').html(score.toFixed(0) + "% <br>");
+}
+
 $(document).ready(function () {
   renderPreSentQuestion();
   renderProgressBar();
@@ -719,5 +937,18 @@ $(document).ready(function () {
     type: 'image'
             // other options
   });
+  $('.tr-ex-head').remove();
+
+
+});
+
+$(window).load(function () {
+  $('.progress').remove();
+  if (questionSaveStatus > 1) {
+    handleRemoveQuestionEl();
+    renderScore();
+  } else {
+
+  }
 });
 

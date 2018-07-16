@@ -40,10 +40,10 @@ class LoadQuestionSave extends \yii\bootstrap\Widget {
       }
     }
     if ($this->questionSave->status == 3 || $this->isAdmin == true) {
-      $jsLoadAns = "
-                    ShowAnswer();
-                    ";
-      $this->view->registerJs($jsLoadAns, View::POS_END);
+//      $jsLoadAns = "
+//                    ShowAnswer();
+//                    ";
+//      $this->view->registerJs($jsLoadAns, View::POS_END);
 //      
     } else {
       

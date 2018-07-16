@@ -9,7 +9,7 @@ use frontend\widgets\QuestionAudio;
 use frontend\widgets\QuestionPNG;
 use frontend\widgets\AnswerQuestion;
 
-class LoadViewQuestion extends \yii\bootstrap\Widget {
+class LoadViewQuestion2 extends \yii\bootstrap\Widget {
 
   public $question;
   public $countDiv;
@@ -32,6 +32,7 @@ class LoadViewQuestion extends \yii\bootstrap\Widget {
     if (!empty($this->question->type_question) && isset($this->question->type_question) && $this->question->type_question == 3 && $this->question->jump_json != null) {
       $jumpJson = json_decode($this->question->jump_json);
       $jumpChoices = json_decode($this->question->jump_choices);
+      $answers = json_decode($this->question->answers, true);
 
       $jumpType = $jumpJson->jump_type;
       $jumpConstraint = $jumpJson->jump_constraint;
@@ -44,7 +45,7 @@ class LoadViewQuestion extends \yii\bootstrap\Widget {
       foreach ($jumpChoices as $jumpChoice) {
         if ($jumpChoice != '') {
           ?>
-          <a class="jump-question-<?= $this->question->id ?>-<?= $countChoice ?>" data-jump-question="<?= $jumpChoice ?>"></a>
+          <a class="jump-question-<?= $this->question->id ?>-<?= $countChoice ?>" data-score="<?= $answers[$countChoice - 1] ?>" data-jump-question="<?= $jumpChoice ?>"></a>
 
           <?php
         } else {
@@ -60,7 +61,7 @@ class LoadViewQuestion extends \yii\bootstrap\Widget {
       <a 
         class="no-question-data-<?= $this->countQuestion ?>" 
         id="no-question-data-question-id-<?= $this->question->id ?>"
-        data-question-id="<?= $this->question->id?>"
+        data-question-id="<?= $this->question->id ?>"
         data-question-type="<?= $this->question->type_question ?>"
         data-jump-type="<?= $jumpType ?>"
         data-jump-constraint="<?= $jumpConstraint ?>"
@@ -104,11 +105,9 @@ class LoadViewQuestion extends \yii\bootstrap\Widget {
                       $answers = json_decode($this->question->answers, true);
                       $qid = $this->question->id;
                       $i = 0;
-                      $myContent = "";
                       if (is_array($choices) || is_object($choices)) {
                         foreach ($choices as $key => $value) {
                           $i++;
-                          echo $myContent;
                           $IDradio = "radio_" . $qid . "_" . $i;
                           if (!empty($key)) {
                             if (($this->question->type_question == 2 || $this->question->type_question == 3) && $answers[$key] == '') {
@@ -151,7 +150,7 @@ class LoadViewQuestion extends \yii\bootstrap\Widget {
                 }
                 ?>
 
-                                                        <!--<div class="wrapper-not-choice" id="wrapper-question-section-<?= $this->countQuestion ?>"></div>-->
+                                                                <!--<div class="wrapper-not-choice" id="wrapper-question-section-<?= $this->countQuestion ?>"></div>-->
 
               </div><!-- /.box-body -->
             </div><!-- /.box -->
@@ -172,25 +171,6 @@ class LoadViewQuestion extends \yii\bootstrap\Widget {
         }
         ?>
         <a class="max-select-choice-question-<?= $this->question->id ?>" data-max-choice="<?= $this->question->max_select_choice ?>"></a>
-        <?php
-        if (!empty($this->question->is_mission_tree) && isset($this->question->is_mission_tree) && $this->question->is_mission_tree == 1) {
-          ?>
-          <a href="#" style="display: none;" class="is-mission-tree" data-status="true" data-id="<?= $this->question->id ?>"></a>
-          <?php
-          $arrMissionTree = json_decode($this->question->mission_tree_questions);
-          $countKey = 1;
-          foreach ($arrMissionTree as $missionTree) {
-            if (!empty($missionTree) && isset($missionTree) && $missionTree != '') {
-              ?>
-              <a id="mission-tree-question-<?= $this->question->id ?>-<?= $countKey ?>" style="display: none;"><?= $missionTree ?></a>
-              <?php
-            }
-            $countKey++;
-          }
-        } else {
-          
-        }
-        ?>
 
         <?php
       }

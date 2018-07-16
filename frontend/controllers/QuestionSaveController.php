@@ -29,6 +29,7 @@ class QuestionSaveController extends Controller {
                         'rescore-all-status',
                         'question-save-export-excel',
                         'question-save-export-excel-with-user',
+                        'handle-post-submit-exam',
                     ],
                     'allow' => true,
                     'roles' => ['@']
@@ -368,6 +369,44 @@ class QuestionSaveController extends Controller {
     } else {
       echo 'ไม่พบข้อมูลนักเรียน';
     }
+  }
+
+  public function actionHandlePostSubmitExam() {
+    $this->layout = 'blank';
+    $questionSaveId = $_POST['questionSaveId'];
+    $score = $_POST['score'];
+    $stringSelectChoice = $_POST['stringSelectChoice'];
+    $questionSelectChoices = [];
+    $questionSaves = [];
+    $time = date('Y-m-d H:i:s');
+    $questionSave = QuestionSave::find()->where(['id' => $questionSaveId])->one();
+//    $questionSave->answer = [];
+//    $questionSave->answer = json_encode($questionSave->answer);
+//    $questionSave->answer = json_decode($questionSave->answer);
+
+    $questionExplode = explode('&', $stringSelectChoice);
+
+    foreach ($questionExplode as $questionString) {
+      $arrSave = [];
+      $choices = explode(',', $questionString);
+      $arrChoice = [];
+      $key = $choices[0];
+      unset($choices[0]);
+      foreach ($choices as $choice) {
+        (!empty($choice) && isset($choice) && $choice != '') ? array_push($arrChoice, $choice) : null;
+      }
+
+      $questionSelectChoices[$key] = $choices;
+      $arrSave['key'] = $key;
+      $arrSave['value'] = json_encode($arrChoice);
+      $arrSave['time'] = $time;
+      $questionSaves[$key] = $arrSave;
+    }
+
+    $questionSave->answer = json_encode($questionSaves);
+    $questionSave->score = (int)$score;
+    $questionSave->status = 3;
+    $questionSave->save();
   }
 
 }

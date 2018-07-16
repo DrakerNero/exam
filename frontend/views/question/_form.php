@@ -68,7 +68,7 @@ $maxSelectChoice = (!empty($model->max_select_choice) && isset($model->max_selec
           <?= $form->field($model, 'jump_constraint_true')->textInput()->label('ถ้าใช่กระโดดข้อ') ?>
         </div>
         <div class="col-md-4">
-          <?= $form->field($model, 'jump_constraint_false')->textInput()->label('ถ้าใช่กระโดดข้อ') ?>
+          <?= $form->field($model, 'jump_constraint_false')->textInput()->label('ถ้าไม่ใช่กระโดดข้อ') ?>
         </div>
       </div>
     </div>
