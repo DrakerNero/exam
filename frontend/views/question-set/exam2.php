@@ -51,6 +51,7 @@ $checkModulePart = '';
 $conutQuestionWithModule = 1;
 foreach ($questions as $question) {
   $marginTop = '';
+  $isNewCase = false;
   $i++;
   $arrQuestionPart[$question->part] = $i;
 //  $modulePart = (!empty($modulePart) && isset($modulePart) && $modulePart)
@@ -58,6 +59,7 @@ foreach ($questions as $question) {
     $modulePart = 1;
     $checkModulePart = $question->part;
   } else if ($checkModulePart != $question->part) {
+    $isNewCase = true;
     $marginTop = 'margin-top: 100px !important;';
     $modulePart = $modulePart + 1;
     $checkModulePart = $question->part;
@@ -74,7 +76,8 @@ foreach ($questions as $question) {
         'questionNumber' => $modulePart . '.' . $conutQuestionWithModule,
         'modelQuestion' => $model,
         'isAdmin' => $isAdmin,
-        'marginTop' => $marginTop
+        'marginTop' => $marginTop,
+        'isNewCase' => $isNewCase
     ]);
   } else {
     
@@ -204,6 +207,6 @@ if ($disableChoice) {
 
 //print_r($arrQuestionPart);
 ?>
-  <div class="over-img" style="text-align: center; display: none;">
-    <img src="<?= Yii::$app->getUrlManager()->getBaseUrl() ?>/uploads/static/over.jpg" />
-  </div>
+<div class="over-img" style="text-align: center; display: none;">
+  <img src="<?= Yii::$app->getUrlManager()->getBaseUrl() ?>/uploads/static/over.jpg" />
+</div>

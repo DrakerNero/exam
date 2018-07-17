@@ -234,10 +234,6 @@ class QuestionSetController extends Controller {
     $model->status = 1;
     $model->mode = '';
     $model->answer = '';
-//    $model->created_at = 1531653284;
-//    $model->updated_at = 1531653284;
-//    echo '<pre>';
-//    print_r($model);
 
     $model->save();
 

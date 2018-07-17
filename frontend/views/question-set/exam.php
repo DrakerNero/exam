@@ -53,11 +53,12 @@ foreach ($questions as $question) {
   $marginTop = '';
   $i++;
   $arrQuestionPart[$question->part] = $i;
-//  $modulePart = (!empty($modulePart) && isset($modulePart) && $modulePart)
+  $isNewCase = false;
   if (isset($modulePart) && $modulePart == '') {
     $modulePart = 1;
     $checkModulePart = $question->part;
   } else if ($checkModulePart != $question->part) {
+    $isNewCase = true;
     $marginTop = 'margin-top: 100px !important;';
     $modulePart = $modulePart + 1;
     $checkModulePart = $question->part;
@@ -74,7 +75,9 @@ foreach ($questions as $question) {
         'questionNumber' => $modulePart . '.' . $conutQuestionWithModule,
         'modelQuestion' => $model,
         'isAdmin' => $isAdmin,
-        'marginTop' => $marginTop
+        'marginTop' => $marginTop,
+        'isNewCase' => $isNewCase,
+        'modulePart' => $modulePart,
     ]);
   } else {
     

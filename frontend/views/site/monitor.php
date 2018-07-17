@@ -3,8 +3,10 @@
 use yii\helpers\Url;
 use frontend\widgets\MonitorTopTItle;
 use frontend\widgets\QuestionSaveMonitorGridView;
+use frontend\helpers\MainHelper;
 
 $this->title = 'Chula Interactive Medical Case';
+$lotataions = MainHelper::setLotation();
 ?>
 <div class="site-index">
   <div class="row top_tiles">
@@ -66,9 +68,11 @@ $this->title = 'Chula Interactive Medical Case';
             <select id="input-rotation-data" style="font-size: 14px;" class="form-control">
               <option disabled selected>Choose Rotation...</option>
               <?php
-              for ($i = 1; $i <= 3; $i++) {
+              $i = 1;
+              foreach ($lotataions as $lotataions) {
                 $selected2 = ($i == $rotation) ? 'selected' : '';
-                echo '<option value="' . $i . '" ' . $selected2 . '>' . $i . '</option>';
+                echo '<option value="' . $i . '" ' . $selected2 . '>' . $lotataions . '</option>';
+                $i++;
               }
               ?>
             </select>
@@ -86,7 +90,7 @@ $this->title = 'Chula Interactive Medical Case';
               QuestionSaveMonitorGridView::widget([
                   'dataProvider' => $dataProvider,
                   'searchModel' => $searchUser,
-                  'examCount'=>$examCount,
+                  'examCount' => $examCount,
               ]);
               ?>
             </div>

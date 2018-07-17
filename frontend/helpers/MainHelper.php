@@ -35,12 +35,23 @@ class MainHelper extends Controller {
 //        4 => 'Fail - Retest',
 //    ];
   }
-  
-  public function arrayQuestionSaveStatus(){
-     return [
+
+  public function arrayQuestionSaveStatus() {
+    return [
         1 => 'Doing',
         3 => 'Pass',
         4 => 'Fail - Retest',
+    ];
+  }
+
+  public function setLotation() {
+    return [
+        1 => 'รุ่น 1 พ.ค.-ก.ค.',
+        2 => 'รุ่น 2 ก.ค.-ส.ค.',
+        3 => 'รุ่น 3 ส.ค.-ต.ค.',
+        4 => 'รุ่น 4 ต.ค.-ธ.ค.',
+        5 => 'รุ่น 5 ธ.ค.-ก.พ.',
+        6 => 'รุ่น 6 ก.พ.-เม.ย',
     ];
   }
 

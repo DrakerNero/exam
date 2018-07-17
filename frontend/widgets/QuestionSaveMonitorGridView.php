@@ -25,8 +25,8 @@ class QuestionSaveMonitorGridView extends \yii\bootstrap\Widget {
         'filterModel' => $this->searchModel,
         'columns' => [
             [
-                'attribute' => 'student_id',
-                'value' => 'student_id',
+                'attribute' => 'username',
+                'value' => 'username',
                 'width' => '90px',
             ],
             [
@@ -60,11 +60,11 @@ class QuestionSaveMonitorGridView extends \yii\bootstrap\Widget {
             [
                 'attribute' => 'rotation',
                 'value' => 'rotation',
-                'width' => '50px',
+                'width' => '150px',
                 'label' => 'Rotation',
-                'filter' => $arrRotation,
+                'filter' => MainHelper::setLotation(),
                 'value' => function($model) {
-                  return (!empty($model->myRotation) && isset($model->myRotation) && $model->myRotation->name != null && $model->myRotation->name != '' ) ? $model->myRotation->name : '-';
+                  return (!empty($model->rotation) && isset($model->rotation) && $model->rotation != null) ? MainHelper::setLotation()[$model->rotation] : '';
                 },
                 'contentOptions' => ['style' => 'text-align: center;']
             ],

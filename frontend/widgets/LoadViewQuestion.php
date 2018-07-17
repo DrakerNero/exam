@@ -19,6 +19,8 @@ class LoadViewQuestion extends \yii\bootstrap\Widget {
   public $questionNumber;
   public $isAdmin = false;
   public $marginTop;
+  public $isNewCase;
+  public $modulePart;
 
   public function run() {
     $name = $this->countDiv;
@@ -28,6 +30,17 @@ class LoadViewQuestion extends \yii\bootstrap\Widget {
     <div class="frame-exam " id="<?= $idPart ?>"  >
       <div  class="col-md-10" disabled>
         <div id="render-question-no-<?= $this->countQuestion ?>" style="<?= $this->marginTop ?>">
+          <?php
+          if ($this->isNewCase == true) {
+            ?>
+
+            <div class="box box-primary" id="explanation-exam">
+              <h5 style="font-weight: bold">Case <?= $this->modulePart ?> </h5>
+            </div>
+
+            <?php
+          }
+          ?>
           <div class="frameExam" id="scroll_<?= $this->countDiv; ?>">
             <div class="box box-solid">
               <div class="box-header with-border" id="frameHeader">
@@ -106,7 +119,7 @@ class LoadViewQuestion extends \yii\bootstrap\Widget {
                 }
                 ?>
 
-                    <!--<div class="wrapper-not-choice" id="wrapper-question-section-<?= $this->countQuestion ?>"></div>-->
+                        <!--<div class="wrapper-not-choice" id="wrapper-question-section-<?= $this->countQuestion ?>"></div>-->
 
               </div><!-- /.box-body -->
             </div><!-- /.box -->
