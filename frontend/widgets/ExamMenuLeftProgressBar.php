@@ -15,7 +15,6 @@ class ExamMenuLeftProgressBar extends \yii\bootstrap\Widget {
   public $questionSave;
 
   public function run() {
-    
     ?>
 
     <aside class="main-sidebar" id="frameLeftMenu">
@@ -41,7 +40,7 @@ class ExamMenuLeftProgressBar extends \yii\bootstrap\Widget {
             <center><title-ex-left>Score</title-ex-left></center>
             <div class="load-score"></div>
             <table class="tb2-ex-left">
-              <tr>
+              <tr class="board-option">
                 <td class="td-ex-body" style="border-right: 1px solid #dcdee3">
                   <h6 style="font-weight: bold;">คะแนนของท่านไม่ผ่านเกณฑ์</h6>
                   <h6 style="font-size: 11px !important">
@@ -52,6 +51,16 @@ class ExamMenuLeftProgressBar extends \yii\bootstrap\Widget {
                       <td style="width: 50%"><a href="<?= Url::home(); ?>">Home <i class="fa fa-home"><i/></a></td>
                       <td id="rescore-exam" style="border-right: 1px solid #dcdee3; width: 50%;">Restart  &nbsp;&nbsp;<i class="fa fa-repeat"></i>
                       </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr class="board-success" style="display: none;">
+                <td>
+                  <h6 style="font-weight: bold;">ยินดีด้วยคุณผ่านข้อสอบชุดนี้แล้ว</h6>
+                  <table style="width: 100%">
+                    <tr>
+                      <td style="text-align: center"><a href="<?= Url::home(); ?>"><i class="fa fa-home"><i/>กลับสู่หน้าหลัก</a></td>
                     </tr>
                   </table>
                 </td>

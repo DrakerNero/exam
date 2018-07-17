@@ -303,7 +303,6 @@ function SaveStateDone(score) {
 }
 
 function ShowAnswer() {
-
   $('.question-save-status').attr('data-id', '3');
   var questionType = $('.question-type').attr('data-id');
   var questionSaveId = $('.question-save-id').attr('data-id');
@@ -421,6 +420,11 @@ function ShowAnswer() {
 
   (parseInt(handleOnShowAnswer()) >= percentPass) ? handlePercentPass() : null;
 //  console.log('hello 741: ' + handleOnShowAnswer() + ' : ' + percentPass + ' : ' + agree);
+  if (agree >= 80) {
+    overScore();
+  } else {
+
+  }
   return agree;
 //  }
 }

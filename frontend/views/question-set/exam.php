@@ -175,9 +175,4 @@ if ($disableChoice) {
 } else {
   
 }
-
-//print_r($arrQuestionPart);
 ?>
-<div class="wrapper-restart-temporary">
-  <button id="btn-restart-temporary" >Restart</button>
-</div>

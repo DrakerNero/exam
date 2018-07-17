@@ -939,6 +939,7 @@ function renderScore() {
   var title = '';
   if (questionSaveScore >= 80) {
     title = 'ยินดีด้วยท่านผ่านเกณฑ์ 80% ของข้อสอบชุดนี้';
+    overScore();
   } else {
     title = 'ท่านไม่ผ่านเกณฑ์คะแนนขั้นต่ำ กรุณากดปุ่ม Reset เพื่อทำใหม่อีกครั้ง';
 
