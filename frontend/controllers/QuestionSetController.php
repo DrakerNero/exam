@@ -265,13 +265,18 @@ class QuestionSetController extends Controller {
         'question_type' => $model->question_type,
         'select_question_type' => $model->select_question_type,
     ];
-    if (!empty($questionSave) && isset($questionSave)) {
+    if (!empty($questionSave) && isset($questionSave) && $questionSave->module_part != null) {
       $questions = Question::find()
               ->where(['part' => json_decode($questionSave->module_part)])
               ->andWhere(['>=', 'id', $model->from])
               ->andWhere(['<=', 'id', $model->to])
               ->all();
     } else {
+      if($questionSave->status == 1) {
+        $questionSave->status = 4;
+        
+        $questionSave->save();
+      }
       $questions = Question::find()
               ->where(['>=', 'id', $model->from])
               ->andWhere(['<=', 'id', $model->to])

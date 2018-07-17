@@ -204,3 +204,6 @@ if ($disableChoice) {
 
 //print_r($arrQuestionPart);
 ?>
+  <div class="over-img" style="text-align: center; display: none;">
+    <img src="<?= Yii::$app->getUrlManager()->getBaseUrl() ?>/uploads/static/over.jpg" />
+  </div>

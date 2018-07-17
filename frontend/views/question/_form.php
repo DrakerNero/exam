@@ -52,14 +52,17 @@ $maxSelectChoice = (!empty($model->max_select_choice) && isset($model->max_selec
       <div class="row">
         <div class="col-md-4">
           <?=
-          $form->field($model, 'jump_type')->dropDownList([1 => '1: กระโดดตาม choice ที่เลือก', 2 => '2: ใช้ผลรวมในการกระโดด'], [
+          $form->field($model, 'jump_type')->dropDownList([
+              1 => '1: กระโดดตาม choice ที่เลือก',
+              2 => '2: ใช้ผลรวมในการกระโดด',
+              3 => '3: กระโดดถ้าเลือก choice'
           ])->label('เลือกการประเภทการกระโดด')
           ?>
           <?=
-          $form->field($model, 'jump_constraint')->dropDownList([1 => '>=', 2 => '<=', 3 => '='])->label('เงื่อนไขกระโดดตามคะแนน')
+          $form->field($model, 'jump_constraint')->dropDownList([1 => '>=  || ถ้าเลือก Choice', 2 => '<=  ||  ถ้าไม่เลือก Choice', 3 => '='])->label('เงื่อนไขกระโดดตามคะแนน')
           ?>
           <?=
-          $form->field($model, 'jump_score')->textInput()->label('คะแนนที่อยู่ในเงื่อนไข')
+          $form->field($model, 'jump_score')->textInput()->label('คะแนนที่อยู่ในเงื่อนไข  ||  Choice ตามเงื่อนไข')
           ?>
         </div>
       </div>

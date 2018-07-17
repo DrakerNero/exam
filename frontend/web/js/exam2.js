@@ -214,7 +214,7 @@ function renderScoreBoard(score, totalScore) {
   return percent.toFixed(0);
 }
 
-function handleQuestionSetJumpModeSaveScore() {
+function handleQuestionSetJumpModeSaveScore(reload) {
   var questionIds = [];
   var totalScore = 0;
   var myScore = 0;
@@ -228,7 +228,6 @@ function handleQuestionSetJumpModeSaveScore() {
 
     }
   }
-  console.log(questionIds);
   questionIds.forEach(function (questionId) {
     var selectChoices = [];
     var stringChoice = '';
@@ -264,11 +263,10 @@ function handleQuestionSetJumpModeSaveScore() {
 
 
   var finishScore = renderScoreBoard(myScore, totalScore);
-  console.log(finishScore);
-  postSaveExam(finishScore, stringSelectChoice);
+  postSaveExam(finishScore, stringSelectChoice, reload);
 }
 
-function postSaveExam(score, stringSelectChoice) {
+function postSaveExam(score, stringSelectChoice, reload) {
   var questionSaveId = $('.question-save').attr('data-id');
   var csrfToken = $('meta[name="csrf-token"]').attr("content");
   $.ajax({
@@ -282,7 +280,9 @@ function postSaveExam(score, stringSelectChoice) {
       _csrf: csrfToken
     }),
     success: function (data) {
-//      location.reload();
+      if (reload === true) {
+        location.reload();
+      }
     },
     error: function (data) {
       return "ไม่มีการส่งข้อมูล";
@@ -290,7 +290,12 @@ function postSaveExam(score, stringSelectChoice) {
   });
 }
 
-function SaveState(state) {
+function SaveState(state, reload) {
+  if (reload == undefined) {
+    reload = true;
+  } else {
+
+  }
   $('.wrapper-send-exam').remove();
   if (questionSetMode == 2) {
     if (state == 2) {
@@ -300,7 +305,7 @@ function SaveState(state) {
         return false;
       }
     } else if (state == 3) {
-      handleQuestionSetJumpModeSaveScore();
+      handleQuestionSetJumpModeSaveScore(reload);
 
     } else {
 
@@ -706,6 +711,31 @@ function handleSumScoreQuestion(quesitonId) {
   }
 }
 
+function checkBoomChoice(questionId) {
+  var selectChoice = [];
+  var scores = [];
+  var boom = false;
+  var i = 1;
+  $("[class*='choice-question-" + questionId + "']").each(function () {
+    if ($(this).is(':checked')) {
+      selectChoice.push(parseInt($(this).val()));
+      var checkBoom = $("[class*='jump-question-" + questionId + "-" + i + "']").attr('data-jump-question');
+      boom = (checkBoom == '#0') ? true : false;
+    } else {
+
+    }
+    i++;
+  });
+
+  if (boom === true) {
+    SaveState(3, false);
+    $('.over-img').show();
+  } else {
+
+  }
+}
+
+
 function handleRenderQuestionJumpType() {
   var forceQuestion = $('.render-force-question-id').attr('data-id');
   var selectEl = '';
@@ -727,15 +757,15 @@ function handleRenderQuestionJumpType() {
   var successScore = true;
 
   if (typeQuestion == 3) {
+    checkBoomChoice(questionId);
     if (jumpType == 1) {
       var radioCheck = $('.radio-preset-' + questionId + ':checked').val();
       var renderQuestionId = $('.jump-question-' + questionId + '-' + radioCheck).attr('data-jump-question');
       handleRenderQuestion(renderQuestionId);
-//      $('.render-force-question-id').attr('data-id', renderQuestionId);
-//      $('.question-id-' + renderQuestionId).show();
-
       if (renderQuestionId == '' || renderQuestionId == undefined || renderQuestionId == null) {
         $('.wrapper-send-exam').show();
+      } else {
+
       }
 
     } else if (jumpType == 2) {
@@ -757,7 +787,7 @@ function handleRenderQuestionJumpType() {
 
 
     } else {
-
+      var isChoiceNO = jumpScore;
     }
 
   } else {
