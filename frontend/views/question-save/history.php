@@ -36,29 +36,24 @@ if (!empty(Yii::$app->user->identity->userProfile->avatar)) {
 ?>
 
 <div class="row" style="padding-left:15px; padding-right:15px;padding-top: 50px; ">
-
-  <a href="#" data-toggle="modal" data-target=".question_pord">
-    <div class="col-md-3 col-sm-6 col-xs-12">
-      <div class="info-box">
-        <span class="info-box-icon bg-yellow"><i class="ion glyphicon glyphicon-pushpin"></i></span>
-        <div class="info-box-content">
-          <span class="info-box-text">จำนวนการส่งข้อสอบ</span>
-          <span class="info-box-number"><?= $genCounrNumber['question_all'] ?> ชุด</span>
-        </div>
+  <div class="col-md-6 col-sm-6 col-xs-12">
+    <div class="info-box">
+      <span class="info-box-icon bg-yellow"><i class="ion glyphicon glyphicon-pushpin"></i></span>
+      <div class="info-box-content">
+        <span class="info-box-text">จำนวนการส่งข้อสอบ</span>
+        <span class="info-box-number"><?= $genCounrNumber['question_all'] ?> ชุด</span>
       </div>
     </div>
-  </a>
-  <a href="#" data-toggle="modal" data-target=".question_all">
-    <div class="col-md-3 col-sm-6 col-xs-12">
-      <div class="info-box">
-        <span class="info-box-icon bg-green"><i class="ion glyphicon glyphicon-saved"></i></span>
-        <div class="info-box-content">
-          <span class="info-box-text">จำนวนข้อสอบที่ผ่าน</span>
-          <span class="info-box-number"><?= $countExamSuccess ?> ชุด</span>
-        </div>
+  </div>
+  <div class="col-md-6 col-sm-6 col-xs-12">
+    <div class="info-box">
+      <span class="info-box-icon bg-green"><i class="ion glyphicon glyphicon-saved"></i></span>
+      <div class="info-box-content">
+        <span class="info-box-text">จำนวนข้อสอบที่ผ่าน</span>
+        <span class="info-box-number"><?= $countExamSuccess ?> ชุด</span>
       </div>
     </div>
-  </a>
+  </div>
 </div>
 
 <div class="col-md-12">
