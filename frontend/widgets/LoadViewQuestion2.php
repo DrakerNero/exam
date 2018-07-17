@@ -150,7 +150,7 @@ class LoadViewQuestion2 extends \yii\bootstrap\Widget {
                 }
                 ?>
 
-                                                                    <!--<div class="wrapper-not-choice" id="wrapper-question-section-<?= $this->countQuestion ?>"></div>-->
+                                                                            <!--<div class="wrapper-not-choice" id="wrapper-question-section-<?= $this->countQuestion ?>"></div>-->
 
               </div><!-- /.box-body -->
             </div><!-- /.box -->
@@ -161,6 +161,7 @@ class LoadViewQuestion2 extends \yii\bootstrap\Widget {
       if (!empty($this->question->max_select_choice) && isset($this->question->max_select_choice)) {
         $stringAnswer = '';
         for ($i2 = 1; $i2 <= $i; $i2++) {
+          echo $answers[$i2] . ',';
           if ($answers[$i2] != '') {
             ?>
             <a id="answer-point-<?= $this->question->id . '-' . $i2 ?>" data-point="<?= $answers[$i2] ?>"></a>

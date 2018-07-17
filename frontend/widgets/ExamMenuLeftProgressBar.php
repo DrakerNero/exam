@@ -15,6 +15,7 @@ class ExamMenuLeftProgressBar extends \yii\bootstrap\Widget {
   public $questionSave;
 
   public function run() {
+    
     ?>
 
     <aside class="main-sidebar" id="frameLeftMenu">

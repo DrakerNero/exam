@@ -200,7 +200,7 @@ function ShowTitleAnswer(point, questionType) {
 
 function renderScoreBoard(score, totalScore) {
   var title = '';
-  var percent = (score * totalScore) / 100;
+  var percent = (100 * score) / totalScore;
   percent = (percent <= 0) ? 0 : percent;
   if (percent >= 80) {
     title = 'ยินดีด้วยท่านผ่านเกณฑ์ 80% ของข้อสอบชุดนี้';
@@ -210,6 +210,8 @@ function renderScoreBoard(score, totalScore) {
   }
   $('.td-ex-body>h6').text(title);
   $('.load-score').html(percent.toFixed(0) + "% <br>");
+
+  return percent.toFixed(0);
 }
 
 function handleQuestionSetJumpModeSaveScore() {
@@ -226,9 +228,12 @@ function handleQuestionSetJumpModeSaveScore() {
 
     }
   }
+  console.log(questionIds);
   questionIds.forEach(function (questionId) {
     var selectChoices = [];
     var stringChoice = '';
+    var maxSelectChoice = $('.max-select-choice-question-' + questionId).attr('data-max-choice');
+    var maxScoreQuestion = 0;
     for (var i2 = 1; i2 <= 15; i2++) {
       var getScoreChoice = $('#answer-point-' + questionId + '-' + i2).attr('data-point');
       var getSelectChoice = $('#radio_' + questionId + '_' + i2 + ':checked');
@@ -242,24 +247,25 @@ function handleQuestionSetJumpModeSaveScore() {
 
       }
       if (getScoreChoice > 0) { // รวมคะแนนสูงสูด
-        totalScore = totalScore + parseInt(getScoreChoice);
+        if (maxSelectChoice == 1) {
+          maxScoreQuestion = (parseInt(getScoreChoice) > maxScoreQuestion) ? parseInt(getScoreChoice) : maxScoreQuestion;
+        } else {
+          totalScore = totalScore + parseInt(getScoreChoice);
+        }
       } else {
-
+        //
       }
     }
-
+    totalScore = totalScore + maxScoreQuestion;
     stringSelectChoice = (stringSelectChoice === '') ? '' + questionId + ',' + stringChoice : stringSelectChoice + '&' + questionId + ',' + stringChoice;
-
     questionSelectChoices[questionId] = selectChoices;
 
   });
 
-  console.log(stringSelectChoice);
-//  console.log(JSON.stringify(questionSelectChoices));
-  renderScoreBoard(myScore, totalScore);
-//  ShowAnswer();
-  postSaveExam(myScore, stringSelectChoice);
-//  stringSelectChoice = stringSelectChoice + '&' +
+
+  var finishScore = renderScoreBoard(myScore, totalScore);
+  console.log(finishScore);
+  postSaveExam(finishScore, stringSelectChoice);
 }
 
 function postSaveExam(score, stringSelectChoice) {
@@ -276,7 +282,7 @@ function postSaveExam(score, stringSelectChoice) {
       _csrf: csrfToken
     }),
     success: function (data) {
-      location.reload();
+//      location.reload();
     },
     error: function (data) {
       return "ไม่มีการส่งข้อมูล";
@@ -287,7 +293,18 @@ function postSaveExam(score, stringSelectChoice) {
 function SaveState(state) {
   $('.wrapper-send-exam').remove();
   if (questionSetMode == 2) {
-    handleQuestionSetJumpModeSaveScore();
+    if (state == 2) {
+      if (confirm('ข้อสอบชุดนี้จะไม่บันทึกการเลือกข้อสอบ คุณต้องออกจากการทำข้อสอบ?')) {
+        return true;
+      } else {
+        return false;
+      }
+    } else if (state == 3) {
+      handleQuestionSetJumpModeSaveScore();
+
+    } else {
+
+    }
   } else {
     var questionSaveStatus = $('.question-save-status').attr('data-id');
     var questionType = $('.question-type').attr('data-id');

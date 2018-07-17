@@ -240,6 +240,8 @@ class QuestionSetController extends Controller {
 //    print_r($model);
 
     $model->save();
+
+    return $model;
   }
 
   public function getArrQuestion($model) {
@@ -263,7 +265,7 @@ class QuestionSetController extends Controller {
         'question_type' => $model->question_type,
         'select_question_type' => $model->select_question_type,
     ];
-    if (!empty($questionSave) && isset($questionSave) && $questionSave->module_part != null && $questionSave->module_part != '') {
+    if (!empty($questionSave) && isset($questionSave)) {
       $questions = Question::find()
               ->where(['part' => json_decode($questionSave->module_part)])
               ->andWhere(['>=', 'id', $model->from])
@@ -288,7 +290,7 @@ class QuestionSetController extends Controller {
       array_push($arrPart, $random_2);
       $arr = [];
       $modelQuestionWithPart = $this->getModelQuestionWithPart($questions, $arrPart);
-      $this->newModelQuestionSave($model->id, $arrPart);
+      $questionSave = $this->newModelQuestionSave($model->id, $arrPart);
 
 
       $arr['questions'] = $modelQuestionWithPart['questions'];
@@ -306,7 +308,9 @@ class QuestionSetController extends Controller {
   }
 
   public function isQuestionSaveExamTypeJump($questionSetId) {
-    $model = QuestionSave::find()->where(['user_id' => Yii::$app->user->identity->id, 'status' => [1, 3], 'question_set_id' => $questionSetId])->one();
+    $model = QuestionSave::find()->where(['user_id' => Yii::$app->user->identity->id, 'status' => [1, 3], 'question_set_id' => $questionSetId])
+//            ->andWhere(['!=', 'module_part', null])
+            ->one();
     if (!empty($model) && isset($model)) {
       return $model;
     }
