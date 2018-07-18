@@ -13,7 +13,7 @@ use yii\widgets\ActiveForm;
       <div class="profile-student-form">
 
         <?php $form = ActiveForm::begin(); ?>
-
+        <?= $model->username ?>
         <?= $form->field($model, 'student_id')->textInput(['maxlength' => true]) ?>
         <div class="row">
           <div class="col-lg-6">

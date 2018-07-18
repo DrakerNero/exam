@@ -25,6 +25,7 @@ class QuestionSaveMonitorGridView extends \yii\bootstrap\Widget {
         'filterModel' => $this->searchModel,
         'columns' => [
             [
+                'label'=>'Student ID',
                 'attribute' => 'username',
                 'value' => 'username',
                 'width' => '90px',

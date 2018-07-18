@@ -31,7 +31,6 @@ class SideBarMenuList extends \yii\bootstrap\Widget {
             <ul class="nav child_menu">
               <li><a href="<?= Url::to(['user-main/index']) ?>">All</a></li>
               <li><a href="<?= Url::to(['question/create']) ?>">Active</a></li>
-              <li><a href="<?= Url::to(['profile-student/index']) ?>">Profile</a></li>
               <!--<li><a href="#">Excel Upload</a></li>-->
             </ul>
           </li>

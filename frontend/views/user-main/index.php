@@ -1,7 +1,8 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
+use frontend\helpers\MainHelper;
 
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\models\UserMainSearch */
@@ -21,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="col-md-12 col-sm-12 col-xs-12">
       <div class="x_panel">
         <h1><?= Html::encode($this->title) ?></h1>
-        <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+        <?php // echo $this->render('_search', ['model' => $searchModel]);  ?>
 
         <div class="x_content">
           <div class="row">
@@ -33,12 +34,26 @@ $this->params['breadcrumbs'][] = $this->title;
                   'class' => 'grid-view hide-resize',
                   'columns' => [
                       ['class' => 'yii\grid\SerialColumn'],
-                      'username',
-                      'student_id',
+                      [
+                          'label' => 'Student ID',
+                          'attribute' => 'username',
+                          'width' => '80px',
+                          'vAlign' => 'middle',
+                          'hAlign' => 'center',
+                      ],
                       'first_name',
                       'last_name',
                       'start_study',
-                      'rotation',
+                      [
+                          'label' => 'Rotation',
+                          'attribute' => 'rotation',
+                          'vAlign' => 'middle',
+                          'hAlign' => 'center',
+                          'filter'=> MainHelper::setLotation(),
+                          'value' => function($model) {
+                            return (!empty($model->rotation) && isset($model->rotation) && $model->rotation != null) ? MainHelper::setLotation()[$model->rotation] : 'Null';
+                          }
+                      ],
                       ['class' => 'yii\grid\ActionColumn'],
                   ],
               ]);
