@@ -214,7 +214,8 @@ class SiteController extends Controller {
       $model->save();
       return $this->redirect(['monitor-profile-user', 'userId' => $id]);
     }
-    return $this->render('edit_profile_user', ['model' => $model, 'id' => $id]);
+    return $this->redirect(['user-main/update', 'id' => $id]);
+//    return $this->render('edit_profile_user', ['model' => $model, 'id' => $id]);
   }
 
   public function actionExamSuccessPage() {
