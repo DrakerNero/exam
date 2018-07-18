@@ -197,13 +197,13 @@ class QuestionSaveController extends Controller {
               ->where(['user_id' => $user_id])
               ->orderBy(['id' => SORT_DESC])
               ->all();
-      $genGraphQuestion = QuestionHistory::Gen_Graph_Question($models);
-      $genCounrNumber = QuestionHistory::Gen_Counr_Number($models);
+//      $genGraphQuestion = QuestionHistory::Gen_Graph_Question($models);
+      $genCounrNumber = QuestionHistory::countModel($models);
       $countExamSuccess = QuestionSave::find()->where(['user_id' => Yii::$app->user->identity->id])->andWhere(['>=', 'score', '80'])->count();
 
       return $this->render('history', [
                   'models' => $models,
-                  'genGraphQuestion' => $genGraphQuestion,
+//                  'genGraphQuestion' => $genGraphQuestion,
                   'genCounrNumber' => $genCounrNumber,
                   'countExamSuccess' => $countExamSuccess
       ]);
@@ -406,6 +406,7 @@ class QuestionSaveController extends Controller {
     $questionSave->answer = json_encode($questionSaves);
     $questionSave->score = (int)$score;
     $questionSave->status = 3;
+    $questionSave->updated_at = (int)strtotime(date('Y-m-d H:i:s'));
     $questionSave->save();
   }
 

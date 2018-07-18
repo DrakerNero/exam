@@ -1,7 +1,6 @@
 <?php
 
 use frontend\widgets\LoadViewQuestion2;
-//use frontend\widgets\ExamMenuLeft;
 use frontend\widgets\ExamMenuLeftProgressBar;
 use frontend\widgets\HeaderMenuRight;
 use frontend\widgets\BottomMenuCenter;
@@ -10,7 +9,6 @@ use yii\web\View;
 
 $this->title = $model->name;
 $disableChoice = (isset($disableChoice) && !empty($disableChoice)) ? $disableChoice : false;
-
 
 if (isset($isAdmin) && !empty($isAdmin) && $isAdmin == true) {
 //  $stringScript = "$('.wrapper-disable-click-choice').hide();";
@@ -33,7 +31,7 @@ if ($model->explanation != '') {
   <div class="frame-exam">
     <div class="col-md-10" >
       <div class="box box-primary" id="explanation-exam">
-        <?= $model->explanation ?>
+        <h5 style="font-weight: bold">Case 1 </h5>
       </div>
     </div>
   </div>
@@ -210,3 +208,4 @@ if ($disableChoice) {
 <div class="over-img" style="text-align: center; display: none;">
   <img src="<?= Yii::$app->getUrlManager()->getBaseUrl() ?>/uploads/static/over.jpg" />
 </div>
+  <img src="<?= Yii::$app->getUrlManager()->getBaseUrl() ?>/uploads/static/over.jpg" />

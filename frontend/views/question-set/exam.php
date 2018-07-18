@@ -1,7 +1,6 @@
 <?php
 
 use frontend\widgets\LoadViewQuestion;
-use frontend\widgets\ExamMenuLeft;
 use frontend\widgets\ExamMenuLeftProgressBar;
 use frontend\widgets\HeaderMenuRight;
 use frontend\widgets\BottomMenuCenter;
@@ -33,7 +32,7 @@ if ($model->explanation != '') {
   <div class="frame-exam">
     <div class="col-md-10" >
       <div class="box box-primary" id="explanation-exam">
-        <?= $model->explanation ?>
+        <h5 style="font-weight: bold">Case 1 </h5>
       </div>
     </div>
   </div>

@@ -1,31 +1,8 @@
 <?php
 
-use frontend\widgets\NewQuestion;
-use frontend\widgets\HistoryPopup;
 use yii\helpers\Url;
+use frontend\helpers\MainHelper;
 ?>
-<script type="text/javascript"
-        src="https://www.google.com/jsapi?autoload={
-        'modules':[{
-        'name':'visualization',
-        'version':'1',
-        'packages':['corechart']
-        }]
-}"></script>
-
-<script type="text/javascript">
-          google.setOnLoadCallback(drawChart);
-  function drawChart() {
-  var data = google.visualization.arrayToDataTable(<?= json_encode($genGraphQuestion) ?>);
-  var options = {
-  title: 'Test Result Trendline',
-          curveType: 'function',
-          legend: { position: 'bottom' }
-  };
-  var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-  chart.draw(data, options);
-  }
-</script>   
 
 <?php
 if (!empty(Yii::$app->user->identity->userProfile->avatar)) {
@@ -41,7 +18,7 @@ if (!empty(Yii::$app->user->identity->userProfile->avatar)) {
       <span class="info-box-icon bg-yellow"><i class="ion glyphicon glyphicon-pushpin"></i></span>
       <div class="info-box-content">
         <span class="info-box-text">จำนวนการส่งข้อสอบ</span>
-        <span class="info-box-number"><?= $genCounrNumber['question_all'] ?> ชุด</span>
+        <span class="info-box-number"><?= $genCounrNumber ?> ชุด</span>
       </div>
     </div>
   </div>
@@ -80,7 +57,7 @@ if (!empty(Yii::$app->user->identity->userProfile->avatar)) {
             <td><?= $model->questionset2->name ?></td>
             <td><?= (!empty($model->score) && isset($model->score)) ? $model->score . ' %' : '-' ?></td>
             <td><?= (!empty($model->elapse_time) && isset($model->elapse_time)) ? number_format($model->elapse_time / 60, 0) . ' min' : '-' ?></td>
-            <td><?= date("Y-m-d H:i:s", $model->updated_at) ?></td>
+            <td><?= MainHelper::setDateTimeThai(date('Y-m-d H:i:s',$model->updated_at)) ?></td>
           </tr>
 
           <?php

@@ -268,9 +268,9 @@ class QuestionSetController extends Controller {
               ->andWhere(['<=', 'id', $model->to])
               ->all();
     } else {
-      if($questionSave->status == 1) {
+      if (!empty($questionSave) && isset($questionSave) && $questionSave->status == 1) {
         $questionSave->status = 4;
-        
+
         $questionSave->save();
       }
       $questions = Question::find()

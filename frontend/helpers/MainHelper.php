@@ -55,4 +55,12 @@ class MainHelper extends Controller {
     ];
   }
 
+  public function setDateTimeThai($datetime) {
+    $timestamp = strtotime($datetime) + 7 * 60 * 60;
+
+    $time = date('Y-m-d H:i:s', $timestamp);
+
+    return $time;
+  }
+
 }
