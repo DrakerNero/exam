@@ -31,6 +31,13 @@ class GridTableQuestion extends \yii\bootstrap\Widget {
                 'hAlign' => 'center',
             ],
             [
+                'label' => 'Case',
+                'attribute' => 'part',
+                'width' => '50px',
+                'vAlign' => 'top',
+                'hAlign' => 'center',
+            ],
+            [
                 'label' => 'Topic',
                 'attribute' => 'question_topic',
                 'width' => '700px',
