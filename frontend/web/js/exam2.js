@@ -711,6 +711,20 @@ function handleSumScoreQuestion(quesitonId) {
   }
 }
 
+function handleSelectMultiperChoice(quesitonId) {
+  var selectChoice = [];
+  $("[class*='choice-question-" + quesitonId + "']").each(function () {
+    if ($(this).is(':checked')) {
+      selectChoice.push(parseInt($(this).val()));
+    } else {
+
+    }
+  });
+
+  return selectChoice;
+
+}
+
 function checkBoomChoice(questionId) {
   var selectChoice = [];
   var scores = [];
@@ -788,6 +802,23 @@ function handleRenderQuestionJumpType() {
 
     } else {
       var isChoiceNO = jumpScore;
+      var selectChoices = handleSelectMultiperChoice(questionId);
+      var isChoice = selectChoices.includes(parseInt(isChoiceNO));
+//      alert(isChoice + ' : ' + isChoiceNO + ' : ' + selectChoices);
+      
+      if (jumpConstraint == 1) { // ถ้าเลือก
+        if (isChoice === true) {
+          handleRenderQuestion(jumpConstraintTrue);
+        } else {
+          handleRenderQuestion(jumpConstraintFalse);
+        }
+      } else { // ถ้าไม่เลือก
+        if (isChoice === false) {
+          handleRenderQuestion(jumpConstraintTrue);
+        } else {
+          handleRenderQuestion(jumpConstraintFalse);
+        }
+      }
     }
 
   } else {
