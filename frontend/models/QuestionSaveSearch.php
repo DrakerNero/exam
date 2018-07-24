@@ -23,7 +23,7 @@ class QuestionSaveSearch extends QuestionSave {
     return [
         [['id', 'user_id'], 'integer'],
         [['question_set_id', 'answer', 'status', 'questionSet'], 'safe'],
-        [['firstName', 'lastName'], 'safe'],
+        [['firstName', 'lastName', 'module_part'], 'safe'],
     ];
   }
 
@@ -112,7 +112,9 @@ class QuestionSaveSearch extends QuestionSave {
   }
 
   public function searchByUserId($params, $userId) {
-    $query = QuestionSave::find()->where(['user_id' => $userId]);
+    $query = QuestionSave::find()
+            ->where(['user_id' => $userId])
+            ->andWhere(['!=', 'module_part', '']);
 
     $dataProvider = new ActiveDataProvider([
         'query' => $query,

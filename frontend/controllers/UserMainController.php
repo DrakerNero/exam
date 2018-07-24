@@ -78,7 +78,8 @@ class UserMainController extends Controller {
    * @return mixed
    * @throws NotFoundHttpException if the model cannot be found
    */
-  public function actionUpdate($id) {
+  public function actionUpdate($id = null) {
+    $id = ($id == null) ? Yii::$app->user->identity->id : $id;
     $model = $this->findModel($id);
 
     if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -86,6 +87,20 @@ class UserMainController extends Controller {
     }
 
     return $this->render('update', [
+                'model' => $model,
+    ]);
+  }
+
+  public function actionProfile() {
+    $this->layout = 'main';
+    $id = Yii::$app->user->identity->id;
+    $model = $this->findModel($id);
+
+    if ($model->load(Yii::$app->request->post()) && $model->save()) {
+      return $this->redirect(['site/index', 'id' => $model->id]);
+    }
+
+    return $this->render('profile', [
                 'model' => $model,
     ]);
   }

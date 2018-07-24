@@ -1,13 +1,13 @@
 <?php
 
-use backend\assets\BackendAsset;
-use backend\widgets\Menu;
-use common\models\TimelineEvent;
+//use backend\assets\BackendAsset;
+//use backend\widgets\Menu;
+//use common\models\TimelineEvent;
 use yii\helpers\ArrayHelper;
-use yii\helpers\Html;
+//use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\widgets\Breadcrumbs;
-use yii\web\View;
+//use yii\widgets\Breadcrumbs;
+//use yii\web\View;
 use yii\bootstrap\Modal;
 use frontend\widgets\HeaderMenuLeft;
 use frontend\models\User;
@@ -78,6 +78,7 @@ if (!empty(Yii::$app->user->identity->id)) {
             </a>
             <ul class="dropdown-menu" style="width:20%">
               <li><a href="<?= Url::to(['question-save/history']) ?>"><font color="#000">Dashboard</font></a></li>
+              <li><a href="<?= Url::to(['user-main/profile']) ?>"><font color="#000">Profile</font></a></li>
               <?php
               if (!empty(Yii::$app->user->identity->id)) {
                 if ($user->user_status == 1) {

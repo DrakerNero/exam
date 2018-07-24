@@ -615,6 +615,7 @@ function handleHidingQuestion(parts) {
 }
 
 function adminTrue() {
+  $('[id*=render-question-no-]').show();
   $('#rescore-exam').remove();
   $('#btn-restart-temporary').remove();
   $('.btn-next-present').remove();

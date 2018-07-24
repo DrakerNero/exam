@@ -53,7 +53,7 @@ class MonitorUserProfileGridExam extends \yii\bootstrap\Widget {
                 'width' => '1px',
                 'format' => 'html',
                 'value' => function($model) {
-                  return '<a target="_blank" href="' . Url::to(['question-set/monitor-user-do-exam', 'questionSaveId' => $model->id]) . '"><i class="fa fa-external-link"></i></a>';
+                  return (!empty($model->answer) && isset($model->answer) && $model->answer != null && $model->answer != '') ? '<a target="_blank" href="' . Url::to(['question-set/monitor-user-do-exam', 'questionSaveId' => $model->id]) . '"><i class="fa fa-external-link"></i></a>' : '';
 //                  return '<a target="_blank" href="' . Yii::$app->getUrlManager()->getBaseUrl() . '/question-set/monitor-user-do-exam?questionSaveId=' . $model->id . '"><i class="fa fa-external-link"></i></a>';
                 }
                     ],

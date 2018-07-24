@@ -452,16 +452,20 @@ class QuestionSetController extends Controller {
           $questionSuccess = $this->setRandomQuestionForExam($questions, $questionSave->module_part);
         }
 
-        $questionSaveChoices = json_decode($questionSave->answer);
-        $doPart = 0;
-        if (isset($questionSaveChoices)) {
-
-          foreach ($questionSaveChoices as $answer) {
-            $doPart = $answer->part;
-          }
-        } else {
-          
-        }
+//        $questionSaveChoices = json_decode($questionSave->answer);
+//        if ($questionSave->questionSet->mode == 2) {
+//          
+//        } else {
+//          $doPart = 0;
+//          if (isset($questionSaveChoices)) {
+//
+//            foreach ($questionSaveChoices as $answer) {
+//              $doPart = $answer->part;
+//            }
+//          } else {
+//            
+//          }
+//        }
 
         // END
 
