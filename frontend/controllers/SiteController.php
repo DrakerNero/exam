@@ -342,7 +342,6 @@ class SiteController extends Controller {
 
   public function actionTestQuestion() {
     $questionSaves = QuestionSave::find()->where(['id' => 20])->all();
-    echo '<pre>';
 
     foreach ($questionSaves as $questionSave) {
       $choices = json_decode($questionSave->answer, true);
@@ -369,23 +368,15 @@ class SiteController extends Controller {
     }
   }
 
-//  public function actionTestLdap() {
-////    $ldap_dn = 'cn=read-only-admin,dc=example,dc=com';
-////    $ldap_password = 'password';
-////    
-////    $ldap_con = ldap_connect('ldap.forumsys.com');
-////    
-////    ldap_set_option($ldap_con, LDAP_OTP_PROTOCOL_VERSION, 30);
-////    
-////    if(ldap_bind($ldap_con, $ldap_dn, $ldap_password)) {
-////      echo 'TRUE';
-////    } else {
-////      echo 'FALSE';
-////    }
-////  }
-//    $con = @ldap_connect('ldaps://the.ldap.server', 636);
-//    ldap_set_option($con, LDAP_OPT_PROTOCOL_VERSION, 3);
-//    ldap_set_option($con, LDAP_OPT_REFERRALS, 0);
-//    var_dump(@ldap_bind($con, 'user@sub.domain.com', 'password'));
-//  }
+  public function actionTopScore($questionSetId) {
+    $questionSets = QuestionSet::find()->where(['status' => 1])->all();
+    $models = QuestionSave::find()
+            ->where(['question_set_id' => $questionSetId, 'status' => 4])
+            ->andWhere(['>=', 'score', '80'])
+            ->orderBy(['score' => SORT_DESC])
+            ->all();
+
+    return $this->render('top_score', ['models' => $models, 'questionSets' => $questionSets, 'questionSetId' => $questionSetId]);
+  }
+
 }

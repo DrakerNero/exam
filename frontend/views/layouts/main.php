@@ -11,6 +11,7 @@ use yii\helpers\Url;
 use yii\bootstrap\Modal;
 use frontend\widgets\HeaderMenuLeft;
 use frontend\models\User;
+use frontend\models\QuestionSet;
 
 /* @var $this \yii\web\View */
 
@@ -19,6 +20,8 @@ if (!empty(Yii::$app->user->identity->id)) {
 } else {
   $user = "";
 }
+
+$questionSet = QuestionSet::find()->where(['status' => 1])->one();
 ?>
 <?php $this->beginContent('@frontend/views/layouts/base.php'); ?>
 <link href="<?= Url::to('@frontendUrl/uploads/images/e-pretest-touch-icon.png') ?>" sizes="120x120" rel="apple-touch-icon" />
@@ -77,13 +80,16 @@ if (!empty(Yii::$app->user->identity->id)) {
               <br>
             </a>
             <ul class="dropdown-menu" style="width:20%">
-              <li><a href="<?= Url::to(['question-save/history']) ?>"><font color="#000">Dashboard</font></a></li>
-              <li><a href="<?= Url::to(['user-main/profile']) ?>"><font color="#000">Profile</font></a></li>
               <?php
               if (!empty(Yii::$app->user->identity->id)) {
+                ?>
+                <li><a href="<?= Url::to(['user-main/profile']) ?>"><font color="#000">Profile</font></a></li>
+                <li><a href="<?= Url::to(['question-save/history']) ?>"><font color="#000">Dashboard</font></a></li>
+                <li><a href="<?= Url::to(['site/top-score', 'questionSetId' => $questionSet->id]) ?>"><font color="#000">Top Score</font></a></li>
+                <?php
                 if ($user->user_status == 1) {
                   ?>
-                      <!--<li><a href="<?= Url::to(['question-save/monitor', 'email' => '0']) ?>"><font color="#000">Search EXAM by User</font></a></li>-->
+                                      <!--<li><a href="<?= Url::to(['question-save/monitor', 'email' => '0']) ?>"><font color="#000">Search EXAM by User</font></a></li>-->
                   <li><a href="<?= Url::to(['site/monitor']) ?>"><font color="#000">Administor</font></a></li>
                   <?php
                 } else {

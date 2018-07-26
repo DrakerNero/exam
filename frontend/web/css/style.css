@@ -932,6 +932,20 @@ img.mfp-img {
   left: 50%;
   transform: translate(-50%, 20%) !important;
 }
+.wrapper-top-score {
+  padding: 10px 20px 0 20px;
+}
+.custom-select, .custom-select select {
+  width: 100%;
+}
+.custom-select select {
+  padding: 8px;
+  border-radius: 3px;
+}
+
+.wrapper-top-score table {
+  word-break: break-all;
+}
 #wrapper-module-exam {
   padding-left: 27px;
   padding-top: 50px;

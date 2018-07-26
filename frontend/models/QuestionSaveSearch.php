@@ -142,4 +142,36 @@ class QuestionSaveSearch extends QuestionSave {
     return $dataProvider;
   }
 
+  public function searchTopScore($params, $questionSetId) {
+    $query = QuestionSave::find()
+            ->where(['question_set_id' => $questionSetId, 'status' => 4])
+            ->andWhere(['>=', 'score', '80'])
+            ->limit(10);
+
+    $dataProvider = new ActiveDataProvider([
+        'query' => $query,
+        'sort' => ['defaultOrder' => ['id' => SORT_DESC]],
+    ]);
+
+    $this->load($params);
+
+    if (!$this->validate()) {
+      // uncomment the following line if you do not want to return any records when validation fails
+      // $query->where('0=1');
+      return $dataProvider;
+    }
+
+    $query->andFilterWhere([
+        'id' => $this->id,
+        'user_id' => $this->user_id,
+//            'updated' => $this->updated,
+    ]);
+
+    $query->andFilterWhere(['like', 'question_set_id', $this->question_set_id])
+            ->andFilterWhere(['like', 'answer', $this->answer])
+            ->andFilterWhere(['like', 'status', $this->status]);
+
+    return $dataProvider;
+  }
+
 }
