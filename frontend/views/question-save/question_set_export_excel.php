@@ -1,6 +1,6 @@
 <?php
 
-use frontend\components\Actions;
+use frontend\helpers\MainHelper;
 
 header('Content-Encoding: UTF-8');
 header('Content-type: text/csv; charset=UTF-8');
@@ -32,7 +32,7 @@ header('Content-Disposition: attachment; filename="export_question_choices.xls"'
           <td>SID</td>
           <td>Question Set</td>
           <td>Datetime </td>
-          <td>Part</td>
+          <td>Case</td>
           <?php
           for ($i = 1; $i <= 200; $i++) {
             for ($i2 = 1; $i2 <= 15; $i2++) {
@@ -45,8 +45,9 @@ header('Content-Disposition: attachment; filename="export_question_choices.xls"'
       <tbody>
         <?php
         foreach ($models as $model) {
-//          $choices = json_decode($model->answer, true);
+          $moduleParts = json_decode($model->module_part);
           $answers = json_decode($model->answer);
+          $countModulePart = 0;
           ?>
           <tr>
             <td><?= $model->user->start_study ?></td>
@@ -54,7 +55,13 @@ header('Content-Disposition: attachment; filename="export_question_choices.xls"'
             <td><?= $model->user->student_id ?></td>
             <td><?= $model->question_set_id ?></td>
             <td><?= date('Y-m-d H:i:s', $model->updated_at) ?></td>
-            <td><?= $model->module_part ?></td>
+            <td><?php
+              foreach ($moduleParts as $modulePart) {
+                echo ($countModulePart != 0) ? ', ' : '';
+                echo MainHelper::setNameModulePart($modulePart);
+                $countModulePart++;
+              }
+              ?></td>
             <?php
             for ($i = $model->questionset2->from; $i <= $model->questionset2->to; $i++) {
               if (!empty($answers->{$i}) && isset($answers->{$i})) {

@@ -6,11 +6,9 @@ use frontend\helpers\MainHelper;
 header('Content-Encoding: UTF-8');
 header('Content-type: text/csv; charset=UTF-8');
 header("Content-Type: application/vnd.ms-excel");
-header('Content-Disposition: attachment; filename="export_question_choices.xls"'); #ชื่อไฟล์
+header('Content-Disposition: attachment; filename="export_question_attempt.xls"'); #ชื่อไฟล์
 ?>
 
-<!--<html xmlns:o="urn:schemas-microsoft-com:office:office"
-      xmlns:x="urn:schemas-microsoft-com:office:excel"   />-->
 <HTML
   xmlns:o="urn:schemas-microsoft-com:office:office"
   xmlns:x="urn:schemas-microsoft-com:office:excel"

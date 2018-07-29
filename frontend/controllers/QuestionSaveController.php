@@ -361,16 +361,22 @@ class QuestionSaveController extends Controller {
       array_push($arrUserId, $user->id);
     }
     if ($academic == null && $rotation == null) {
-      $models = QuestionSave::find()->all();
+      $models = QuestionSave::find()
+              ->where(['!=', 'module_part', ''])
+              ->all();
     } else {
-      $models = QuestionSave::find()->where(['id' => $arrUserId])->all();
+      $models = QuestionSave::find()
+              ->where(['id' => $arrUserId])
+              ->andWhere(['!=', 'module_part', ''])
+              ->all();
     }
 
-    if (count($models) >= 1) {
-      return $this->render('question_set_export_excel', ['models' => $models]);
-    } else {
-      echo 'ไม่พบข้อมูลนักเรียน';
-    }
+    return $this->render('question_set_export_excel', ['models' => $models]);
+//    if (count($models) >= 1) {
+//      return $this->render('question_set_export_excel', ['models' => $models]);
+//    } else {
+//      echo 'ไม่พบข้อมูลนักเรียน';
+//    }
   }
 
   public function actionHandlePostSubmitExam() {

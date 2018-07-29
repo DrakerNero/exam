@@ -369,9 +369,23 @@ class SiteController extends Controller {
   }
 
   public function actionTopScore($questionSetId) {
+    $user = Yii::$app->user->identity;
+    $arrWhere = ['status' => 1];
+    $rotation = (!empty($user->rotaion) && isset($user->rotaion) && $user->rotaion != null) ? $user->rotation : null;
+    $academic = (!empty($user->start_year) && isset($user->start_year) && $user->start_year != null) ? $user->start_year : null;
+
+    ($academic != null) ? $arrWhere['start_study'] = $academic : null;
+    ($rotation != null) ? $arrWhere['rotation'] = $rotation : null;
+
+    $userIds = [];
+    $users = User::find()->where($arrWhere)->all();
+    foreach ($users as $user) {
+      array_push($userIds, $user->id);
+    }
+
     $questionSets = QuestionSet::find()->where(['status' => 1])->all();
     $models = QuestionSave::find()
-            ->where(['question_set_id' => $questionSetId, 'status' => 4])
+            ->where(['question_set_id' => $questionSetId, 'status' => 4, 'user_id' => $userIds])
             ->andWhere(['>=', 'score', '80'])
             ->orderBy(['score' => SORT_DESC])
             ->all();
