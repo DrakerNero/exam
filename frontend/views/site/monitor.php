@@ -7,6 +7,8 @@ use frontend\helpers\MainHelper;
 
 $this->title = 'Chula Interactive Medical Case';
 $lotataions = MainHelper::setLotation();
+$getRotation = (!empty($_GET['rotation']) && isset($_GET['rotation']) && $_GET['rotation'] != null && $_GET['rotation'] != '') ? $_GET['rotation'] : '';
+$getStartStudy = (!empty($_GET['academic']) && isset($_GET['academic']) && $_GET['academic'] != null && $_GET['academic'] != '') ? $_GET['academic'] : '';
 ?>
 <div class="site-index">
   <div class="row top_tiles">
@@ -51,7 +53,7 @@ $lotataions = MainHelper::setLotation();
 
         </div>
         <div class="row">
-          <div class="col-lg-5 col-xs-5">
+          <div class="col-lg-4 col-xs-4">
             <select id="input-academic-data" style="font-size: 14px;" class="form-control">
               <option disabled selected>Choose Academic Year...</option>
               <?php
@@ -64,7 +66,7 @@ $lotataions = MainHelper::setLotation();
               ?>
             </select>
           </div>
-          <div class="col-lg-5 col-xs-5">
+          <div class="col-lg-4 col-xs-4">
             <select id="input-rotation-data" style="font-size: 14px;" class="form-control">
               <option disabled selected>Choose Rotation...</option>
               <?php
@@ -77,9 +79,10 @@ $lotataions = MainHelper::setLotation();
               ?>
             </select>
           </div>
-          <div class="col-lg-2 col-xs-2">
+          <div class="col-lg-3 col-xs-3">
             <span onclick="searchUserWithData('<?= Url::to(['site/monitor']) ?>', 'false')" style="font-size: 14px" class="btn btn-primary"><i class="fa fa-search"></i> Search</span>
-            <span onclick="searchUserWithData('<?= Url::to(['question-save/question-save-export-excel-with-user']) ?>', 'true')" style="font-size: 14px" class="btn btn-default"><i class="fa fa-file-excel-o"></i> Export</span>
+            <span onclick="searchUserWithData('<?= Url::to(['question-save/question-save-export-excel-with-user']) ?>', 'true')" style="font-size: 14px" class="btn btn-default"><i class="fa fa-file-excel-o"></i> Export Score</span>
+            <span onclick="openLocation('<?= Url::to(['question-save/question-save-export-attempt', 'rotation' => $getRotation, 'startStudy' => $getStartStudy]) ?>')" style="font-size: 14px" class="btn btn-github"><i class="fa fa-file-excel-o"></i> Export Attempts</span>
           </div>
         </div>
 

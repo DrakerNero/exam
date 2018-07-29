@@ -11,6 +11,7 @@ use yii\filters\VerbFilter;
 use frontend\models\QuestionHistory;
 use yii\filters\AccessControl;
 use frontend\models\User;
+use frontend\models\QuestionSet;
 
 /**
  * QuestionSaveController implements the CRUD actions for QuestionSave model.
@@ -30,6 +31,7 @@ class QuestionSaveController extends Controller {
                         'question-save-export-excel',
                         'question-save-export-excel-with-user',
                         'handle-post-submit-exam',
+                        'question-save-export-attempt'
                     ],
                     'allow' => true,
                     'roles' => ['@']
@@ -404,10 +406,35 @@ class QuestionSaveController extends Controller {
     }
 
     $questionSave->answer = json_encode($questionSaves);
-    $questionSave->score = (int)$score;
+    $questionSave->score = (int) $score;
     $questionSave->status = 3;
-    $questionSave->updated_at = (int)strtotime(date('Y-m-d H:i:s'));
+    $questionSave->updated_at = (int) strtotime(date('Y-m-d H:i:s'));
     $questionSave->save();
+  }
+
+  public function actionQuestionSaveExportAttempt($rotation = null, $startStudy = null) {
+    $this->layout = 'blank';
+    $userWhere = ['status' => 1];
+    echo $startStudy;
+    (!empty($rotation) && isset($rotation) && $rotation != null ) ? $userWhere['rotation'] = $rotation : null;
+    (!empty($startStudy) && isset($startStudy) && $startStudy != null ) ? $userWhere['start_study'] = $startStudy : null;
+
+    print_r($userWhere);
+    $userModels = User::find()
+            ->where($userWhere)
+            ->all();
+
+    if (count($userModels) >= 1) {
+
+      $questionSetCount = QuestionSet::find()->where(['status' => 1])->count();
+
+      return $this->render('question_save_export_attempt', [
+                  'userModels' => $userModels,
+                  'questionSetCount' => $questionSetCount,
+      ]);
+    } else {
+      
+    }
   }
 
 }

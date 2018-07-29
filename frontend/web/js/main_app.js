@@ -27,6 +27,12 @@ $(document).ready(function () {
 
 });
 
+function openLocation(url) {
+//  alert(url);
+  window.open(url, '_blank');
+}
+  
+
 function searchUserWithData(url, newWindow) {
   var academic = $('#input-academic-data').val();
   var rotation = $('#input-rotation-data').val();
