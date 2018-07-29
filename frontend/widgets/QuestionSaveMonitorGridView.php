@@ -7,6 +7,7 @@ use kartik\grid\GridView;
 use frontend\helpers\MainHelper;
 use yii\helpers\Url;
 use frontend\models\Rotation;
+use frontend\models\QuestionSave;
 
 class QuestionSaveMonitorGridView extends \yii\bootstrap\Widget {
 
@@ -25,7 +26,7 @@ class QuestionSaveMonitorGridView extends \yii\bootstrap\Widget {
         'filterModel' => $this->searchModel,
         'columns' => [
             [
-                'label'=>'Student ID',
+                'label' => 'Student ID',
                 'attribute' => 'username',
                 'value' => 'username',
                 'width' => '90px',
@@ -42,14 +43,6 @@ class QuestionSaveMonitorGridView extends \yii\bootstrap\Widget {
 //                'width' => '100px',
             ],
             [
-                'label' => 'Question Success',
-                'contentOptions' => ['style' => 'text-align: center;'],
-                'width' => '50px',
-                'value' => function($model) {
-          return count($model->userQuestionScore) . '/' . $this->examCount;
-        }
-            ],
-            [
                 'attribute' => 'start_study',
                 'value' => 'start_study',
                 'width' => '50px',
@@ -63,23 +56,42 @@ class QuestionSaveMonitorGridView extends \yii\bootstrap\Widget {
                 'value' => 'rotation',
                 'width' => '150px',
                 'label' => 'Rotation',
-                'filter' => MainHelper::setLotation(),
+                'filter' => False,
                 'value' => function($model) {
                   return (!empty($model->rotation) && isset($model->rotation) && $model->rotation != null) ? MainHelper::setLotation()[$model->rotation] : '';
                 },
                 'contentOptions' => ['style' => 'text-align: center;']
             ],
             [
-                'width' => '1px',
-                'format' => 'html',
+                'label' => 'Question Success',
+                'contentOptions' => ['style' => 'text-align: center;'],
+                'width' => '50px',
                 'value' => function($model) {
-
-                  return '<a target="_blank" href="' . Url::to(['site/monitor-profile-user', 'userId' => $model->id]) . '"><i class="fa fa-user"></i></a>';
-                }
-                    ],
-                ],
-                    ], ['examCount' => $this->examCount]);
-          }
-
+          return count($model->userQuestionScore) . '/' . $this->examCount;
         }
-        
+            ],
+            [
+                'label' => 'Attempts',
+                'width' => '50px',
+                'value' => function($model) {
+                  return QuestionSave::find()
+                                  ->where(['user_id' => $model->id])
+                                  ->andWhere(['!=', 'module_part', null])
+                                  ->count();
+                },
+                        'contentOptions' => ['style' => 'text-align: center;']
+                    ],
+                    [
+                        'width' => '1px',
+                        'format' => 'html',
+                        'value' => function($model) {
+
+                          return '<a target="_blank" href="' . Url::to(['site/monitor-profile-user', 'userId' => $model->id]) . '"><i class="fa fa-user"></i></a>';
+                        }
+                            ],
+                        ],
+                            ], ['examCount' => $this->examCount]);
+                  }
+
+                }
+                
