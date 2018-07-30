@@ -304,7 +304,7 @@ function SaveState(state, reload) {
       } else {
         return false;
       }
-    } else if (state == 3) {
+    } else if (state == 3) { // ข้อสอบกระโดด
       handleQuestionSetJumpModeSaveScore(reload);
 
     } else {

@@ -48,7 +48,7 @@ class ExamMenuLeftProgressBar extends \yii\bootstrap\Widget {
                   </h6>
                   <table style="width: 100%">
                     <tr>
-                      <td style="width: 50%"><a href="<?= Url::home(); ?>">Home <i class="fa fa-home"><i/></a></td>
+                      <td style="width: 50%"><a href="<?= Url::to(['site/index']); ?>">Home <i class="fa fa-home"><i/></a></td>
                       <td id="rescore-exam" style="border-right: 1px solid #dcdee3; width: 50%;">Restart  &nbsp;&nbsp;<i class="fa fa-repeat"></i>
                       </td>
                     </tr>

@@ -12,6 +12,7 @@ use frontend\models\QuestionHistory;
 use yii\filters\AccessControl;
 use frontend\models\User;
 use frontend\models\QuestionSet;
+use frontend\models\Question;
 
 /**
  * QuestionSaveController implements the CRUD actions for QuestionSave model.
@@ -349,7 +350,7 @@ class QuestionSaveController extends Controller {
     }
   }
 
-  public function actionQuestionSaveExportExcelWithUser($academic = null, $rotation = null) {
+  public function actionQuestionSaveExportExcelWithUserBK($academic = null, $rotation = null) {
     $this->layout = 'blank';
 
     $arrWhere = [];
@@ -379,6 +380,56 @@ class QuestionSaveController extends Controller {
 //    }
   }
 
+  public function actionQuestionSaveExportExcelWithUser($academic = null, $rotation = null) {
+    $this->layout = 'blank';
+
+    $arrWhere = [];
+    $arrUserId = [];
+    ($academic != null) ? $arrWhere['start_study'] = $academic : null;
+    ($rotation != null) ? $arrWhere['rotation'] = $rotation : null;
+    $modelUsers = User::find()->where($arrWhere)->all();
+    foreach ($modelUsers as $user) {
+      array_push($arrUserId, $user->id);
+    }
+    $questionSets = QuestionSet::find()
+            ->where(['status' => 1])
+            ->all();
+
+
+//    if ($academic == null && $rotation == null) {
+//      $models = QuestionSave::find()
+//              ->where(['!=', 'module_part', ''])
+//              ->all();
+//    } else {
+//      $models = QuestionSave::find()
+//              ->where(['id' => $arrUserId])
+//              ->andWhere(['!=', 'module_part', ''])
+//              ->all();
+//    }
+
+    return $this->render('question_set_export_excel', [
+                'questionSets' => $questionSets,
+                'modelUsers' => $modelUsers,
+                'academic' => $academic,
+                'rotation' => $rotation,
+    ]);
+  }
+
+  public function handleQeustionSetPart($questionSetId) {
+    $questionSet = QuestionSet::find()->where(['id' => $questionSetId])->one();
+    $partQuestions = [];
+    $questions = Question::find()
+            ->where(['>=', 'id', $questionSet->from])
+            ->andWhere(['<=', 'id', $questionSet->to])
+            ->all();
+
+    foreach ($questions as $question) {
+      $partQuestions[$question->id] = $question->part;
+    }
+
+    return $partQuestions;
+  }
+
   public function actionHandlePostSubmitExam() {
     $this->layout = 'blank';
     $questionSaveId = $_POST['questionSaveId'];
@@ -388,9 +439,8 @@ class QuestionSaveController extends Controller {
     $questionSaves = [];
     $time = date('Y-m-d H:i:s');
     $questionSave = QuestionSave::find()->where(['id' => $questionSaveId])->one();
-//    $questionSave->answer = [];
-//    $questionSave->answer = json_encode($questionSave->answer);
-//    $questionSave->answer = json_decode($questionSave->answer);
+    $getPartQuestions = $this->handleQeustionSetPart($questionSave->question_set_id);
+
 
     $questionExplode = explode('&', $stringSelectChoice);
 
@@ -408,6 +458,7 @@ class QuestionSaveController extends Controller {
       $arrSave['key'] = $key;
       $arrSave['value'] = json_encode($arrChoice);
       $arrSave['time'] = $time;
+      $arrSave['part'] = $getPartQuestions[$key];
       $questionSaves[$key] = $arrSave;
     }
 
