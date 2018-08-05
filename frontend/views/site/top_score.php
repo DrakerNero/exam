@@ -6,6 +6,14 @@ use yii\helpers\Url;
 <div class="row" id="wrapper-module-exam">
   <div class="wrapper-top-score">
     <div class="row">
+      <div class="col-lg-6" style="text-align: left; margin-bottom: 20px;">
+        <h3> Exam: <?= $questionSet->name ?></h3>
+      </div>
+      <div class="col-lg-6" style="text-align: right">
+        <h3>Hello!! &nbsp;&nbsp; <?= $user->first_name. ' '. $user->last_name ?></h3>
+      </div>
+    </div>
+    <div class="row">
       <div class="col-lg-8">
         <div class="custom-select" >
           <select id="select-question-top-score">

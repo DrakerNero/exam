@@ -379,10 +379,10 @@ class SiteController extends Controller {
 
     $userIds = [];
     $users = User::find()->where($arrWhere)->all();
-    foreach ($users as $user) {
-      array_push($userIds, $user->id);
+    foreach ($users as $user2) {
+      array_push($userIds, $user2->id);
     }
-
+    $questionSet = QuestionSet::find()->where(['id' => $questionSetId])->one();
     $questionSets = QuestionSet::find()->where(['status' => 1])->all();
     $models = QuestionSave::find()
             ->where(['question_set_id' => $questionSetId, 'status' => 3, 'user_id' => $userIds])
@@ -390,7 +390,7 @@ class SiteController extends Controller {
             ->orderBy(['score' => SORT_DESC])
             ->all();
 
-    return $this->render('top_score', ['models' => $models, 'questionSets' => $questionSets, 'questionSetId' => $questionSetId]);
+    return $this->render('top_score', ['models' => $models, 'questionSets' => $questionSets, 'questionSetId' => $questionSetId, 'user' => $user, 'questionSet' => $questionSet]);
   }
 
 }
