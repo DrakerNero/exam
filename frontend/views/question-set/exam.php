@@ -22,6 +22,11 @@ if (isset($isAdmin) && !empty($isAdmin) && $isAdmin == true) {
           . "adminFalse();"
   ;
 }
+if (!empty($questionSave) && isset($questionSave) && $questionSave->score >= 80) {
+  $stringScript = $stringScript.'overScore();';
+} else {
+  
+}
 ?>
 <?= ($disableChoice) ? '<div class="wrapper-disable-click-choice"></div>' : '' ?>
 
@@ -177,4 +182,6 @@ if ($disableChoice) {
 } else {
   
 }
+
 ?>
+

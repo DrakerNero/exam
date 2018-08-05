@@ -430,9 +430,10 @@ function ShowAnswer() {
 }
 
 function handlePercentPass() {
-  $('.tb2-ex-left').remove();
-  $('#btn-send-exam').remove();
-  $('#exam-progress-bar').remove();
+  overScore();
+//  $('.tb2-ex-left').remove();
+//  $('#btn-send-exam').remove();
+//  $('#exam-progress-bar').remove();
 }
 
 function Rescore(getUrl) {
