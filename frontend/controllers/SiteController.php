@@ -385,7 +385,7 @@ class SiteController extends Controller {
 
     $questionSets = QuestionSet::find()->where(['status' => 1])->all();
     $models = QuestionSave::find()
-            ->where(['question_set_id' => $questionSetId, 'status' => 4, 'user_id' => $userIds])
+            ->where(['question_set_id' => $questionSetId, 'status' => 3, 'user_id' => $userIds])
             ->andWhere(['>=', 'score', '80'])
             ->orderBy(['score' => SORT_DESC])
             ->all();

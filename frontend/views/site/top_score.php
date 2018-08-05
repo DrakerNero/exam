@@ -1,6 +1,7 @@
 <?php
 
 use frontend\helpers\MainHelper;
+use yii\helpers\Url;
 ?>
 <div class="row" id="wrapper-module-exam">
   <div class="wrapper-top-score">
@@ -18,7 +19,7 @@ use frontend\helpers\MainHelper;
         </div>
       </div>
       <div class="col-lg-4">
-        <button onClick="goToToScoreWihtId('<?= Yii::$app->getUrlManager()->getBaseUrl() ?>/..');" type="button" class="btn btn-success" style="height: 40px;"><i class="fa fa-send"></i></button>
+        <button onClick="goToToScoreWihtId('<?= Url::to(['site/top-score', 'questionSetId' => '']) ?>');" type="button" class="btn btn-success" style="height: 40px;"><i class="fa fa-send"></i></button>
       </div>
     </div>
     <br />

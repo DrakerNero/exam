@@ -24,6 +24,6 @@ $(function () {
 
 function goToToScoreWihtId(url) {
   var questionSetId = $('#select-question-top-score').val();
-  var newUrl = url + 'index.php?r=site%2Ftop-score&questionSetId=' + questionSetId;
+  var newUrl = url + '' + questionSetId;
   window.location.replace(newUrl);
 }
