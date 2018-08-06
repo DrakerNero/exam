@@ -60,7 +60,12 @@ class LoadViewQuestion extends \yii\bootstrap\Widget {
 
                   <h3 class="box-title">
                     <?= (!empty($this->question->question_topic) && isset($this->question->question_topic) && $this->question->question_topic != '') ? nl2br($this->question->question_topic) . '<br /><br />' : '' ?>
-                    <?= $this->questionNumber . '&nbsp;&nbsp; ' ?><?= nl2br($this->question->question) ?>
+                    <table>
+                      <tr>
+                        <td><?= $this->questionNumber ?> &nbsp;&nbsp;</td>
+                        <td><?= nl2br($this->question->question) ?></td>
+                      </tr>
+                    </table>
                   </h3>
                 </div>
               </div><!-- /.box-header -->
@@ -119,7 +124,7 @@ class LoadViewQuestion extends \yii\bootstrap\Widget {
                 }
                 ?>
 
-                        <!--<div class="wrapper-not-choice" id="wrapper-question-section-<?= $this->countQuestion ?>"></div>-->
+                                <!--<div class="wrapper-not-choice" id="wrapper-question-section-<?= $this->countQuestion ?>"></div>-->
 
               </div><!-- /.box-body -->
             </div><!-- /.box -->
