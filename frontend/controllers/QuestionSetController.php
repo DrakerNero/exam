@@ -284,8 +284,11 @@ class QuestionSetController extends Controller {
           array_push($arrMode_2, $question->part);
         }
       }
-      $random_1 = array_values(array_unique($arrMode_1))[$this->handleRandomSizeArray(array_values(array_unique($arrMode_1)))];
-      $random_2 = array_values(array_unique($arrMode_2))[$this->handleRandomSizeArray(array_values(array_unique($arrMode_2)))];
+      $newArrMode1 = array_values(array_unique($arrMode_1));
+      $newArrMode2 = array_values(array_unique($arrMode_2));
+      
+      $random_1 = $newArrMode1[rand(0, count($newArrMode1) - 1)];
+      $random_2 = $newArrMode2[rand(0, count($newArrMode2) - 1)];
 
       array_push($arrPart, $random_1);
       array_push($arrPart, $random_2);
@@ -466,7 +469,6 @@ class QuestionSetController extends Controller {
 //            
 //          }
 //        }
-
         // END
 
 
