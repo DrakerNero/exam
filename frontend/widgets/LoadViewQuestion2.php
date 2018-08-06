@@ -104,7 +104,7 @@ class LoadViewQuestion2 extends \yii\bootstrap\Widget {
                     <?= (!empty($this->question->question_topic) && isset($this->question->question_topic) && $this->question->question_topic != '') ? nl2br($this->question->question_topic) . '<br /><br />' : '' ?>
                     <table>
                       <tr>
-                        <td><?= $this->questionNumber ?> &nbsp;&nbsp;</td>
+                        <td style="vertical-align: top;"><?= $this->questionNumber ?> &nbsp;&nbsp;</td>
                         <td><?= nl2br($this->question->question) ?></td>
                       </tr>
                     </table>
