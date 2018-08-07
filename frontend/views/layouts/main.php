@@ -85,7 +85,7 @@ $questionSet = QuestionSet::find()->where(['status' => 1])->one();
                 ?>
                 <li><a href="<?= Url::to(['user-main/profile']) ?>"><font color="#000">Profile</font></a></li>
                 <li><a href="<?= Url::to(['question-save/history']) ?>"><font color="#000">Dashboard</font></a></li>
-                <li><a href="<?= Url::to(['site/top-score', 'questionSetId' => $questionSet->id]) ?>"><font color="#000">Top Score</font></a></li>
+                <li><a href="<?= Url::to(['site/top-score', 'questionSetId' => $questionSet->id]) ?>"><font color="#000">Hall of fame</font></a></li>
                 <?php
                 if ($user->user_status == 1) {
                   ?>
