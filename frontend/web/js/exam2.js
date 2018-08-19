@@ -146,12 +146,13 @@ function countDown(duration, display1, display2) {
     display1.textContent = minutes + ":" + seconds;
     display2.textContent = minutes + ":" + seconds;
     var questionSaveStatus = $('.question-save-status').attr('data-id');
-    if (timer < 300) {
-      //display.css("color","red");
-    }
+//    if (timer < 300) {
+//      //display.css("color","red");
+//    }
     if (--timer < 0 || questionSaveStatus == 3) {
 //            alert("หมดเวลาทำข้อสอบแล้วคะ");
       clearInterval(myCountDown);
+      SaveState(4, false);
       ShowAnswer();
     }
   }, 1000);
@@ -306,7 +307,8 @@ function SaveState(state, reload) {
       }
     } else if (state == 3) { // ข้อสอบกระโดด
       handleQuestionSetJumpModeSaveScore(reload);
-
+    } else if (state == 4) {
+      handleQuestionSetJumpModeSaveScore(reload);
     } else {
 
     }
@@ -336,6 +338,15 @@ function SaveState(state, reload) {
       } else {
         return false;
       }
+    } else if (state == 4) {
+      var score = ShowAnswer();
+
+      if (multiChoice == true) {
+        score = handleOnShowAnswer();
+      } else {
+
+      }
+      SaveStateDone(score);
     }
   }
 }
@@ -805,7 +816,7 @@ function handleRenderQuestionJumpType() {
       var selectChoices = handleSelectMultiperChoice(questionId);
       var isChoice = selectChoices.includes(parseInt(isChoiceNO));
 //      alert(isChoice + ' : ' + isChoiceNO + ' : ' + selectChoices);
-      
+
       if (jumpConstraint == 1) { // ถ้าเลือก
         if (isChoice === true) {
           handleRenderQuestion(jumpConstraintTrue);

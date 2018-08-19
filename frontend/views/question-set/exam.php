@@ -10,7 +10,7 @@ use yii\web\View;
 $this->title = $model->name;
 $disableChoice = (isset($disableChoice) && !empty($disableChoice)) ? $disableChoice : false;
 
-
+$endTime = (!empty($questionSave->score) && isset($questionSave->score) && $questionSave->score != null) ? '' : '';
 if (isset($isAdmin) && !empty($isAdmin) && $isAdmin == true) {
 //  $stringScript = "$('.wrapper-disable-click-choice').hide();";
 //  echo $questionSave->module_part;
@@ -23,7 +23,7 @@ if (isset($isAdmin) && !empty($isAdmin) && $isAdmin == true) {
   ;
 }
 if (!empty($questionSave) && isset($questionSave) && $questionSave->score >= 80) {
-  $stringScript = $stringScript.'overScore();';
+  $stringScript = $stringScript . 'overScore();';
 } else {
   
 }
@@ -182,6 +182,5 @@ if ($disableChoice) {
 } else {
   
 }
-
 ?>
 

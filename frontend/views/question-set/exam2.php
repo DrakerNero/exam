@@ -94,6 +94,7 @@ echo HeaderMenuRight::widget(['countQuestion' => $i, 'questionSet' => $model, 'f
 echo BottomMenuCenter::widget(['countQuestion' => $i, 'questionSet' => $model, 'from' => $model->from, 'to' => $model->to, 'disableChoice' => $disableChoice, 'questions' => $questions]);
 
 $elapseTime = (!empty($questionSave->elapse_time) && isset($questionSave->elapse_time)) ? $questionSave->elapse_time : 0;
+$endTime = (!empty($questionSave->score) && isset($questionSave->score) && $questionSave->score != null) ? '' : '';
 
 $js = "   
         $('numQuestionAll').text('" . $i . "');
@@ -202,10 +203,8 @@ if ($disableChoice) {
 } else {
   
 }
-
-
 ?>
-  
+
 <div class="over-img" style="text-align: center; display: none;">
   <img src="<?= Yii::$app->getUrlManager()->getBaseUrl() ?>/uploads/static/over.jpg" />
 </div>

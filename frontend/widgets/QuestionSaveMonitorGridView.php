@@ -76,7 +76,7 @@ class QuestionSaveMonitorGridView extends \yii\bootstrap\Widget {
                 'value' => function($model) {
                   return QuestionSave::find()
                                   ->where(['user_id' => $model->id])
-                                  ->andWhere(['!=', 'module_part', null])
+                                  ->andWhere(['!=', 'module_part', ''])
                                   ->count();
                 },
                         'contentOptions' => ['style' => 'text-align: center;']
