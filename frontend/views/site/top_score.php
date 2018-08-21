@@ -7,7 +7,7 @@ use yii\helpers\Url;
   <div class="wrapper-top-score">
     <div class="row">
       <div class="col-lg-6" style="text-align: left; margin-bottom: 20px;">
-        <h3> Exam: <?= $questionSet->name ?></h3>
+        
       </div>
       <div class="col-lg-6" style="text-align: right">
         <h3>Hello!! &nbsp;&nbsp; <?= $user->first_name. ' '. $user->last_name ?></h3>
@@ -32,7 +32,7 @@ use yii\helpers\Url;
     </div>
     <br />
     <div class="box box-info" style="padding: 10px;">
-      <h2>Top Score</h2>
+      <h2> Student complete: <?= $questionSet->name ?></h2>
       <br />
       <table class="table table-hover">
         <thead>

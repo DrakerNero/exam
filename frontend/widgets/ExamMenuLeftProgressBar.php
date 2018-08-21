@@ -44,7 +44,7 @@ class ExamMenuLeftProgressBar extends \yii\bootstrap\Widget {
                 <td class="td-ex-body" style="border-right: 1px solid #dcdee3">
                   <h6 style="font-weight: bold;">คะแนนของท่านไม่ผ่านเกณฑ์</h6>
                   <h6 style="font-size: 11px !important">
-                    กลับสู่หน้าหลัก | ทำข้อสอบอีกครับ
+                    กลับสู่หน้าหลัก | ทำข้อสอบอีกครั้ง
                   </h6>
                   <table style="width: 100%">
                     <tr>

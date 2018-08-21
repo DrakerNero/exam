@@ -22,7 +22,7 @@ use frontend\helpers\MainHelper;
 
         <?= $form->field($model, 'last_name')->textInput(['maxlength' => true]) ?>
 
-        <?= $form->field($model, 'start_study')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'start_study')->textInput(['maxlength' => true])->label('Academic Year') ?>
 
         <?= $form->field($model, 'rotation')->dropDownList(MainHelper::setLotation()) ?>
 
