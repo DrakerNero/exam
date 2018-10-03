@@ -234,7 +234,7 @@ function handleOnSumScore() {
     var selectChoice = [];
     $("[class^='choice-question-" + from + "']").each(function () {
       if ($(this).is(':checked')) {
-        console.log("[class^='choice-question-" + from + "']", $(this).val());
+//        console.log("[class^='choice-question-" + from + "']", $(this).val());
         selectChoice.push(parseInt($(this).val()));
       } else {
 
@@ -654,7 +654,7 @@ function handleMissionTree() {
         _csrf: csrfToken
       }),
       success: function (data) {
-        console.log(data);
+//        console.log(data);
 
       },
       error: function (data) {
@@ -662,10 +662,10 @@ function handleMissionTree() {
       }
     });
 
-    console.log('Yes' + isMissionTree + ' : ' + questionId + ' : ' + checkInput + ' : ' + questionTreeId);
+//    console.log('Yes' + isMissionTree + ' : ' + questionId + ' : ' + checkInput + ' : ' + questionTreeId);
 
   } else {
-    console.log('No' + isMissionTree);
+//    console.log('No' + isMissionTree);
   }
 }
 

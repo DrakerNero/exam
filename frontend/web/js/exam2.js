@@ -360,7 +360,7 @@ function handleOnSumScore() {
     var selectChoice = [];
     $("[class^='choice-question-" + from + "']").each(function () {
       if ($(this).is(':checked')) {
-        console.log("[class^='choice-question-" + from + "']", $(this).val());
+//        console.log("[class^='choice-question-" + from + "']", $(this).val());
         selectChoice.push(parseInt($(this).val()));
       } else {
 
@@ -984,10 +984,10 @@ function handleMissionTree() {
       }
     });
 
-    console.log('Yes' + isMissionTree + ' : ' + questionId + ' : ' + checkInput + ' : ' + questionTreeId);
+//    console.log('Yes' + isMissionTree + ' : ' + questionId + ' : ' + checkInput + ' : ' + questionTreeId);
 
   } else {
-    console.log('No' + isMissionTree);
+//    console.log('No' + isMissionTree);
   }
 }
 
@@ -998,7 +998,7 @@ function removeQuestionEl(questionId) {
 function handleRemoveQuestionEl() {
   for (var i = questionFrom; i <= questionTo; i++) {
     var check = $("input[name^='name_" + i + "']").is(':checked');
-    console.log(i + ' : ' + check);
+//    console.log(i + ' : ' + check);
     if (check != undefined && check == 1) {
 //      questionIds.push(i);
     } else { // ถ้าไม่มีให้ remove ทิ่ง
