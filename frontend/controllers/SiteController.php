@@ -271,8 +271,7 @@ class SiteController extends Controller {
           }
         }
       }
-
-
+      
       return $this->render('_exam_status_page', ['models' => $arrQuestionSave, 'popup' => $popup, 'iconName' => $iconName, 'colorClass' => $colorClass]);
     } else {
       return $this->redirect(['index']);

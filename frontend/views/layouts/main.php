@@ -27,7 +27,7 @@ $questionSet = QuestionSet::find()->where(['status' => 1])->one();
 <link href="<?= Url::to('@frontendUrl/uploads/images/e-pretest-touch-icon.png') ?>" sizes="120x120" rel="apple-touch-icon" />
 <div class="wrapper">
   <header class="main-header" id="divHeaderBar">
-    <a href="<?php echo Yii::getAlias('@frontendUrl') ?>" class="logo">
+    <a href="<?= Url::to(['site/index', 'subject_id' => 'all']) ?>" class="logo">
         <!--<span>e-pretest</span>-->
       <span class="wrapper-logo">
         <span class="left">

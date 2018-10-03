@@ -71,7 +71,7 @@ function ClickSave(questionId, choices, part) {
   $.ajax({
     type: "POST",
 //    url: "../../question-save/click-save",
-    url: "index.php?r=question-save/click-save",
+    url: "../../question-save/click-save",
     data: ({
       questionSaveId: questionSaveId,
       questionId: questionId,
@@ -153,7 +153,7 @@ $(window).load(function () {
     Rescore('');
   });
   $('#btn-restart-temporary').click(function () {
-    Rescore('index.php?r=question-save/rescore-all-status');
+    Rescore('../../question-save/rescore-all-status');
   });
   $('.div-rescore-exam-mobile').click(function () {
     Rescore('');
@@ -298,7 +298,7 @@ function SaveStateDone(score) {
   var csrfToken = $('meta[name="csrf-token"]').attr("content");
   $.ajax({
     type: "POST",
-    url: "index.php?r=question-save/save-state-done",
+    url: "../../question-save/save-state-done",
     data: ({
       questionSaveId: questionSaveId,
       score: score,
@@ -447,7 +447,7 @@ function handlePercentPass() {
 }
 
 function Rescore(getUrl) {
-  var urlPost = (getUrl == null || getUrl == undefined || getUrl == '') ? 'index.php?r=question-save/rescore' : getUrl;
+  var urlPost = (getUrl == null || getUrl == undefined || getUrl == '') ? '../../question-save/rescore' : getUrl;
   var csrfToken = $('meta[name="csrf-token"]').attr("content");
   var questionSetId = $('.question-set-id').attr('data-id');
   var questionSaveId = $('.question-save').attr('data-id');
@@ -474,7 +474,7 @@ function Rescore(getUrl) {
 
 function LoadMonitor() {
   var email = $('.insert-email-monitor').val();
-  window.location.replace("../question-save/monitor?email=" + email);
+  window.location.replace("../../question-save/monitor?email=" + email);
 }
 
 var activeSectionQuestion = 0;
@@ -504,7 +504,7 @@ $('.btn-next-present').click(function () {
   $.ajax({
     type: "POST",
 //    url: "../../question-save/update-present-question",
-    url: "index.php?r=question-save/update-present-question",
+    url: "../../question-save/update-present-question",
     data: ({
       presentQuestion: presentQuestion,
       id: questionSaveId,
@@ -648,7 +648,7 @@ function handleMissionTree() {
 
     $.ajax({
       type: "POST",
-      url: "index.php?r=question/get-mission-tree-question",
+      url: "../../question/get-mission-tree-question",
       data: ({
         questionTreeId: questionTreeId,
         _csrf: csrfToken

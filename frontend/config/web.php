@@ -1,4 +1,7 @@
 <?php
+use \yii\web\Request;
+
+$baseUrl = str_replace('/frontend/web', '', (new Request)->getBaseUrl());
 
 $config = [
     'homeUrl' => Yii::getAlias('@frontendUrl'),
@@ -33,7 +36,8 @@ $config = [
             'errorAction' => 'site/error'
         ],
         'request' => [
-            'cookieValidationKey' => getenv('FRONTEND_COOKIE_VALIDATION_KEY')
+            'cookieValidationKey' => getenv('FRONTEND_COOKIE_VALIDATION_KEY'),
+            'baseUrl' => $baseUrl,
         ],
         'user' => [
             'class' => 'yii\web\User',

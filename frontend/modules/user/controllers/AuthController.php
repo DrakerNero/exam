@@ -47,8 +47,8 @@ class AuthController extends \yii\web\Controller {
                     'allow' => false,
                     'roles' => ['@'],
                     'denyCallback' => function () {
-              return Yii::$app->controller->redirect(['/user/default/profile']);
-            }
+                      return Yii::$app->controller->redirect(['/user/default/profile']);
+                    }
                 ],
                 [
                     'actions' => ['logout'],
@@ -98,16 +98,15 @@ class AuthController extends \yii\web\Controller {
       if ($model->username != 'demo01') {
         if ($this->handleAuthenWithRadius($model) == true) {
           $model->radiusLogin();
-//        echo 'true';
         } else {
           $model->login();
-//        echo 'false';
         }
       } else {
         $model->login();
       }
 
-      return $this->goBack();
+//      return $this->goBack();
+      return $this->redirect(['../site/index', 'subject_id' => 'all']);
     } else {
       return $this->render('login', [
                   'model' => $model
@@ -117,7 +116,8 @@ class AuthController extends \yii\web\Controller {
 
   public function actionLogout() {
     Yii::$app->user->logout();
-    return $this->goHome();
+//    return $this->goHome();
+    return $this->redirect(['../user/auth/login']);
   }
 
   public function actionSignup() {

@@ -38,13 +38,13 @@ function searchUserWithData(url, newWindow) {
   var rotation = $('#input-rotation-data').val();
   var newUrl = url;
   if (academic == null && rotation != null) {
-    newUrl = url + '&rotation=' + rotation;
+    newUrl = url + '?rotation=' + rotation;
   } else if (rotation == null && academic != null) {
-    newUrl = url + '&academic=' + academic;
+    newUrl = url + '?academic=' + academic;
   } else if (academic == null && rotation == null) {
     newUrl = url;
   } else {
-    newUrl = url + '&academic=' + academic + '&rotation=' + rotation;
+    newUrl = url + '?academic=' + academic + '&rotation=' + rotation;
   }
   if (newWindow == 'true') {
     window.open(newUrl, '_blank');

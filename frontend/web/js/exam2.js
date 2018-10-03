@@ -83,7 +83,7 @@ function ClickSave(questionId, choices, part) {
   $.ajax({
     type: "POST",
 //    url: "../../question-save/click-save",
-    url: "index.php?r=question-save/click-save",
+    url: "../../question-save/click-save",
     data: ({
       questionSaveId: questionSaveId,
       questionId: questionId,
@@ -164,7 +164,7 @@ $(window).load(function () {
     Rescore('');
   });
   $('#btn-restart-temporary').click(function () {
-    Rescore('index.php?r=question-save/rescore-all-status');
+    Rescore('../../question-save/rescore-all-status');
   });
   $('.div-rescore-exam-mobile').click(function () {
     Rescore('');
@@ -272,7 +272,7 @@ function postSaveExam(score, stringSelectChoice, reload) {
   var csrfToken = $('meta[name="csrf-token"]').attr("content");
   $.ajax({
     type: "POST",
-    url: "index.php?r=question-save/handle-post-submit-exam",
+    url: "../../question-save/handle-post-submit-exam",
     cache: false,
     data: ({
       stringSelectChoice: stringSelectChoice,
@@ -424,7 +424,7 @@ function SaveStateDone(score) {
   var csrfToken = $('meta[name="csrf-token"]').attr("content");
   $.ajax({
     type: "POST",
-    url: "index.php?r=question-save/save-state-done",
+    url: "../../question-save/save-state-done",
     data: ({
       questionSaveId: questionSaveId,
       score: score,
@@ -537,7 +537,7 @@ function ShowAnswer() {
     var csrfToken = $('meta[name="csrf-token"]').attr("content");
     $.ajax({
       type: "POST",
-      url: "../../question-save/finish-question",
+      url: "../question-save/finish-question",
       data: ({
         questionSetId: questionSetId,
         _csrf: csrfToken
@@ -616,7 +616,7 @@ function handlePercentPass() {
 }
 
 function Rescore(getUrl) {
-  var urlPost = (getUrl == null || getUrl == undefined || getUrl == '') ? 'index.php?r=question-save/rescore' : getUrl;
+  var urlPost = (getUrl == null || getUrl == undefined || getUrl == '') ? '../../question-save/rescore' : getUrl;
   var csrfToken = $('meta[name="csrf-token"]').attr("content");
   var questionSetId = $('.question-set-id').attr('data-id');
   var questionSaveId = $('.question-save').attr('data-id');
@@ -676,7 +676,7 @@ $('.btn-next-present').click(function () {
     $.ajax({
       type: "POST",
 //    url: "../../question-save/update-present-question",
-      url: "index.php?r=question-save/update-present-question",
+      url: "../../question-save/update-present-question",
       data: ({
         presentQuestion: presentQuestion,
         id: questionSaveId,
@@ -875,7 +875,7 @@ function handleOnNextSection() {
     var questionSaveId = $('.question-save').attr('data-id');
     $.ajax({
       type: "POST",
-      url: "../../question-save/save-present-section",
+      url: "../question-save/save-present-section",
       data: ({
         questionSaveId: questionSaveId,
         sectionQuestionMax: sectionQuestionMax,
@@ -970,7 +970,7 @@ function handleMissionTree() {
 
     $.ajax({
       type: "POST",
-      url: "index.php?r=question/get-mission-tree-question",
+      url: "../question/get-mission-tree-question",
       data: ({
         questionTreeId: questionTreeId,
         _csrf: csrfToken
