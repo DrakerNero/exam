@@ -20,6 +20,9 @@ header('Content-Disposition: attachment; filename="export_question_attempt.xls"'
         mso-number-format:\@;
         border: 1px solid #000;
       }
+      .body-td td {
+        text-align: center;
+      }
     </style>
   </HEAD>
   <BODY>
@@ -50,7 +53,7 @@ header('Content-Disposition: attachment; filename="export_question_attempt.xls"'
             $attempt++;
           }
           ?>
-          <tr>
+          <tr class="body-td">
             <td><?= $model->username ?></td>
             <td><?= $model->first_name . ' ' . $model->last_name ?></td>
             <td><?= $model->start_study ?></td>
