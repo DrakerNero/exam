@@ -33,7 +33,6 @@ header('Content-Disposition: attachment; filename="export_question_attempt.xls"'
           <td>Exam Pass</td>
           <td>Exam Total</td>
           <td>Attempt</td>
-          ?>
         </tr>
       </thead>
       <tbody>
@@ -44,7 +43,7 @@ header('Content-Disposition: attachment; filename="export_question_attempt.xls"'
           $attempt = 0;
           $questionSaves = QuestionSave::find()
                   ->where(['user_id' => $model->id])
-                  ->andWhere(['!=', 'module_part', null])
+                  ->andWhere(['!=', 'module_part', ''])
                   ->all();
           foreach ($questionSaves as $questionSave) {
             ($questionSave->score >= 80) ? $examPass++ : null;

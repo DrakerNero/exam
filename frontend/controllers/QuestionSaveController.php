@@ -25,7 +25,6 @@ class QuestionSaveController extends Controller {
             'class' => AccessControl::className(),
             'rules' => [
                 [
-
                     'actions' => ['history', 'monitor', 'click-save', 'finish-question', 'save-state-done', 'rescore', 'save-present-section', 'update-present-question',
                         'click-save-multi-choice',
                         'rescore-all-status',
@@ -393,6 +392,7 @@ class QuestionSaveController extends Controller {
     }
     $questionSets = QuestionSet::find()
             ->where(['status' => 1])
+            ->orderBy(['id' => SORT_DESC])
             ->all();
 
 
@@ -476,9 +476,9 @@ class QuestionSaveController extends Controller {
     (!empty($rotation) && isset($rotation) && $rotation != null ) ? $userWhere['rotation'] = $rotation : null;
     (!empty($startStudy) && isset($startStudy) && $startStudy != null ) ? $userWhere['start_study'] = $startStudy : null;
 
-    print_r($userWhere);
     $userModels = User::find()
             ->where($userWhere)
+            ->orderBy(['id' => SORT_DESC])
             ->all();
 
     if (count($userModels) >= 1) {
