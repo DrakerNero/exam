@@ -44,6 +44,10 @@ class GridTableQuestion extends \yii\bootstrap\Widget {
                 'vAlign' => 'top',
                 'hAlign' => 'center',
                 'contentOptions' => ['style' => 'text-align: left; '],
+                'format' => 'html',
+                'value' => function($model) {
+                  return substr($model->question_topic, 0, 200).'...';
+                }
             ],
             [
                 'label' => 'Question',
@@ -51,6 +55,7 @@ class GridTableQuestion extends \yii\bootstrap\Widget {
                 'width' => '300px',
                 'vAlign' => 'middle',
                 'hAlign' => 'center',
+                'format' => 'html',
                 'contentOptions' => ['style' => 'text-align: left;'],
             ],
             [
@@ -90,12 +95,11 @@ class GridTableQuestion extends \yii\bootstrap\Widget {
                           . '<i class="fa fa-edit"></i>'
                           . '</a>';
                 }
-                            ] : [
-                        'class' => 'yii\grid\ActionColumn',
-                            ],
-                ]
-            ]);
-          }
+                    ] : [
+                'class' => 'yii\grid\ActionColumn',
+                    ],
+        ]
+    ]);
+  }
 
-        }
-        
+}

@@ -17,7 +17,13 @@ class HeaderMenuLeft extends \yii\bootstrap\Widget {
     return (!empty($data) && isset($data) && $data != null) ? '(' . $data . ')' : '';
   }
 
+  public function handleActiveMenu($str) {
+    return ($_SERVER['REQUEST_URI'] == $str) ? 'class="active"' : '';
+  }
+
   public function run() {
+    echo $_SERVER['REQUEST_URI'];
+    echo '888';
     $user = Yii::$app->user->identity;
     $countQuestionSuccess = 0;
     $arrQuestionSuccess = [];
@@ -59,31 +65,31 @@ class HeaderMenuLeft extends \yii\bootstrap\Widget {
     </script>
 
     <aside class="main-sidebar">
-      <section class="sidebar">
-        <ul class="sidebar-menu">
-          <li>
-            <a href="<?= Yii::$app->urlManager->createUrl(['site/index', 'subject_id' => 'all']) ?>" >
-              <h6> All<?= $this->renderCountMenu($countQuestionAll) ?></h6>
-            </a>                            
-          </li>
-          <li>
-            <a href="<?= Yii::$app->urlManager->createUrl(['site/exam-success-page']) ?>" >
-              <h6> Passed<?= $this->renderCountMenu(sizeof($successUnique)) ?></h6>
-            </a>                            
-          </li>
-          <li>
-            <a href="<?= Yii::$app->urlManager->createUrl(['site/exam-doing-page']) ?>" >
-              <h6> Doing <?= $this->renderCountMenu(sizeof(array_diff($questionDoingUnique, $successUnique))) ?></h6>
-            </a>                            
-          </li>
-          <li>
-            <a href="<?= Yii::$app->urlManager->createUrl(['site/exam-not-do-page']) ?>" >
-              <h6> Not Doing <?= $this->renderCountMenu($questionNotDoing) ?></h6>
-            </a>                            
-          </li>
-          </li>
-        </ul>
-      </section>                
+        <section class="sidebar">
+            <ul class="sidebar-menu">
+                <li <?= $this->handleActiveMenu('cuinteractive.md.chula.ac.th/site/index?subject_id=all') ?>>
+                    <a href="<?= Yii::$app->urlManager->createUrl(['site/index', 'subject_id' => 'all']) ?>" >
+                        <h6> All<?= $this->renderCountMenu($countQuestionAll) ?></h6>
+                    </a>                            
+                </li>
+                <li <?= $this->handleActiveMenu('cuinteractive.md.chula.ac.th/site/exam-success-page') ?>>
+                    <a href="<?= Yii::$app->urlManager->createUrl(['site/exam-success-page']) ?>" >
+                        <h6> Passed<?= $this->renderCountMenu(sizeof($successUnique)) ?></h6>
+                    </a>                            
+                </li>
+                <li <?= $this->handleActiveMenu('cuinteractive.md.chula.ac.th/site/exam-doing-page') ?>>
+                    <a href="<?= Yii::$app->urlManager->createUrl(['site/exam-doing-page']) ?>" >
+                        <h6> Doing <?= $this->renderCountMenu(sizeof(array_diff($questionDoingUnique, $successUnique))) ?></h6>
+                    </a>                            
+                </li>
+                <li <?= $this->handleActiveMenu('cuinteractive.md.chula.ac.th/site/exam-not-do-page') ?>>
+                    <a href="<?= Yii::$app->urlManager->createUrl(['site/exam-not-do-page']) ?>" >
+                        <h6> Not Doing <?= $this->renderCountMenu($questionNotDoing) ?></h6>
+                    </a>                            
+                </li>
+                </li>
+            </ul>
+        </section>                
     </aside>
 
     <?php

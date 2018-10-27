@@ -27,3 +27,9 @@ function goToToScoreWihtId(url) {
   var newUrl = url + '' + questionSetId;
   window.location.replace(newUrl);
 }
+
+$('#select-question-top-score').change(function () {
+  var value = $(this).val();
+
+  window.open("../site/top-score?questionSetId=" + value, "_self");
+});

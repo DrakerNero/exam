@@ -27,7 +27,6 @@ class QuestionSetController extends Controller {
             'class' => AccessControl::className(),
             'rules' => [
                 [
-
                     'actions' => [
                         'do-exam',
                         'scholarship-exam',
@@ -92,7 +91,7 @@ class QuestionSetController extends Controller {
 
 
     if ($model->load(Yii::$app->request->post()) && $model->save()) {
-      return $this->redirect(['view', 'id' => $model->id]);
+      return $this->redirect(['index']);
     } else {
       return $this->render('create', [
                   'model' => $model,
@@ -121,7 +120,7 @@ class QuestionSetController extends Controller {
       $model->updated_at = date('Y-m-d H:i:s');
       $model->save();
 
-      return $this->redirect(['view', 'id' => $model->id]);
+      return $this->redirect(['index']);
     } else {
       return $this->render('update', [
                   'model' => $model,
@@ -286,7 +285,7 @@ class QuestionSetController extends Controller {
       }
       $newArrMode1 = array_values(array_unique($arrMode_1));
       $newArrMode2 = array_values(array_unique($arrMode_2));
-      
+
       $random_1 = $newArrMode1[rand(0, count($newArrMode1) - 1)];
       $random_2 = $newArrMode2[rand(0, count($newArrMode2) - 1)];
 
@@ -480,6 +479,59 @@ class QuestionSetController extends Controller {
       throw new NotFoundHttpException('The question set you have requested is not available');
     }
   }
+
+//  public function actionRenderExamMonitor($id) {
+//    $disableChoice = false;
+//    $isAdmin = true;
+//    $model = QuestionSet::findOne($id);
+//    if (!empty($model)) {
+//      if (Yii::$app->user->identity->user_status == 1) {
+//        $questions = Question::find()
+//                ->where(['>=', 'id', $model->from])
+//                ->andWhere(['<=', 'id', $model->to])
+//                ->all();
+//
+//        // START
+//
+////        $arrQuestion = [];
+////        for ($i = $model->from; $i <= $model->to; $i++) {
+////          $arrQuestion[$i] = $i;
+////        }
+////        $questions = Question::find()->where(['id' => $arrQuestion])->all();
+//        $parts = [];
+//        $moduleQuestion = [];
+//        $questionSuccess = [];
+//        foreach ($questions as $question) {
+//          if (!empty($question->part) && isset($question->part)) {
+//            array_push($parts, $question->part);
+//          } else {
+//            
+//          }
+//        }
+//        $uniquePart = array_values(array_unique($parts));
+//
+//        foreach (array_rand($uniquePart, $model->total_module) as $keyModule) { // loop เพื่อ random module ของ question_set
+//          array_push($moduleQuestion, $uniquePart[$keyModule]);
+//        }
+//
+//        $totalModule = array_rand(array_values(array_unique($parts)), $model->total_module);
+//        if ($questionSave->module_part === '' || $questionSave->module_part === null) {
+//          $questionSave->module_part = json_encode($moduleQuestion);
+//          $questionSuccess = $this->setRandomQuestionForExam($questions, $moduleQuestion);
+//          $questionSave->save();
+//        } else {
+//          $questionSave->module_part = json_decode($questionSave->module_part);
+//          $questionSuccess = $this->setRandomQuestionForExam($questions, $questionSave->module_part);
+//        }
+//
+//        return $this->render('exam', ['model' => $model, 'questionSave' => $questionSave, 'questions' => $questionSuccess, 'disableChoice' => $disableChoice, 'isAdmin' => $isAdmin]);
+//      } else {
+//        return $this->redirect(['site/index']);
+//      }
+//    } else {
+//      throw new NotFoundHttpException('The question set you have requested is not available');
+//    }
+//  }
 
   public function actionTeacher($id) {
     return $this->render('teacher', ['id' => $id]);

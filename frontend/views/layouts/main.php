@@ -34,7 +34,7 @@ $questionSet = QuestionSet::find()->where(['status' => 1])->one();
           <img  src="<?= Url::to('@frontendUrl/uploads/static/logo-2.png') ?>" class="img-circle" />
         </span>
         <span class="right">
-          คณะแพทย์ศาสตร์<br />
+          คณะแพทยศาสตร์<br />
           จุฬาลงกรณ์มหาวิทยาลัย
         </span>
       </span>
@@ -85,12 +85,12 @@ $questionSet = QuestionSet::find()->where(['status' => 1])->one();
                 ?>
                 <li><a href="<?= Url::to(['user-main/profile']) ?>"><font color="#000">Profile</font></a></li>
                 <li><a href="<?= Url::to(['question-save/history']) ?>"><font color="#000">Dashboard</font></a></li>
-                <li><a href="<?= Url::to(['site/top-score', 'questionSetId' => $questionSet->id]) ?>"><font color="#000">Hall of fame</font></a></li>
+                <li><a href="<?= Url::to(['site/top-score', 'questionSetId' => $questionSet->id]) ?>"><font color="#000">Student complete</font></a></li>
                 <?php
                 if ($user->user_status == 1) {
                   ?>
                                       <!--<li><a href="<?= Url::to(['question-save/monitor', 'email' => '0']) ?>"><font color="#000">Search EXAM by User</font></a></li>-->
-                  <li><a href="<?= Url::to(['site/monitor']) ?>"><font color="#000">Administor</font></a></li>
+                  <li><a href="<?= Url::to(['site/monitor']) ?>"><font color="#000">administer</font></a></li>
                   <?php
                 } else {
                   

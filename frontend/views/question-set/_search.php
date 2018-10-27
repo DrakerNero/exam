@@ -23,8 +23,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'question_type') ?>
 
-    <?php // echo $form->field($model, 'question_id') ?>
-
     <?php // echo $form->field($model, 'img') ?>
 
     <?php // echo $form->field($model, 'status') ?>

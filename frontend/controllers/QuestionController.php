@@ -190,7 +190,7 @@ class QuestionController extends Controller {
       $model->updated_at = date('Y-m-d H:i:s');
 
       $model->save();
-      return $this->redirect(['view', 'id' => $model->id]);
+      return $this->redirect(['index']);
     } else {
       return $this->render('create', [
                   'model' => $model,
@@ -240,7 +240,7 @@ class QuestionController extends Controller {
       $model->updated_at = date('Y-m-d H:i:s');
 
       $model->save();
-      return $this->redirect(['view', 'id' => $model->id]);
+      return $this->redirect(['index']);
     } else {
       return $this->render('update', [
                   'model' => $model,

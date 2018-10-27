@@ -339,14 +339,18 @@ class QuestionSaveController extends Controller {
 
   public function actionQuestionSaveExportExcel($questionSetId) {
     $this->layout = 'blank';
-    $models = QuestionSave::find()->where(['question_set_id' => $questionSetId])->all();
+//    $models = QuestionSave::find()->where(['question_set_id' => $questionSetId])->all();
+    $questionSets = QuestionSet::find()
+            ->where(['id' => $questionSetId])
+//            ->orderBy(['id' => SORT_DESC])
+            ->all();
 
 
-    if (count($models) >= 1) {
-      return $this->render('question_set_export_excel', ['models' => $models]);
-    } else {
-      
-    }
+    return $this->render('question_set_export_excel', [
+                'questionSets' => $questionSets,
+                'academic' => null,
+                'rotation' => null,
+    ]);
   }
 
   public function actionQuestionSaveExportExcelWithUserBK($academic = null, $rotation = null) {
@@ -412,6 +416,7 @@ class QuestionSaveController extends Controller {
                 'modelUsers' => $modelUsers,
                 'academic' => $academic,
                 'rotation' => $rotation,
+                'arrUserId' => $arrUserId
     ]);
   }
 
