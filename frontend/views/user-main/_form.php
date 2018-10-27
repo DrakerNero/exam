@@ -7,34 +7,40 @@ use frontend\helpers\MainHelper;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\UserMain */
 /* @var $form yii\widgets\ActiveForm */
+$year = date('Y') + 543;
+
+$arrYear = [
+    '' => '',
+];
+for ($i = $year; $i >= ($year - 5); $i--) {
+  $arrYear[$i] = $i;
+}
 ?>
 <div class="row">
-  <div class="col-md-6 col-sm-6 col-xs-12">
-    <div class="x_panel">
-      <div class="user-main-form">
-        <br />
-        <h3>Student ID: <?= $model->username; ?></h3>
-        <?php $form = ActiveForm::begin(); ?>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="x_panel">
+            <div class="user-main-form">
+                <br />
+                <h3>Student ID: <?= $model->username; ?></h3>
+                <?php $form = ActiveForm::begin(); ?>
 
+                <?= $form->field($model, 'first_name')->textInput(['maxlength' => true]) ?>
 
+                <?= $form->field($model, 'last_name')->textInput(['maxlength' => true]) ?>
 
-        <?= $form->field($model, 'first_name')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'start_study')->dropDownList($arrYear)->label('Academic Year') ?>
 
-        <?= $form->field($model, 'last_name')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'rotation')->dropDownList(MainHelper::setLotation()) ?>
 
-        <?= $form->field($model, 'start_study')->textInput(['maxlength' => true])->label('Academic Year') ?>
+                <?= $form->field($model, 'status')->dropDownList([1 => 'Active', 0 => 'Inactive']) ?>
 
-        <?= $form->field($model, 'rotation')->dropDownList(MainHelper::setLotation()) ?>
+                <div class="form-group">
+                    <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+                </div>
 
-        <?= $form->field($model, 'status')->dropDownList([1 => 'Active', 0 => 'Inactive']) ?>
+                <?php ActiveForm::end(); ?>
 
-        <div class="form-group">
-          <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+            </div>
         </div>
-
-        <?php ActiveForm::end(); ?>
-
-      </div>
     </div>
-  </div>
 </div>
