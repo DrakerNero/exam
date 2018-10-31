@@ -160,9 +160,9 @@ class SiteController extends Controller {
     $countUserActive = 0;
     foreach ($usersActives as $usersActive) {
       array_push($arrAcademics, $usersActive->start_study);
-      if (!empty($usersActive->rotation) && isset($usersActive->rotation) && $usersActive->rotation != '' && $usersActive->rotation != null) {
-        $countUserActive++;
-      }
+//      if (!empty($usersActive->rotation) && isset($usersActive->rotation) && $usersActive->rotation != '' && $usersActive->rotation != null) {
+      $countUserActive++;
+//      }
     }
 
     $resultAcademics = array_unique($arrAcademics);
@@ -271,7 +271,7 @@ class SiteController extends Controller {
           }
         }
       }
-      
+
       return $this->render('_exam_status_page', ['models' => $arrQuestionSave, 'popup' => $popup, 'iconName' => $iconName, 'colorClass' => $colorClass]);
     } else {
       return $this->redirect(['index']);

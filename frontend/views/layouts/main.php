@@ -75,7 +75,7 @@ $questionSet = QuestionSet::find()->where(['status' => 1])->one();
                 <?php
               } else {
                 ?>
-                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span> <b><?= Yii::$app->user->identity->first_name.' '.Yii::$app->user->identity->last_name ?></b>
               <?php } ?>
               <br>
             </a>

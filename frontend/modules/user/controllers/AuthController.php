@@ -104,8 +104,13 @@ class AuthController extends \yii\web\Controller {
       } else {
         $model->login();
       }
-
-//      return $this->goBack();
+      $user = Yii::$app->user->identity;
+//
+      if ($user->first_name == null || $user->last_name == null || $user->rotation == null || $user->start_study == null) {
+        return $this->redirect(['../user-main/profile']);
+      } else {
+        return $this->redirect(['../site/index', 'subject_id' => 'all']);
+      }
       return $this->redirect(['../site/index', 'subject_id' => 'all']);
     } else {
       return $this->render('login', [
