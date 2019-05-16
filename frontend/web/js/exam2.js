@@ -6,7 +6,6 @@ var questionFrom = $('.question-from').attr('data-id');
 var questionTo = $('.question-to').attr('data-id');
 var questionSaveStatus = $('.question-save-status').attr('data-id');
 var questionSaveScore = $('.question-save-score').attr('data-id');
-
 var percentPass = 80;
 
 function InsertQuestion(from, to) {
@@ -159,7 +158,6 @@ function countDown(duration, display1, display2) {
 }
 
 $(window).load(function () {
-
   $('#rescore-exam').click(function () {
     Rescore('');
   });
@@ -589,7 +587,7 @@ function ShowAnswer() {
 
     $('.tb2-ex-left').show();
 //    $('.frameClickAnswer').css('height', '315px');
-    $('score-m').html(agree + ' คะแนน');
+    $('score-m').html(agree + '/' + countQuestion);
   }
 
   $('.tb-ex-left').css({'border-bottom': ' 1px solid #dcdee3'});
