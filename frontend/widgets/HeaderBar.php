@@ -26,10 +26,24 @@ class HeaderBar extends \yii\bootstrap\Widget {
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top" id="navBarTopMenu" role="navigation">
                 <div class="mini-header">
-                    <a href="<?php echo Yii::getAlias('@frontendUrl') ?>" onClick="return SaveState(2)" class="logo">
-                      <?= HeartRate::widget() ?>
-                        <!--<img src="<?= Url::to('@frontendUrl/uploads/images/logo.png') ?>" class="img-circle" />-->
-                    </a>
+                    <table>
+                        <tr>
+                            <td style="background: #1e683a; border-right: 1px solid #33984a;">
+                                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="<?php echo Yii::getAlias('@frontendUrl') ?>" onClick="return SaveState(2)" class="logo">
+                                  <?= HeartRate::widget() ?>
+                                    <!--<img src="<?= Url::to('@frontendUrl/uploads/images/logo.png') ?>" class="img-circle" />-->
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="frame-submit-mobile">
                     <div class="div-submit-exam-mobile" id="insert-answer" onclick="return SaveState(3)">
@@ -38,6 +52,7 @@ class HeaderBar extends \yii\bootstrap\Widget {
                     <div class="div-rescore-exam-mobile" id="insert-rescore">
                         ทำใหม่
                     </div>
+                    <div class="rescore-exam-header-bar-mobile" id="rescore-exam">ทำอีกครั้ง</div>
                 </div>
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">

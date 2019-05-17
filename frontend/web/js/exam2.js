@@ -158,7 +158,7 @@ function countDown(duration, display1, display2) {
 }
 
 $(window).load(function () {
-  $('#rescore-exam').click(function () {
+  $('[id=rescore-exam]').click(function () {
     Rescore('');
   });
   $('#btn-restart-temporary').click(function () {
@@ -478,6 +478,7 @@ function openAnswerWithFromTo() {
   }
 }
 
+
 function ShowAnswer() {
 
   $('.question-save-status').attr('data-id', '3');
@@ -562,9 +563,10 @@ function ShowAnswer() {
 
   if (percent >= 80) {
     title = 'ยินดีด้วยท่านผ่านเกณฑ์ 80% ของข้อสอบชุดนี้';
+    passExam();
   } else {
     title = 'ท่านไม่ผ่านเกณฑ์คะแนนขั้นต่ำ กรุณากดปุ่ม Reset เพื่อทำใหม่อีกครั้ง';
-
+    failExam();
   }
 
   if (questionType !== '2') {
@@ -947,7 +949,7 @@ function handleHidingQuestion(parts) {
 }
 
 function adminTrue() {
-  $('#rescore-exam').remove();
+  $('[id=rescore-exam]').remove();
   $('#btn-restart-temporary').remove();
   $('.btn-next-present').remove();
 }

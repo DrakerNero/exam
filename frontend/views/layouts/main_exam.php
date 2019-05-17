@@ -16,9 +16,9 @@ use yii\helpers\Html;
     <!-- Left side column. contains the logo and sidebar -->
 
     <!-- Content Wrapper. Contains page content -->
+    <div class="wrapper-clone-left-menu"></div>
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-
         <!-- Main content -->
         <section class="content" id="backgroundDoExam">
             <?php if (Yii::$app->session->hasFlash('alert')): ?>
