@@ -538,7 +538,7 @@ function renderPreSentQuestion() {
 
 }
 function renderProgressBar() {
-  var doQuestion = $('numquestion').text();
+  var doQuestion = $('#frameLeftMenu numquestion').text();
   if (doQuestion == 0) {
     doQuestion = $('.count-select-question').attr('data-id');
   } else {
@@ -546,6 +546,9 @@ function renderProgressBar() {
   }
   var maxQuestion = $('.max-question-data').attr('data-max');
   var progress = (100 * parseInt(doQuestion)) / maxQuestion;
+
+  console.log(progress, doQuestion, maxQuestion);
+
   $('#exam-progress-bar').text(progress.toFixed(0) + '%');
   $('#exam-progress-bar').css({'width': progress.toFixed(0) + '%'});
 

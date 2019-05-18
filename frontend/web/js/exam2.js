@@ -849,7 +849,7 @@ function renderPreSentQuestion() {
 
 }
 function renderProgressBar() {
-  var doQuestion = $('numquestion').text();
+  var doQuestion = $('#frameLeftMenu numquestion').text();
   if (doQuestion == 0) {
     doQuestion = $('.count-select-question').attr('data-id');
   } else {
